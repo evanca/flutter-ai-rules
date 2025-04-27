@@ -4,7 +4,8 @@
 
 ## ⚡ TLDR
 
-Copy the contents of the rule set of your choice (e.g., [combined/flutter_dart__under_6K.md](combined/flutter_dart__under_6K.md)) into your IDE's global or local rules.
+If you want to use `.cursor/rules` or `.windsurfrules`, just copy the contents of the rule set of your choice (e.g., `combined/flutter_dart__under_6K.md`) into your IDE’s global or local rules.  
+For maximum control, you can also copy the `/rules` folder into your project and reference rules as needed (e.g., "Read @rules/firebase/ and set up a project with Realtime Database, App Check, and Analytics.").
 
 ## 🚀 Introduction
 
