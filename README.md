@@ -102,3 +102,7 @@ Here are the official sources that have been used to build these rules:
 ### Testing
 - [Mockito](https://pub.dev/packages/mockito) - Official Mockito for Dart documentation
 - [Mocktail](https://pub.dev/packages/mocktail) - Official Mocktail documentation
+
+### Firebase
+- [Firebase for Flutter](https://firebase.google.com/docs/flutter/setup) - Official Firebase Flutter documentation
+- [Code with Andrea](https://codewithandrea.com/articles/flutter-firebase-multiple-flavors-flutterfire-cli/) - How to Setup Flutter & Firebase with Multiple Flavors using the FlutterFire CLI
