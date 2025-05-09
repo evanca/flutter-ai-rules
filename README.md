@@ -56,6 +56,22 @@ If you prefer more control:
 
 Everything is modular — use what works best for you.
 
+### Option 3: Download All Rules via CLI
+
+You can fetch the latest rules directly into your project with a single command:
+
+```sh
+git clone --depth 1 https://github.com/evanca/flutter-ai-rules.git temp_repo && mkdir -p docs && cp -r temp_repo/rules/* docs && rm -rf temp_repo
+```
+
+This will copy all rules into a `docs` folder in your project. After all rules are in the `docs` folder, you can reference them individually based on your needs—without the limitations of IDE ruleset length. Simply use them as context where applicable. For example:
+
+“Read `@docs/bloc.md` and create test coverage for new methods.”
+
+**Pro tip:**  
+You can also add a global rule that references this `docs` folder. For example, in your global rules or settings, you might write:  
+“We have a `/docs` folder containing various rules based on Flutter and Dart documentation.”
+
 ## 📏 No Opinions, Just Documentation
 
 All rules are sourced from official documentation — no personal preferences or subjective interpretations. That’s intentional. You’re free to alter them to your taste, but this repo keeps things objective by sticking to the source.
