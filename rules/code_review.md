@@ -21,3 +21,4 @@
 19. Ensure there are new or updated tests covering new or changed logic.
 20. Ensure all tests pass in the continuous integration system.
 21. Provide clear, constructive feedback for any issues found, including suggestions for improvement and requests for clarification if anything is unclear.
+22. The expected output is an answer in the chat, mentioning conclusions and recommendations per file.
