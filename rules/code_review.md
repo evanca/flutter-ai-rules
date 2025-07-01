@@ -1,8 +1,12 @@
 # Code Review Ruleset for LLMs
 
 1. Check that the current branch is a feature, bugfix, or PR/MR branch and not a main or develop branch.
-2. Verify the branch is up-to-date with the target branch.
+2. Verify the branch is up-to-date with the target branch (main).
 3. Identify the target branch for the merge and list all files that have changed, been added, or deleted.
+4. For every change, look up the commit title and review how any connected components are implemented. 
+5. Do not assume a change or fix is correct without investigating the implementation details.
+6. If the change or fix remains difficult to understand after several attempts, include this in your report. 
+6. Fetch online documentation if you’re unsure about the best practices for a particular package or library.
 4. For each changed file, check that the file is in the correct directory.
 5. For each changed file, check that the file name follows naming conventions.
 6. For each changed file, verify the file’s responsibility is clear and that the reason for its change or addition is understandable.
@@ -19,6 +23,9 @@
 17. Check that the overall change set is focused and scoped to the stated purpose and does not include unrelated or unnecessary changes.
 18. Verify that the PR/MR description accurately reflects the changes made.
 19. Ensure there are new or updated tests covering new or changed logic.
+20. If there’s a test, always evaluate whether the test could fail or if it’s only checking a mock implementation.
 20. Ensure all tests pass in the continuous integration system.
 21. Provide clear, constructive feedback for any issues found, including suggestions for improvement and requests for clarification if anything is unclear.
 22. The expected output is an answer in the chat, mentioning conclusions and recommendations per file.
+
+TOTAL CHAR COUNT:     2771
