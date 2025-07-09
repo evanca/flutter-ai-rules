@@ -68,3 +68,7 @@
 5. Be aware that App Check tokens are automatically refreshed at approximately half the TTL duration.
 6. For high-security applications, use the shortest practical TTL for App Check tokens.
 7. Implement server-side verification for critical operations using Firebase Admin SDK.
+
+### Android Device Integrity
+
+**Important Note**: For certain Android devices, you need to enable "Meets basic device integrity" in the Google Play console to ensure proper App Check functionality.

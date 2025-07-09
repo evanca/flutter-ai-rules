@@ -44,9 +44,9 @@
 15. Always keep business logic out of UI widgets; only interact with cubits/blocs via events or public methods.
 16. Internal events in a bloc should be private and only used for real-time updates from repositories.
 17. Use custom event transformers for internal events if needed.
-18. When exposing public methods on a cubit, only use them to trigger state changes and return `void` or `Future<void>`.
-19. For blocs, avoid exposing custom public methods; trigger state changes by adding events.
-20. When using `BlocProvider.of(context)`, call it within a child `BuildContext`, not the same context where the bloc was provided.
+17. When exposing public methods on a cubit, only use them to trigger state changes and return `void` or `Future<void>`.
+18. For blocs, avoid exposing custom public methods; trigger state changes by adding events via the `add` method.
+19. When using `BlocProvider.of(context)`, call it within a child `BuildContext`, not the same context where the bloc was provided.
 
 ### Architecture
 1. Separate your features into three layers: Presentation, Business Logic, and Data.
@@ -79,6 +79,22 @@
 15. Scope rebuilds using `Builder` when using `context.watch` or `context.select` for multiple blocs.
 16. Handle all possible cubit/bloc states explicitly in the UI (e.g., empty, loading, error, populated).
 
+### Code Quality & Linting
+1. Use the `bloc_lint` package to enforce Bloc best practices and catch common mistakes.
+2. Use `bloc_tools` command-line utilities for project scaffolding and development workflow.
+3. Configure `bloc_lint` in your `analysis_options.yaml` with recommended rules for static analysis.
+4. Avoid importing Flutter dependencies in your business logic components (blocs, cubits, repositories).
+5. Avoid exposing public fields on Bloc and Cubit instances; all state should be accessed through the `state` getter.
+6. Avoid exposing public methods on Bloc instances; use the `add` method to communicate with blocs via events.
+7. Use `bloc lint` command from `bloc_tools` to run linting from the command line.
+8. Install `bloc_tools` globally for command-line access: `dart pub global activate bloc_tools`.
+9. Use the recommended `analysis_options.yaml` configuration with all recommended bloc linting rules enabled.
+10. Available lint rules include: `avoid_flutter_imports`, `avoid_public_fields`, `avoid_public_bloc_methods`, `prefer_bloc`, `prefer_cubit`, and `prefer_void_public_cubit_methods`.
+
+### Developer Tools & Integrations
+1. Create custom templates using Mason bricks for consistent code generation across projects.
+2. Use the official Bloc developer tools for debugging and state inspection.
+
 ### Testing
 1. Add the `test` and `bloc_test` packages to your dev dependencies for bloc testing.
 2. Organize tests into groups to share setup and teardown logic.
@@ -90,5 +106,13 @@
 8. Assert the expected sequence of emitted states for each bloc event.
 9. Keep tests concise, focused, and easy to maintain to ensure confidence in refactoring.
 10. Mock cubits/blocs in widget tests to verify UI behavior for all possible states.
+11. Consider using `bloc_lint` in your CI/CD pipeline to enforce code quality standards.
 
-TOTAL CHAR COUNT:     7810
+### Ecosystem & Packages
+1. The Bloc ecosystem consists of multiple packages: `bloc` (core), `flutter_bloc` (Flutter widgets), `bloc_test` (testing), `bloc_lint` (linting), `bloc_tools` (CLI), `bloc_concurrency` (event transformers), `hydrated_bloc` (persistence), `replay_bloc` (undo/redo), and `angular_bloc` (AngularDart).
+2. Use `bloc_concurrency` package for advanced event transformers like `sequential`, `concurrent`, `droppable`, and `restartable`.
+3. Use `hydrated_bloc` for automatic state persistence and restoration across app sessions.
+4. Use `replay_bloc` to add undo and redo functionality to your blocs.
+5. Install packages based on your needs: start with `bloc` and `flutter_bloc` for basic functionality.
+
+TOTAL CHAR COUNT:     9968

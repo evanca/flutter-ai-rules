@@ -156,3 +156,13 @@
    await FirebaseMessaging.instance.setAutoInitEnabled(true);
    ```
 4. Be aware that the auto-initialization setting persists across app restarts once set.
+
+### iOS Image Notifications
+
+**Important**: The iOS simulator does not display images in push notifications. You must test on a physical device.
+
+1. Add a notification service extension in Xcode for iOS image support.
+2. Select either Swift or Objective-C when creating the notification service extension.
+3. For Swift implementations, use the `FirebaseMessaging` Swift package by adding it to your target.
+4. For Objective-C implementations, add the Firebase/Messaging pod to your Podfile.
+5. Configure the notification service extension to use `Messaging.serviceExtension().populateNotificationContent()` for image handling.

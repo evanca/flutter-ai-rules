@@ -19,6 +19,19 @@
 5. For development with Firebase Emulator Suite, use `await Firebase.initializeApp(demoProjectId: "demo-project-id")` instead of the standard initialization.
 6. Keep the `firebase_options.dart` file in version control as it contains non-secret configuration identifiers.
 
+### Firebase Initialization
+
+1. Ensure `WidgetsFlutterBinding.ensureInitialized()` is called before Firebase initialization.
+   ```dart
+   void main() async {
+     WidgetsFlutterBinding.ensureInitialized();
+     await Firebase.initializeApp(
+       options: DefaultFirebaseOptions.currentPlatform,
+     );
+     runApp(const MyApp());
+   }
+   ```
+
 ### Adding Firebase Services
 
 1. Add Firebase plugins to your app using `flutter pub add [plugin_name]` (e.g., `flutter pub add firebase_auth`).

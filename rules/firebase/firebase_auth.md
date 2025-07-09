@@ -161,3 +161,26 @@
 6. For sensitive operations, consider re-authenticating users with `reauthenticateWithCredential()`.
 7. When using email/password authentication, enforce strong password policies.
 8. In Firebase Realtime Database and Cloud Storage Security Rules, use the `auth` variable to get the signed-in user's unique ID for access control.
+
+### Multi-Factor Authentication
+
+**Important Security Warning**: Avoid the use of SMS-based MFA. SMS is an insecure technology that is easy to compromise or spoof with no authentication mechanism or eavesdropping protection.
+
+**Platform Limitations**: Windows platform does not support multi-factor authentication. Using multi-factor authentication with multiple tenants on any platform is not supported on Flutter.
+
+1. Enable at least one provider that supports multi-factor authentication before implementing MFA.
+
+### Email Link Authentication
+
+**Important Update**: Firebase Dynamic Links is deprecated for email link authentication. Firebase Hosting is now used to send sign-in links. 
+
+**Platform-Specific Configuration**: Follow the platform-specific guides for proper configuration:
+- [Android Email Link Auth](https://firebase.google.com/docs/auth/android/email-link-auth#complete-android-signin)
+- [iOS Email Link Auth](https://firebase.google.com/docs/auth/ios/email-link-auth#complete-apple-signin)
+- [Web Email Link Auth](https://firebase.google.com/docs/auth/web/email-link-auth#completing_sign-in_in_a_web_page)
+
+1. For sign-in completion via mobile application, configure the app to detect incoming application links and parse the underlying deep link.
+2. Use `handleCodeInApp: true` in ActionCodeSettings as the sign-in operation must always be completed in the app.
+3. Store the user's email address locally (e.g., using SharedPreferences) when sending the sign-in email to streamline the flow.
+4. **Security**: Do not pass the user's email in redirect URL parameters and reuse it as this may enable session injections.
+5. Use HTTPS URLs in production to prevent link interception by intermediary servers.

@@ -77,10 +77,16 @@
 5. Consider including explanations of terminology, links, and references in library-level docs.
 6. Start doc comments with a single-sentence summary.
 7. Separate the first sentence of a doc comment into its own paragraph.
-8. Use square brackets in doc comments to refer to in-scope identifiers.
-9. Use prose to explain parameters, return values, and exceptions.
-10. Put doc comments before metadata annotations.
-11. Document why code exists or how it should be used, not just what it does.
+8. Avoid redundancy with the surrounding context.
+9. Prefer starting function or method comments with third-person verbs if their main purpose is a side effect.
+10. Prefer a noun phrase or non-imperative verb phrase for functions or methods if returning a value is their primary purpose.
+11. Prefer starting non-boolean variable or property comments with a noun phrase.
+12. Prefer starting boolean variable or property comments with "Whether" followed by a noun or gerund phrase.
+13. Prefer starting library or type comments with noun phrases.
+14. Use square brackets in doc comments to refer to in-scope identifiers.
+15. Use prose to explain parameters, return values, and exceptions.
+16. Put doc comments before metadata annotations.
+17. Document why code exists or how it should be used, not just what it does.
 
 ### Testing
 1. Write unit tests for business logic.
@@ -102,4 +108,4 @@
 2. Avoid expensive operations in build methods.
 3. Implement pagination for large lists.
 
-TOTAL CHAR COUNT:     4993
+TOTAL CHAR COUNT:     5539

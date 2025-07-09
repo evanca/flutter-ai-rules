@@ -116,3 +116,14 @@
 5. Test error handling in different app states and scenarios to ensure comprehensive crash reporting.
 6. Monitor the Crashlytics dashboard regularly to identify and address emerging issues.
 7. Use the Firebase console to set up alerts for new issues or regressions.
+
+### Opt-in Reporting
+
+**Impact Awareness**: Enabling opt-in reporting affects crash data collection. By default, Crashlytics automatically collects crash reports for all users.
+
+1. To give users more control over data collection, disable automatic reporting and only send data when you choose to in your code.
+2. The override value persists across all subsequent launches of your app so Crashlytics can automatically collect reports for that user.
+3. Use `FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true)` to enable collection for select users.
+4. If a user later opts-out, pass `false` as the override value, which will apply the next time the user launches the app.
+5. When data collection is disabled for a user, Crashlytics will store crash information locally on the device.
+6. If data collection is subsequently enabled, any crash information stored on the device will be sent to Crashlytics for processing.
