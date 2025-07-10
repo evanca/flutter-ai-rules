@@ -117,15 +117,15 @@
 8. Do not expect to reset all providers at once; instead, make providers that should reset depend on a "user" or "session" provider and reset that dependency.
 9. `hooks_riverpod` and `flutter_hooks` are versioned independently; always add both as dependencies if using hooks.
 10. Riverpod uses `identical` instead of `==` to filter updates for performance reasons, especially with code-generated models; override `updateShouldNotify` on Notifiers to change this behavior.
-11. If you encounter "Cannot use `ref` after the widget was disposed", ensure you check `context.mounted` before using `ref` after an `await` in an async callback.
+11. If you encounter "Using `ref` when a widget is about to or has been unmounted is unsafe" after the widget was disposed, ensure you check `context.mounted` before using `ref` after an `await` in an async callback.
 
 ### Provider Observers (Logging & Error Reporting)
 1. Use a `ProviderObserver` to listen to all events in the provider tree for logging, analytics, or error reporting.
 2. Extend the `ProviderObserver` class and override its methods to respond to provider lifecycle events:
-   - `didAddProvider`: called when a provider is added to the tree.
-   - `didUpdateProvider`: called when a provider is updated.
-   - `didDisposeProvider`: called when a provider is disposed.
-   - `providerDidFail`: called when a synchronous provider throws an error.
+   - `didAddProvider(ProviderObserverContext context, Object? value)`: called when a provider is added to the tree.
+   - `didUpdateProvider(ProviderObserverContext context, Object? previousValue, Object? newValue)`: called when a provider is updated.
+   - `didDisposeProvider(ProviderObserverContext context)`: called when a provider is disposed.
+   - `providerDidFail(ProviderObserverContext context, Object error, StackTrace stackTrace)`: called when a synchronous provider throws an error.
 3. Register your observer(s) by passing them to the `observers` parameter of `ProviderScope` (for Flutter apps) or `ProviderContainer` (for pure Dart).
 4. You can register multiple observers if needed by providing a list to the `observers` parameter.
 5. Use observers to integrate with remote error reporting services, log provider state changes, or trigger custom analytics.
@@ -185,4 +185,4 @@
 15. Keep all test-specific setup and teardown logic inside the test body or test utility functions. Avoid global state.
 16. Ensure your test environment closely matches your production environment for reliable results.
 
-TOTAL CHAR COUNT:    15993
+TOTAL CHAR COUNT:    16271
