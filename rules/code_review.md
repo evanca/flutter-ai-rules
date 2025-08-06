@@ -5,27 +5,28 @@
 3. Identify the target branch for the merge and list all files that have changed, been added, or deleted.
 4. For every change, look up the commit title and review how any connected components are implemented. 
 5. Do not assume a change or fix is correct without investigating the implementation details.
-6. If the change or fix remains difficult to understand after several attempts, include this in your report. 
-6. Fetch online documentation if you’re unsure about the best practices for a particular package or library.
-4. For each changed file, check that the file is in the correct directory.
-5. For each changed file, check that the file name follows naming conventions.
-6. For each changed file, verify the file’s responsibility is clear and that the reason for its change or addition is understandable.
-7. For each changed file, review the code for readability and ensure variable, function, and class names are descriptive and consistent.
-8. For each changed file, check the logic and correctness of the code, ensuring there are no logic errors or missing edge cases.
-9. For each changed file, check that the code is modular and does not contain unnecessary duplication (maintainability).
-10. For each changed file, ensure errors and exceptions are handled appropriately.
-11. For each changed file, check for potential security concerns such as input validation and secrets in code.
-12. For each changed file, check for obvious performance issues or inefficiencies.
-13. For each changed file, verify that public APIs, complex logic, and new modules are documented.
-14. For each changed file, ensure there is sufficient test coverage for new or changed logic.
-15. For each changed file, ensure the code matches the project’s style guide and coding patterns.
-16. For generated files, confirm they are up-to-date and not manually edited.
-17. Check that the overall change set is focused and scoped to the stated purpose and does not include unrelated or unnecessary changes.
-18. Verify that the PR/MR description accurately reflects the changes made.
-19. Ensure there are new or updated tests covering new or changed logic.
-20. If there’s a test, always evaluate whether the test could fail or if it’s only checking a mock implementation.
-20. Ensure all tests pass in the continuous integration system.
-21. Provide clear, constructive feedback for any issues found, including suggestions for improvement and requests for clarification if anything is unclear.
-22. The expected output is an answer in the chat, mentioning conclusions and recommendations per file.
+6. Avoid complimenting or critiquing by default; be as objective and reasonable as possible. Instead of offering automatic praise, take a devil's advocate approach and give honest, thoughtful feedback.
+7. If the change or fix remains difficult to understand after several attempts, include this in your report. 
+8. Fetch online documentation if you're unsure about the best practices for a particular package or library.
+9. For each changed file, check that the file is in the correct directory.
+10. For each changed file, check that the file name follows naming conventions.
+11. For each changed file, verify the file's responsibility is clear and that the reason for its change or addition is understandable.
+12. For each changed file, review the code for readability and ensure variable, function, and class names are descriptive and consistent.
+13. For each changed file, check the logic and correctness of the code, ensuring there are no logic errors or missing edge cases.
+14. For each changed file, check that the code is modular and does not contain unnecessary duplication (maintainability).
+15. For each changed file, ensure errors and exceptions are handled appropriately.
+16. For each changed file, check for potential security concerns such as input validation and secrets in code.
+17. For each changed file, check for obvious performance issues or inefficiencies.
+18. For each changed file, verify that public APIs, complex logic, and new modules are documented.
+19. For each changed file, ensure there is sufficient test coverage for new or changed logic.
+20. For each changed file, ensure the code matches the project's style guide and coding patterns.
+21. For generated files, confirm they are up-to-date and not manually edited.
+22. Check that the overall change set is focused and scoped to the stated purpose and does not include unrelated or unnecessary changes.
+23. Verify that the PR/MR description accurately reflects the changes made.
+24. Ensure there are new or updated tests covering new or changed logic.
+25. If there's a test, always evaluate whether the test could fail or if it's only checking a mock implementation.
+26. Ensure all tests pass in the continuous integration system.
+27. Provide clear, constructive feedback for any issues found, including suggestions for improvement and requests for clarification if anything is unclear.
+28. The expected output is an answer in the chat, mentioning conclusions and recommendations per file.
 
-TOTAL CHAR COUNT:     2771
+TOTAL CHAR COUNT:     2978
