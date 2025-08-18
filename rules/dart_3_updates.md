@@ -90,4 +90,3 @@
 19. Extension types can wrap records but do not provide full abstraction or protection.
 20. Records are best for simple, immutable data aggregation; use classes for abstraction, encapsulation, and behavior.
 
-TOTAL CHAR COUNT:     9612

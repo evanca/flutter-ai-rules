@@ -1,0 +1,28 @@
+# Rules Character Count
+
+This document contains character counts for all rule files.
+
+| Rules Under 6K | Character Count |
+|----------------|-----------------|
+| code_review.md |     2978 |
+| effective_dart.md |     5539 |
+| flutter_app_architecture.md |     5192 |
+| flutter_change_notifier.md |     2752 |
+| flutter_errors.md |     1391 |
+| mockito.md |     3080 |
+| mocktail.md |     2577 |
+| provider.md |     2861 |
+| testing.md |      626 |
+
+| Rules 6K+ | Character Count |
+|-----------|-----------------|
+| bloc.md |     9968 |
+| dart_3_updates.md |     9612 |
+| riverpod.md |    16271 |
+
+**Total character count across all rules:** 62847
+
+---
+
+**Windsurf limits:** `global_rules.md` and `.windsurfrules` are limited to 6000 characters each. Any content above 6000 characters will be truncated and Cascade will not be aware of them.
+Source: [Windsurf Documentation - Memories](https://docs.windsurf.com/windsurf/memories), accessed Apr 15 2025.

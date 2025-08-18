@@ -115,4 +115,3 @@
 4. Use `replay_bloc` to add undo and redo functionality to your blocs.
 5. Install packages based on your needs: start with `bloc` and `flutter_bloc` for basic functionality.
 
-TOTAL CHAR COUNT:     9968

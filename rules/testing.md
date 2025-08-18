@@ -4,4 +4,3 @@
 - Always use group() in test files — even if there’s only one test — and name the group after the class under test.
 - Name test cases using “should” to clearly describe the expected behavior. Example: test('value should start at 0', () {...}.
 
-TOTAL CHAR COUNT:      626

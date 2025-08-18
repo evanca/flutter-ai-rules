@@ -185,4 +185,3 @@
 15. Keep all test-specific setup and teardown logic inside the test body or test utility functions. Avoid global state.
 16. Ensure your test environment closely matches your production environment for reliable results.
 
-TOTAL CHAR COUNT:    16271

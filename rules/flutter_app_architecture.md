@@ -54,4 +54,3 @@
 17. Follow Dart naming conventions and format code using `dart format`.
 18. Use curly braces for all flow control statements to ensure clarity and prevent bugs.
 
-TOTAL CHAR COUNT:     5192

@@ -21,4 +21,3 @@
 19. Stub every method you expect to be called, even if it's not the focus of your test, to prevent runtime errors.
 20. When matching string outputs, make sure you understand what `.toString()` returns for the type you are using.
 
-TOTAL CHAR COUNT:     2577

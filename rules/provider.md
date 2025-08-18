@@ -66,4 +66,3 @@ class MyClass with DiagnosticableTreeMixin {
 14. You can use any object as state, not just `ChangeNotifier`; use `Provider.value()` with a `StatefulWidget` if needed.
 15. If you have a very large number of providers (e.g., 150+), consider mounting them over time (e.g., during splash screen animation) or avoid `MultiProvider` to prevent StackOverflowError.
 
-TOTAL CHAR COUNT:     2861
