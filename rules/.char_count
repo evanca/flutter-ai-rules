@@ -26,3 +26,6 @@ This document contains character counts for all rule files.
 
 **Windsurf limits:** `global_rules.md` and `.windsurfrules` are limited to 6000 characters each. Any content above 6000 characters will be truncated and Cascade will not be aware of them.
 Source: [Windsurf Documentation - Memories](https://docs.windsurf.com/windsurf/memories), accessed Apr 15 2025.
+
+**Cursor limits:** Keep rules concise. Under 500 lines is a good target.
+Source: [Cursor Documentation - Rules](https://docs.cursor.com/context/rules#best-practices), accessed May 7 2025.
