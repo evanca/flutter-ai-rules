@@ -10,25 +10,27 @@
 6. Initialize App Check after Firebase initialization but before using any Firebase services.
    ```dart
    await Firebase.initializeApp();
-   await FirebaseAppCheck.instance.activate(
-     webProvider: ReCaptchaV3Provider('recaptcha-v3-site-key'),
-     androidProvider: AndroidProvider.playIntegrity,
-     appleProvider: AppleProvider.deviceCheck,
-   );
+    await FirebaseAppCheck.instance.activate(
+       webProvider: ReCaptchaV3Provider('recaptcha-v3-site-key'),
+       // Use provider classes to select platform providers.
+       // For production: providerAndroid: AndroidPlayIntegrityProvider(), providerApple: AppleAppAttestProvider()
+       providerAndroid: AndroidPlayIntegrityProvider(),
+       providerApple: AppleDeviceCheckProvider(),
+    );
    ```
 7. For web applications, obtain a reCAPTCHA v3 site key from the Firebase console and use it with the `ReCaptchaV3Provider`.
 
 ### Provider Selection
 
 1. For Android, choose the appropriate provider based on your requirements:
-   - `AndroidProvider.playIntegrity` (default): Uses Play Integrity API for app verification
-   - `AndroidProvider.safetyNet`: Uses the legacy SafetyNet API (not recommended for new apps)
-   - `AndroidProvider.debug`: For development and testing environments only
+   - `AndroidPlayIntegrityProvider` (default): Uses Play Integrity API for app verification
+   - `AndroidSafetyNetProvider`: Uses the legacy SafetyNet API (not recommended for new apps)
+   - `AndroidDebugProvider`: For development and testing environments only
 2. For Apple platforms (iOS/macOS), choose the appropriate provider:
-   - `AppleProvider.deviceCheck` (default): Works on iOS 11+ and macOS 10.15+
-   - `AppleProvider.appAttest`: Enhanced security on iOS 14+ and macOS 14+
-   - `AppleProvider.appAttestWithDeviceCheckFallback`: Uses App Attest with fallback to Device Check
-   - `AppleProvider.debug`: For development and testing environments only
+   - `AppleDeviceCheckProvider` (default): Works on iOS 11+ and macOS 10.15+
+   - `AppleAppAttestProvider`: Enhanced security on iOS 14+ and macOS 14+
+   - `AppleAppAttestProviderWithDeviceCheckFallback`: Uses App Attest with fallback to Device Check
+   - `AppleDebugProvider`: For development and testing environments only
 3. For web platforms, use one of the following providers:
    - `ReCaptchaV3Provider`: Standard reCAPTCHA v3 verification
    - `ReCaptchaEnterpriseProvider`: Enhanced version with additional features
@@ -36,12 +38,13 @@
 ### Development and Testing
 
 1. Use the debug provider during development to run your app in emulators or CI environments.
-   ```dart
-   await FirebaseAppCheck.instance.activate(
-     androidProvider: AndroidProvider.debug,
-     appleProvider: AppleProvider.debug,
-   );
-   ```
+    ```dart
+    await FirebaseAppCheck.instance.activate(
+       // For development/testing use the debug providers (optionally with a debug token):
+       providerAndroid: AndroidDebugProvider('YOUR_DEBUG_TOKEN'),
+       providerApple: AppleDebugProvider('YOUR_DEBUG_TOKEN'),
+    );
+    ```
 2. For iOS debug builds, enable debug logging by adding `-FIRDebugEnabled` to the Arguments Passed on Launch in Xcode.
 3. For web debug builds, enable debug mode by setting `self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;` in your `web/index.html` file.
 4. Register the debug tokens displayed in the console in the Firebase console's App Check section.

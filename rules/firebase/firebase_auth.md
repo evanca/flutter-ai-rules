@@ -92,18 +92,15 @@
 2. For Google Sign-In on native platforms, use the `google_sign_in` plugin and create a credential with the authentication details.
    ```dart
    Future<UserCredential> signInWithGoogle() async {
-     // Trigger the authentication flow
-     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-     
-     // Obtain the auth details from the request
-     final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
-     
-     // Create a new credential
-     final credential = GoogleAuthProvider.credential(
-       accessToken: googleAuth?.accessToken,
-       idToken: googleAuth?.idToken,
-     );
-     
+     // Trigger the authentication flow (new API)
+     final GoogleSignInAccount? googleUser = await GoogleSignIn.instance.authenticate();
+
+     // Obtain the auth details (non-nullable after authenticate)
+     final GoogleSignInAuthentication googleAuth = googleUser.authentication;
+
+     // Create a new credential with the ID token
+     final credential = GoogleAuthProvider.credential(idToken: googleAuth.idToken);
+
      // Once signed in, return the UserCredential
      return await FirebaseAuth.instance.signInWithCredential(credential);
    }
