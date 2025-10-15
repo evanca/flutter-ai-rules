@@ -39,6 +39,7 @@
 2. Use curly braces for all flow control statements.
 3. Prefer `final` over `var` when variable values won't change.
 4. Use `const` for compile-time constants.
+5. Prefer lines 80 characters or fewer for readability.
 
 ### Imports & Files
 1. Don't import libraries inside the `src` directory of another package.
@@ -68,6 +69,7 @@
 10. Use `rethrow` to rethrow a caught exception.
 11. Override `hashCode` if you override `==`.
 12. Make your `==` operator obey the mathematical rules of equality.
+13. Prefer specific exception handling: avoid generic `catch (e)` handlers when possible; use `on SomeException catch (e, _)` and `.onError<T>` (or specific `on` clauses) instead of broad `.catchError`/catch blocks.
 
 ### Documentation
 1. Format comments like sentences.
@@ -78,13 +80,14 @@
 6. Start doc comments with a single-sentence summary.
 7. Separate the first sentence of a doc comment into its own paragraph.
 8. Avoid redundancy with the surrounding context.
-9. Prefer starting function or method comments with third-person verbs if their main purpose is a side effect.
-10. Prefer a noun phrase or non-imperative verb phrase for functions or methods if returning a value is their primary purpose.
+9. Prefer starting comments of a function or method with third-person verbs if its main purpose is a side effect.
+10. Prefer a noun phrase or non-imperative verb phrase for a function or method if returning a value is its primary purpose.
 11. Prefer starting non-boolean variable or property comments with a noun phrase.
 12. Prefer starting boolean variable or property comments with "Whether" followed by a noun or gerund phrase.
 13. Prefer starting library or type comments with noun phrases.
 14. Use square brackets in doc comments to refer to in-scope identifiers.
 15. Use prose to explain parameters, return values, and exceptions.
+	- Consider using short sections such as "The [parameter]", "Returns", and "Throws" to make parameter and error documentation clearer.
 16. Put doc comments before metadata annotations.
 17. Document why code exists or how it should be used, not just what it does.
 
