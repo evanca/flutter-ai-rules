@@ -28,8 +28,8 @@ ChangeNotifierProvider(
 return Consumer<CartModel>(
   builder: (context, cart, child) => Stack(
     children: [
-      if (child != null) child,
-      Text('Total price: \${cart.totalPrice}'),
+      child ?? const SizedBox.shrink(),
+      Text('Total price: ${cart.totalPrice}'),
     ],
   ),
   child: const SomeExpensiveWidget(),
