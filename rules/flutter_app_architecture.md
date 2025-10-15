@@ -53,4 +53,7 @@
 16. Prefer making declarations private and consider making constructors `const` if the class supports it.
 17. Follow Dart naming conventions and format code using `dart format`.
 18. Use curly braces for all flow control statements to ensure clarity and prevent bugs.
+19. Prefer explicit typing and generics on public APIs (for example, prefer typed command signatures such as `Command0<void>` rather than untyped/dynamic signatures) to improve clarity and type safety.
+20. For small immutable domain or data models, prefer using `abstract class` with `const` constructors and `final` fields where it improves readability and enforces immutability.
+21. Use descriptive constant names for resources and table identifiers (for example prefer `_todoTableName` over compact prefixes like `_kTableTodo`) to improve clarity across examples and migrations.
 
