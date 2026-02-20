@@ -13,6 +13,10 @@ This repository provides a comprehensive, (almost) non-opinionated collection of
 
 ## 📁 Repository Structure
 
+- **`skills/`**  
+  **NEW!** Skills are an open standard for extending agent capabilities. A skill is a folder containing a `SKILL.md` file with instructions that the agent can follow when working on specific tasks. They are essentially what “dynamic rules” used to be — applied automatically when the agent determines they are relevant based on the description.
+
+  Copy or symlink any skill folder into `.cursor/skills/`, `.agent/skills/`, or another supported location.
 - **`rules/`**  
   Contains individual rule files, each focused on a specific topic or tool (e.g., `bloc.md`, `effective_dart.md`, etc.).  
   These files are:
