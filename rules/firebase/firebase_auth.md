@@ -147,6 +147,10 @@
      photoURL: "https://example.com/jane-q-user/profile.jpg",
    );
    ```
+8. Use `verifyBeforeUpdateEmail()` (not `updateEmail()`) to change a user's email address. This sends a verification email to the new address; the email is only updated after the user verifies it.
+   ```dart
+   await user?.verifyBeforeUpdateEmail("newemail@example.com");
+   ```
 
 ### Security Best Practices
 

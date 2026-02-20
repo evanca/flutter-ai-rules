@@ -24,7 +24,6 @@
 
 1. For Android, choose the appropriate provider based on your requirements:
    - `AndroidPlayIntegrityProvider` (default): Uses Play Integrity API for app verification
-   - `AndroidSafetyNetProvider`: Uses the legacy SafetyNet API (not recommended for new apps)
    - `AndroidDebugProvider`: For development and testing environments only
 2. For Apple platforms (iOS/macOS), choose the appropriate provider:
    - `AppleDeviceCheckProvider` (default): Works on iOS 11+ and macOS 10.15+

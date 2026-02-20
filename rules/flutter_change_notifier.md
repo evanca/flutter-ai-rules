@@ -28,7 +28,7 @@ ChangeNotifierProvider(
 return Consumer<CartModel>(
   builder: (context, cart, child) => Stack(
     children: [
-      child ?? const SizedBox.shrink(),
+      ?child,
       Text('Total price: ${cart.totalPrice}'),
     ],
   ),

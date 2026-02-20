@@ -220,7 +220,7 @@ ChangeNotifierProvider(
 return Consumer<CartModel>(
   builder: (context, cart, child) => Stack(
     children: [
-      if (child != null) child,
+      ?child,
       Text('Total price: \${cart.totalPrice}'),
     ],
   ),

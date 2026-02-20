@@ -78,7 +78,7 @@
 1. Use a `Fake` when you want a lightweight, custom implementation of a class for testing.
 2. Use a `Mock` when you need to verify interactions (method calls, arguments, call counts).
 3. Use `@GenerateMocks([YourClass])` or `@GenerateNiceMocks([MockSpec<YourClass>()])` to generate mock classes.
-4. Run `flutter pub run build_runner build` after adding mock annotations to generate the mock files.
+4. Run `dart run build_runner build` after adding mock annotations to generate the mock files.
 5. Create mock instances from generated classes (e.g., `var mock = MockCat();`).
 6. Use `when(mock.method()).thenReturn(value)` to stub method calls, and `when(mock.method()).thenThrow(error)` to stub errors.
 7. Use `thenAnswer` to calculate a response at call time: `when(mock.method()).thenAnswer((_) => value);`.
