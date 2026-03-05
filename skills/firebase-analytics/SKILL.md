@@ -16,11 +16,6 @@ Use this skill when:
 * Setting user properties or default event parameters.
 * Applying best practices for analytics data collection.
 
-Do not use this skill for:
-
-* Firebase Crashlytics, Remote Config, or other Firebase services.
-* Server-side analytics implementations.
-
 ---
 
 ## 1. Setup and Configuration

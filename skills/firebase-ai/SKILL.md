@@ -16,11 +16,6 @@ Use this skill when:
 * Handling errors and offline scenarios for AI operations.
 * Applying security and privacy considerations for AI features.
 
-Do not use this skill for:
-
-* Firebase Firestore, Auth, Storage, or other Firebase services.
-* Non-Firebase AI/ML integrations.
-
 ---
 
 ## 1. Setup and Configuration

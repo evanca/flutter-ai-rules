@@ -19,11 +19,6 @@ Use this skill when:
 * Wiring dependency injection between components.
 * Adding a domain (logic) layer for complex business logic.
 
-Do not use this skill for:
-
-* Choosing a state management package (bloc, riverpod, etc.). The pattern applies regardless of state management.
-* Firebase, navigation, or platform plugin specifics.
-
 ---
 
 ## 1. Layers

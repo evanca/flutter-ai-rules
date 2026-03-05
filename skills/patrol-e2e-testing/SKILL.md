@@ -23,11 +23,6 @@ Use this skill when:
 * A UI bug should be captured as a regression test.
 * Cross-platform behavior (Android / iOS / Web) must be validated.
 
-Do not use this skill for:
-
-* Pure unit tests
-* Simple widget tests that do not require full app integration
-
 ## Setup
 
 For installation and project initialization, follow the official documentation:

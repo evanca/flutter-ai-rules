@@ -17,11 +17,6 @@ Use this skill when:
 * Writing unit tests for a Cubit or Bloc.
 * Deciding between Cubit and Bloc.
 
-Do not use this skill for:
-
-* Riverpod, Provider, or ChangeNotifier state management.
-* General Dart/Flutter questions unrelated to bloc.
-
 ---
 
 ## 1. Cubit vs Bloc

@@ -17,11 +17,6 @@ Use this skill when:
 * Enabling enforcement and monitoring App Check metrics.
 * Applying App Check security best practices.
 
-Do not use this skill for:
-
-* Firebase Auth, Firestore, or other Firebase services in isolation.
-* Server-side App Check token verification (use Firebase Admin SDK).
-
 ---
 
 ## 1. Setup and Configuration

@@ -17,11 +17,6 @@ Use this skill when:
 * Optimizing for scale and avoiding hotspots.
 * Applying Firestore security rules.
 
-Do not use this skill for:
-
-* Firebase Realtime Database (a separate product).
-* Firebase Auth, Storage, or other Firebase services.
-
 ---
 
 ## 1. Database Selection

@@ -17,11 +17,6 @@ Use this skill when:
 * Optimizing function call performance.
 * Testing with the Firebase Emulator Suite.
 
-Do not use this skill for:
-
-* Writing or deploying server-side Cloud Functions code (Node.js/Python/etc.).
-* Firebase Firestore, Auth, Storage, or other Firebase services.
-
 ---
 
 ## 1. Setup and Configuration
