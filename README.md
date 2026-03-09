@@ -1,4 +1,4 @@
-# Flutter Rules for Windsurf, Cursor, and Other AI-Powered IDEs
+# Flutter AI Skills and Rules for Cursor, Copilot, Antigravity, and Other AI-Powered IDEs
 
 <img src="media/flutter_ai_rules.png" width="500" alt="Flutter Rules for Windsurf, Cursor">
 
