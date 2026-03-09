@@ -347,6 +347,4 @@ Rules:
 
 ## References
 
-- [bloc library documentation](https://bloclibrary.dev)
-- [flutter_bloc package](https://pub.dev/packages/flutter_bloc)
-- [bloc_test package](https://pub.dev/packages/bloc_test)
+- [Bloc GitHub Repository](https://github.com/felangel/bloc)

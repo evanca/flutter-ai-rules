@@ -44,10 +44,3 @@ Name test cases using **"should"** to clearly describe the expected behavior:
 test('should emit updated list when item is added', () { ... });
 test('should throw ArgumentError when input is negative', () { ... });
 ```
-
----
-
-## References
-
-- [Flutter testing documentation](https://docs.flutter.dev/testing)
-- [Dart testing package](https://pub.dev/packages/test)

@@ -239,6 +239,4 @@ await tester.pumpWidget(
 
 ## References
 
-- [Riverpod documentation](https://riverpod.dev/docs/introduction/getting_started)
-- [riverpod package on pub.dev](https://pub.dev/packages/flutter_riverpod)
-- [riverpod_lint](https://pub.dev/packages/riverpod_lint)
+- [Riverpod GitHub Repository](https://github.com/rrousselGit/riverpod)

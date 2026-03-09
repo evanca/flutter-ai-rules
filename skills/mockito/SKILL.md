@@ -142,5 +142,4 @@ logInvocations([mock1, mock2]); // print all collected invocations
 
 ## References
 
-- [mockito package on pub.dev](https://pub.dev/packages/mockito)
-- [mockito README](https://github.com/dart-lang/mockito/blob/master/README.md)
+- [Mockito GitHub Repository](https://github.com/dart-lang/mockito)

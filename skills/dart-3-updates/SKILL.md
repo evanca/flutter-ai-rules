@@ -217,10 +217,3 @@ Use a **class** when:
 - Changing a record type alias does not guarantee type safety across the codebase — only classes provide full abstraction.
 
 ---
-
-## References
-
-- [Dart 3 Branches](https://dart.dev/language/branches)
-- [Dart 3 Patterns](https://dart.dev/language/patterns)
-- [Dart 3 Pattern Types](https://dart.dev/language/pattern-types)
-- [Dart 3 Records](https://dart.dev/language/records)

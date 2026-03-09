@@ -180,7 +180,4 @@ int add(int a, int b) { ... }
 
 ## References
 
-- [Effective Dart: Style](https://dart.dev/effective-dart/style)
-- [Effective Dart: Usage](https://dart.dev/effective-dart/usage)
-- [Effective Dart: Design](https://dart.dev/effective-dart/design)
-- [Effective Dart: Documentation](https://dart.dev/effective-dart/documentation)
+- [Dart Site WWW GitHub Repository](https://github.com/dart-lang/site-www)

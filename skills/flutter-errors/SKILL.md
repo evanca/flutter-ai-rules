@@ -116,3 +116,7 @@ void initState() {
 - Enable **"Show guidelines"** to see layout boundaries.
 - Add `debugPaintSizeEnabled = true;` temporarily in your `main()` to paint layout bounds.
 - Refer to the [Flutter constraints documentation](https://docs.flutter.dev/ui/layout/constraints) for a deeper understanding of how constraints propagate.
+
+## References
+
+- [Flutter Website GitHub Repository](https://github.com/flutter/website)

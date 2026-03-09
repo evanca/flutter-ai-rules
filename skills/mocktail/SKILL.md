@@ -115,5 +115,4 @@ print(captured.last);
 
 ## References
 
-- [mocktail package on pub.dev](https://pub.dev/packages/mocktail)
-- [mocktail README](https://github.com/felangel/mocktail/blob/main/packages/mocktail/README.md)
+- [Mocktail GitHub Repository](https://github.com/felangel/mocktail)

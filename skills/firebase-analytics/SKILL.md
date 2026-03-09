@@ -122,6 +122,4 @@ await FirebaseAnalytics.instance.setUserProperty(
 
 ## References
 
-- [Firebase Analytics Flutter documentation](https://firebase.google.com/docs/analytics/get-started?platform=flutter)
-- [Recommended events](https://support.google.com/analytics/answer/9267735)
-- [Automatically collected events](https://support.google.com/analytics/answer/9234069)
+- [FlutterFire GitHub Repository](https://github.com/firebase/flutterfire)

@@ -131,5 +131,4 @@ test('adding item updates total', () {
 
 ## References
 
-- [Simple app state management (Flutter docs)](https://docs.flutter.dev/data-and-backend/state-mgmt/simple)
-- [provider package](https://pub.dev/packages/provider)
+- [Flutter Website GitHub Repository](https://github.com/flutter/website)

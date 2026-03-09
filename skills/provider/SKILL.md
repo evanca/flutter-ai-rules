@@ -132,5 +132,4 @@ ValueListenableBuilder<int>(
 
 ## References
 
-- [provider package on pub.dev](https://pub.dev/packages/provider)
-- [Simple app state management (Flutter docs)](https://docs.flutter.dev/data-and-backend/state-mgmt/simple)
+- [Provider GitHub Repository](https://github.com/rrousselGit/provider)
