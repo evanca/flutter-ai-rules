@@ -75,16 +75,22 @@
        password: password
      );
    } on FirebaseAuthException catch (e) {
-     if (e.code == 'user-not-found') {
+     if (e.code == 'invalid-credential') {
+       // Since September 2023 Firebase enables email enumeration protection by
+       // default, which returns this code instead of 'user-not-found' or
+       // 'wrong-password' to prevent revealing whether an email is registered.
+       print('Invalid email or password.');
+     } else if (e.code == 'user-not-found') {
        print('No user found for that email.');
      } else if (e.code == 'wrong-password') {
        print('Wrong password provided for that user.');
      }
    }
    ```
-3. Verify the user's email address after account creation to enhance security.
-4. Be aware that Firebase limits the number of new email/password sign-ups from the same IP address in a short period to protect against abuse.
-5. On iOS and macOS, be aware that authentication state can persist between app re-installs as the Firebase SDK persists authentication state to the system keychain.
+3. Handle the `invalid-credential` error code when signing in with email and password. Since September 2023, Firebase enables email enumeration protection by default on new projects, replacing `user-not-found` and `wrong-password` with `invalid-credential` to prevent revealing whether an email address is registered. This setting can be managed in the Firebase console under **Authentication > Settings**.
+4. Verify the user's email address after account creation to enhance security.
+5. Be aware that Firebase limits the number of new email/password sign-ups from the same IP address in a short period to protect against abuse.
+6. On iOS and macOS, be aware that authentication state can persist between app re-installs as the Firebase SDK persists authentication state to the system keychain.
 
 ### Social Authentication
 
@@ -122,6 +128,20 @@
    ```
 4. Configure platform-specific settings for each social provider (e.g., SHA1 key for Google Sign-In on Android).
 5. Be aware that if a user signs in with a social provider after having manually registered an account with the same email, their authentication provider will automatically change due to Firebase's concept of trusted providers.
+6. On Android, `signInWithProvider` opens a Chrome Custom Tab for the OAuth flow. If your `AndroidManifest.xml` contains `android:taskAffinity=""` (Flutter's default template), the Custom Tab will close when the user switches apps (e.g., to open a password manager), causing a `web-context-already-presented` error on return. To fix this, remove `android:taskAffinity=""` from your `AndroidManifest.xml`.
+7. When signing in with Apple, request the `email` and `name` scopes to present the full first-time sign-in UI (including the "Share/Hide email" option).
+   ```dart
+   Future<UserCredential> signInWithApple() async {
+     final appleProvider = AppleAuthProvider();
+     appleProvider.addScope('email');
+     appleProvider.addScope('name');
+     if (kIsWeb) {
+       await FirebaseAuth.instance.signInWithPopup(appleProvider);
+     } else {
+       await FirebaseAuth.instance.signInWithProvider(appleProvider);
+     }
+   }
+   ```
 
 ### Error Handling
 

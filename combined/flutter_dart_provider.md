@@ -221,8 +221,8 @@ MultiProvider(
   child: someWidget,
 )
 ```
-6. Use `context.watch<T>()` to listen to changes and rebuild the widget when `T` changes.
-7. Use `context.read<T>()` to access a provider without listening for changes (e.g., in callbacks).
+6. Use `context.watch<T>()` to listen to changes and rebuild the widget when `T` changes. `context.watch<T>()` can only be called inside `StatelessWidget.build`/`State.build` or a Provider's `update` method.
+7. Use `context.read<T>()` to access a provider without listening for changes (e.g., in callbacks). Avoid calling `context.read<T>()` inside `StatelessWidget.build`/`State.build`; use `context.watch<T>()` there instead.
 8. Use `context.select<T, R>(R selector(T value))` to listen to only a small part of `T` and optimize rebuilds.
 ```dart
 final selected = context.select<MyModel, int>((model) => model.count);

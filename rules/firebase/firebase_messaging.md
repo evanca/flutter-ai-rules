@@ -6,7 +6,7 @@
 2. Upload your APNs authentication key to Firebase before using FCM on iOS.
 3. Do not disable method swizzling on Apple devices, as it's required for FCM token handling.
 4. Request user permission before FCM payloads can be received on iOS, macOS, web, and Android 13 or newer.
-5. For iOS, ensure the bundle ID for your APNs certificate matches the bundle ID of your app.
+5. For iOS, ensure the bundle ID for your APNs authentication key matches the bundle ID of your app.
 6. Install the FCM plugin using `flutter pub add firebase_messaging`.
 7. Ensure your Android devices are running Android 4.4 or higher with Google Play services installed.
 8. Check for Google Play services compatibility in both `onCreate()` and `onResume()` methods for Android.
@@ -135,6 +135,23 @@
      // APNS token is available, make FCM plugin API requests
    }
    ```
+
+### Notification Interaction Handling
+
+1. Handle notification taps when the app is launched from a **terminated state** using `getInitialMessage()`, which returns a `Future<RemoteMessage?>`. Once consumed, the `RemoteMessage` is removed.
+   ```dart
+   RemoteMessage? initialMessage = await FirebaseMessaging.instance.getInitialMessage();
+   if (initialMessage != null) {
+     // App opened from terminated state via notification
+   }
+   ```
+2. Handle notification taps when the app is in a **background state** using the `onMessageOpenedApp` stream.
+   ```dart
+   FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+     // App brought to foreground via notification tap
+   });
+   ```
+3. Always handle both `getInitialMessage()` and `onMessageOpenedApp` to ensure a smooth experience regardless of whether the app was terminated or backgrounded when the notification was tapped.
 
 ### Auto-Initialization Control
 

@@ -10,6 +10,7 @@
    FirebaseAnalytics analytics = FirebaseAnalytics.instance;
    ```
 5. Initialize Firebase before using any Firebase Analytics features.
+6. On iOS, if your app does not use the IDFA (Advertising Identifier), use the `FirebaseAnalyticsWithoutAdIdSupport` dependency instead of the default `FirebaseAnalytics` iOS dependency to avoid App Store review questions about advertising identifiers. With Swift Package Manager, set the `FIREBASE_ANALYTICS_WITHOUT_ADID=true` environment variable when building. With CocoaPods, add both `pod 'FirebaseAnalytics'` and `pod 'FirebaseAnalyticsWithoutAdIdSupport'` to your `Podfile`.
 
 ### Event Logging
 
