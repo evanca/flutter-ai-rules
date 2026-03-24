@@ -1,6 +1,6 @@
 ---
 name: flutterfire-configure
-description: Sets up Firebase for Flutter apps using FlutterFire CLI. Use when initializing a Firebase project, running flutterfire configure, initializing Firebase in main.dart, or configuring multiple app flavors.
+description: "Sets up Firebase for Flutter apps using FlutterFire CLI. Use when adding Firebase to a Flutter project for the first time, running flutterfire configure after adding new platforms or services, initializing Firebase in main.dart, or configuring separate Firebase projects for multiple app flavors. Trigger terms: flutterfire configure, Firebase setup, Firebase initialization, firebase_core, firebase_options.dart, app flavors, multi-environment Firebase."
 ---
 
 # FlutterFire Configure Skill
@@ -73,12 +73,18 @@ void main() async {
 
 ---
 
-## 4. Best Practices
+## 4. Verification and Best Practices
+
+After configuration, verify the setup is working:
+
+1. Run `flutter run` and confirm the app launches without Firebase initialization errors.
+2. Check the debug console for `Firebase initialized successfully` or similar confirmation.
+3. Verify `firebase_options.dart` was generated with the correct project ID.
 
 - Enable **Firebase Analytics** for optimal experience with Crashlytics, Remote Config, and other products.
 - Use a **consistent Firebase project** across all platforms for data consistency.
 - For iOS/macOS apps using certain Firebase services, add the **Keychain Sharing** capability in Xcode.
-- Test your Firebase configuration with **both debug and release** builds.
+- Test the Firebase configuration with **both debug and release** builds.
 - Check **version compatibility** between Flutter plugins and the underlying Firebase SDK.
 
 ---

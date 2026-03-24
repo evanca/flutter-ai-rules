@@ -1,6 +1,6 @@
 ---
 name: firebase-auth
-description: Integrates Firebase Authentication into Flutter apps. Use when setting up auth, managing auth state, implementing email/password or social sign-in, handling auth errors, managing users, or applying security best practices.
+description: "Integrates Firebase Authentication into Flutter apps. Use when implementing email/password sign-in, configuring Google or social sign-in providers, listening to auth state changes, managing user profiles and account linking, implementing multi-factor authentication, handling FirebaseAuthException errors, or securing auth flows. Trigger terms: Firebase auth, sign-in, sign-up, authentication, login, logout, social login, MFA, auth state, FirebaseAuthException."
 ---
 
 # Firebase Authentication Skill
@@ -148,11 +148,20 @@ Future<UserCredential> signInWithGoogle() async {
 
 ## 5. Error Handling
 
+Common `FirebaseAuthException` codes and their recommended handling:
+
+| Error code | Meaning | Action |
+|---|---|---|
+| `weak-password` | Password does not meet strength requirements | Show password requirements to user |
+| `email-already-in-use` | Account exists for this email | Prompt sign-in or password reset |
+| `user-not-found` | No account for this email | Prompt account creation |
+| `wrong-password` | Incorrect password | Show error, offer password reset |
+| `too-many-requests` | Rate limited | Show cooldown message, retry later |
+| `account-exists-with-different-credential` | Email linked to another provider | Fetch sign-in methods, guide user to correct provider |
+| `operation-not-allowed` | Provider not enabled | Enable the provider in the Firebase console |
+
 - Always use `try-catch` with `FirebaseAuthException`.
-- Check `e.code` to identify specific error types.
-- Handle `account-exists-with-different-credential` by fetching sign-in methods for the email and guiding users through the correct flow.
-- Handle `too-many-requests` with retry logic or user feedback.
-- Handle `operation-not-allowed` by ensuring the provider is enabled in the Firebase console.
+- Check `e.code` to identify specific error types and provide actionable user feedback.
 
 ---
 

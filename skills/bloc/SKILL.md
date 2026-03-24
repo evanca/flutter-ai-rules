@@ -1,21 +1,22 @@
 ---
 name: bloc
-description: Implements Flutter state management using the bloc library (Bloc and Cubit). Use when creating new features, screens, or state management logic with bloc/cubit, modeling state, wiring Flutter widgets to blocs, or writing bloc/cubit unit tests.
+description: "Implement Flutter state management using the bloc and flutter_bloc libraries. Use when creating a new Cubit or Bloc, modeling state with sealed classes or status enums, wiring BlocBuilder/BlocListener/BlocProvider in widgets, writing bloc unit tests, refactoring state management, or deciding between Cubit and Bloc."
 ---
 
 # Bloc Skill
 
-This skill defines how to design, implement, and test state management using the [bloc](https://pub.dev/packages/bloc) and [flutter_bloc](https://pub.dev/packages/flutter_bloc) libraries.
+Design, implement, and test state management using the [bloc](https://pub.dev/packages/bloc) and [flutter_bloc](https://pub.dev/packages/flutter_bloc) libraries.
 
 ## When to Use
 
 Use this skill when:
 
 * Creating a new Cubit or Bloc for a feature.
-* Modeling state (choosing between sealed classes vs a single state class).
+* Modeling state (choosing between sealed classes and a single state class with status enum).
 * Wiring `BlocBuilder`, `BlocListener`, `BlocConsumer`, or `BlocProvider` in the widget tree.
 * Writing unit tests for a Cubit or Bloc.
 * Deciding between Cubit and Bloc.
+* Refactoring existing state management to follow bloc conventions.
 
 ---
 
@@ -342,6 +343,27 @@ Rules:
 - Use `group()` named after the class under test.
 - Name test cases with "should" to describe expected behavior.
 - Register fallback values for custom types: `registerFallbackValue(MyEvent())`.
+
+---
+
+## 9. Common Pitfalls
+
+| Pitfall | Fix |
+|---|---|
+| Emitting the same state instance twice | Always create a new state object; bloc ignores duplicate emissions via `==`. |
+| Calling `context.watch` inside callbacks | Use `context.read` in callbacks; `watch` is only valid inside `build`. |
+| Forgetting `Equatable` props | Add every field to `props`; missing fields cause silent state update bugs. |
+| Mutable state fields | Keep state `@immutable`; use `copyWith` or new sealed subclass instances. |
+| Business logic in widgets | Move all logic into the Cubit/Bloc; widgets only dispatch events or call methods. |
+
+```dart
+// BAD — mutating state in-place
+state.items.add(newItem);
+emit(state);
+
+// GOOD — emit a new state with copied list
+emit(state.copyWith(items: [...state.items, newItem]));
+```
 
 ---
 

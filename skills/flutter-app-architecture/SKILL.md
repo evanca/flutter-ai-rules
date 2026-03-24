@@ -1,76 +1,217 @@
 ---
 name: flutter-app-architecture
-description: Provides best practices for Flutter app architecture, including layered architecture, data flow, state management patterns, and extensibility guidelines.
+description: "Implement layered Flutter app architecture with MVVM, repositories, services, and dependency injection. Use when scaffolding a new Flutter project, refactoring an existing app into layers, creating view models and repositories, configuring dependency injection, implementing unidirectional data flow, or adding a domain layer for complex business logic."
 ---
 
 # Flutter App Architecture Skill
 
-This skill provides comprehensive guidelines for structuring Flutter applications using layered architecture, proper data flow, and best practices for maintainability and testability.
+This skill defines how to structure Flutter applications using layered architecture, proper data flow, and MVVM patterns for maintainability and testability.
+
+## When to Use
+
+Use this skill when:
+
+* Scaffolding a new Flutter project with layered architecture.
+* Creating or refactoring View Models, Repositories, or Services.
+* Wiring dependency injection between architectural components.
+* Implementing unidirectional data flow across layers.
+* Adding a Domain (Logic) Layer for complex business logic or shared use cases.
 
 ---
 
-## Architecture
+## 1. Layer Structure
 
-1. Separate your features into a UI Layer (presentation), a Data Layer (business data and logic), and, for complex apps, consider adding a Domain (Logic) Layer between UI and Data layers to encapsulate business logic and use-cases.
-2. You can organize code by feature: The classes needed for each feature are grouped together. For example, you might have an auth directory, which would contain files like auth_viewmodel.dart (or, depending on your state management approach: auth_controller.dart, auth_provider.dart, auth_bloc.dart), login_usecase.dart, logout_usecase.dart, login_screen.dart, logout_button.dart, etc. Alternatively, you can organize by type or use a hybrid approach.
-3. Only allow communication between adjacent layers; the UI layer should not access the data layer directly, and vice versa.
-4. Introduce a Logic (Domain) Layer only for complex business logic that does not fit cleanly in the UI or Data layers.
-5. Clearly define the responsibilities, boundaries, and interfaces of each layer and component (Views, View Models, Repositories, Services).
-6. Further divide each layer into components with specific responsibilities and well-defined interfaces.
-7. In the UI Layer, use Views to describe how to present data to the user; keep logic minimal and only UI-related.
-8. Pass events from Views to View Models in response to user interactions.
-9. In View Models, contain logic to convert app data into UI state and maintain the current state needed by the view.
-10. Expose callbacks (commands) from View Models to Views and retrieve/transform data from repositories.
-11. In the Data Layer, use Repositories as the single source of truth (SSOT) for model data and to handle business logic such as caching, error handling, and refreshing data.
-12. Only the SSOT class (usually the repository) should be able to mutate its data; all other classes should read from it.
-13. Repositories should transform raw data from services into domain models and output data consumed by View Models.
-14. Use Services to wrap API endpoints and expose asynchronous response objects; services should isolate data-loading and hold no state.
-15. Use dependency injection to provide components with their dependencies, enabling testability and flexibility.
+Separate every app into a **UI Layer** and a **Data Layer**. Add a **Logic (Domain) Layer** only for complex apps.
 
-## Data Flow and State
+```
+┌──────────────────────────────────────────────────────────────┐
+│   UI Layer    │  Views + ViewModels                           │
+├──────────────────────────────────────────────────────────────┤
+│  Logic Layer  │  Use Cases / Interactors  (optional)         │
+├──────────────────────────────────────────────────────────────┤
+│   Data Layer  │  Repositories + Services                     │
+└──────────────────────────────────────────────────────────────┘
+```
 
-1. Follow unidirectional data flow: state flows from the data layer through the logic layer to the UI layer, and events from user interaction flow in the opposite direction.
-2. Data changes should always happen in the SSOT (data layer), not in the UI or logic layers.
-3. The UI should always reflect the current (immutable) state; trigger UI rebuilds only in response to state changes.
-4. Views should contain as little logic as possible and be driven by state from View Models.
+**Rules:**
+- Only adjacent layers may communicate. The UI layer must never access a Service directly.
+- Data changes always happen in the Data layer (SSOT = Repository). No mutation in UI or Logic layers.
+- Follow unidirectional data flow: state flows **down** (Data → UI), events flow **up** (UI → Data).
 
-## Use Cases / Interactors
+---
 
-1. Introduce use cases/interactors in the domain layer only when logic is complex, reused, or merges data from multiple repositories.
-2. Use cases depend on repositories and may be used by multiple view models.
-3. Add use cases only when needed; refactor to use use-cases exclusively if logic is repeatedly shared across view models.
+## 2. Component Responsibilities
 
-## Extensibility and Testability
+### View
+- Describes how to present data; keep logic minimal and UI-related only.
+- Passes events to the ViewModel in response to user interactions.
 
-1. All architectural components should have well-defined inputs and outputs (interfaces).
-2. Favor dependency injection to allow swapping implementations without changing consumers.
-3. Test view models by mocking repositories; test UI logic independently of widgets.
-4. Design components to be easily replaceable and independently testable.
+### ViewModel
+- Converts app data into UI state and maintains the current state needed by the View.
+- Exposes callbacks (commands) to the View and retrieves/transforms data from Repositories.
 
-## Best Practices
+```dart
+class BookingViewModel extends ChangeNotifier {
+  final BookingRepository _repo;
 
-1. Strongly recommend following separation of concerns and layered architecture.
-2. Strongly recommend using dependency injection for testability and flexibility.
-3. Recommend using MVVM as the default pattern, but adapt as needed for your app's complexity.
-4. Use key-value storage for simple data (e.g., configuration, preferences) and SQL storage for complex relationships.
-5. Use optimistic updates to improve perceived responsiveness by updating the UI before operations complete.
-6. Support offline-first strategies by combining local and remote data sources in repositories and enabling synchronization as appropriate.
-7. Keep views focused on presentation and extract reusable widgets into separate components.
-8. Use `StatelessWidget` when possible and avoid unnecessary `StatefulWidget`s.
-9. Keep build methods simple and focused on rendering.
-10. Choose state management approaches appropriate to the complexity of your app.
-11. Keep state as local as possible to minimize rebuilds and complexity.
-12. Use `const` constructors when possible to improve performance.
-13. Avoid expensive operations in build methods and implement pagination for large lists.
-14. Keep files focused on a single responsibility and limit file length for readability.
-15. Group related functionality together and use `final` for fields and top-level variables when possible.
-16. Prefer making declarations private and consider making constructors `const` if the class supports it.
-17. Follow Dart naming conventions and format code using `dart format`.
-18. Use curly braces for all flow control statements to ensure clarity and prevent bugs.
-19. Prefer explicit typing and generics on public APIs (for example, prefer typed command signatures such as `Command0<void>` rather than untyped/dynamic signatures) to improve clarity and type safety.
-20. For small immutable domain or data models, prefer using `abstract class` with `const` constructors and `final` fields where it improves readability and enforces immutability.
-21. Use descriptive constant names for resources and table identifiers (for example prefer `_todoTableName` over compact prefixes like `_kTableTodo`) to improve clarity across examples and migrations.
+  BookingViewModel(this._repo);
+
+  List<Booking> _bookings = [];
+  List<Booking> get bookings => List.unmodifiable(_bookings);
+
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
+
+  Future<void> loadBookings() async {
+    _isLoading = true;
+    notifyListeners();
+
+    _bookings = await _repo.getBookings();
+    _isLoading = false;
+    notifyListeners();
+  }
+
+  Future<void> cancelBooking(String id) async {
+    await _repo.cancelBooking(id);
+    _bookings = await _repo.getBookings();
+    notifyListeners();
+  }
+}
+```
+
+### Repository (Single Source of Truth)
+- The only class that may mutate its data; all other classes read from it.
+- Handles caching, error handling, and data refresh logic.
+- Transforms raw data from Services into domain models.
+
+```dart
+class BookingRepository {
+  final BookingApiService _apiService;
+  final BookingLocalService _localService;
+
+  BookingRepository(this._apiService, this._localService);
+
+  Future<List<Booking>> getBookings() async {
+    try {
+      final remote = await _apiService.fetchBookings();
+      await _localService.cacheBookings(remote);
+      return remote;
+    } catch (_) {
+      return _localService.getCachedBookings();
+    }
+  }
+
+  Future<void> cancelBooking(String id) async {
+    await _apiService.cancelBooking(id);
+    await _localService.removeCachedBooking(id);
+  }
+}
+```
+
+### Service
+- Wraps API endpoints and exposes asynchronous response objects.
+- Isolates data-loading and holds no state.
+
+```dart
+class BookingApiService {
+  final http.Client _client;
+  BookingApiService(this._client);
+
+  Future<List<Booking>> fetchBookings() async {
+    final response = await _client.get(Uri.parse('/api/bookings'));
+    if (response.statusCode != 200) {
+      throw HttpException('Failed to load bookings');
+    }
+    final data = jsonDecode(response.body) as List;
+    return data.map((json) => Booking.fromJson(json)).toList();
+  }
+}
+```
+
+---
+
+## 3. Dependency Injection
+
+Supply dependencies via constructors. Define abstract interfaces so implementations can be swapped for testing.
+
+```dart
+// Abstract interface for the repository
+abstract class BookingRepository {
+  Future<List<Booking>> getBookings();
+  Future<void> cancelBooking(String id);
+}
+
+// Concrete implementation
+class BookingRepositoryImpl implements BookingRepository {
+  final BookingApiService _api;
+  BookingRepositoryImpl(this._api);
+
+  @override
+  Future<List<Booking>> getBookings() => _api.fetchBookings();
+
+  @override
+  Future<void> cancelBooking(String id) => _api.cancelBooking(id);
+}
+```
+
+---
+
+## 4. Use Cases (Domain Layer)
+
+Introduce use cases only when:
+- Logic is complex or does not fit cleanly in the UI or Data layers.
+- Logic is reused across multiple ViewModels or merges data from multiple Repositories.
+
+```dart
+class GetUpcomingBookingsUseCase {
+  final BookingRepository _bookingRepo;
+  final UserRepository _userRepo;
+
+  GetUpcomingBookingsUseCase(this._bookingRepo, this._userRepo);
+
+  Future<List<Booking>> call() async {
+    final user = await _userRepo.getCurrentUser();
+    final bookings = await _bookingRepo.getBookings();
+    return bookings
+        .where((b) => b.userId == user.id && b.date.isAfter(DateTime.now()))
+        .toList();
+  }
+}
+```
+
+---
+
+## 5. Workflow: Scaffold a New Feature
+
+1. **Create the Service** — implement the API wrapper with typed response parsing.
+2. **Create the Repository** — inject the Service, implement caching and error-handling logic.
+3. **Create the ViewModel** — inject the Repository, expose UI state and commands.
+4. **Create the View** — bind to the ViewModel, render state, dispatch events.
+5. **Wire DI** — register all components in the dependency injection container.
+6. **Verify** — confirm the View never accesses the Service directly and data flows unidirectionally.
+
+---
+
+## 6. Data Storage
+
+- Use **key-value storage** (e.g., `shared_preferences`) for configuration and preferences.
+- Use **SQL storage** (e.g., `drift`, `sqflite`) for complex relational data.
+- Implement **optimistic updates** to improve perceived responsiveness by updating UI before server confirms.
+- Support **offline-first** by combining local and remote data sources in Repositories.
+
+---
+
+## 7. Coding Conventions
+
+- Use `StatelessWidget` when possible; avoid unnecessary `StatefulWidget`s.
+- Keep build methods simple and focused on rendering.
+- Prefer `final` for fields and top-level variables. Prefer `const` constructors when the class supports it.
+- Prefer explicit typing on public APIs (e.g., `Command0<void>` over dynamic signatures).
+- Use descriptive constant names (e.g., `_todoTableName` over `_kTableTodo`).
+
+---
 
 ## References
 
+- [Flutter app architecture guide](https://docs.flutter.dev/app-architecture/guide)
 - [Flutter Website GitHub Repository](https://github.com/flutter/website)

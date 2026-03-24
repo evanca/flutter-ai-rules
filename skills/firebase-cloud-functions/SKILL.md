@@ -1,6 +1,6 @@
 ---
 name: firebase-cloud-functions
-description: Calls Firebase Cloud Functions from Flutter apps. Use when setting up callable functions, passing data to functions, handling errors from function calls, optimizing performance, or testing with the Firebase Emulator Suite.
+description: "Calls Firebase Cloud Functions from Flutter apps. Use when implementing callable functions, passing structured data to server-side logic, handling function errors and timeouts, configuring region-specific deployments, or testing with the Firebase Emulator Suite. Trigger terms: cloud functions, httpsCallable, server-side logic, callable functions, Firebase functions, backend calls."
 ---
 
 # Firebase Cloud Functions Skill
@@ -11,11 +11,11 @@ This skill defines how to correctly call Firebase Cloud Functions from Flutter a
 
 Use this skill when:
 
-* Setting up and configuring Cloud Functions in a Flutter project.
-* Calling callable functions and handling their results.
-* Handling errors from function calls.
-* Optimizing function call performance.
-* Testing with the Firebase Emulator Suite.
+* Implementing callable Cloud Functions in a Flutter project.
+* Passing structured data to server-side functions and processing results.
+* Handling errors, timeouts, and retries for function calls.
+* Configuring region-specific function deployments.
+* Testing Cloud Functions locally with the Firebase Emulator Suite.
 
 ---
 
@@ -33,9 +33,14 @@ final functions = FirebaseFunctions.instance;
 ```
 
 - Initialize Firebase before using any Cloud Functions features.
-- For region-specific deployments, specify the region when getting the instance.
-- Deploy callable functions to Firebase **before** attempting to call them from your Flutter app.
-- Consider implementing **App Check** to prevent abuse of your Cloud Functions.
+- For region-specific deployments, specify the region:
+
+```dart
+final functions = FirebaseFunctions.instanceFor(region: 'europe-west1');
+```
+
+- Deploy callable functions to Firebase **before** attempting to call them from the Flutter app.
+- Consider implementing **App Check** to prevent abuse of Cloud Functions.
 
 ---
 
@@ -65,7 +70,8 @@ final result = await FirebaseFunctions.instance
 ```dart
 final responseData = result.data;
 // Cast to expected type if needed:
-final responseString = result.data as String;
+final message = result.data as Map<String, dynamic>;
+final status = message['status'] as String;
 ```
 
 - **Do not** pass authentication tokens in function parameters — they are automatically included by the SDK.
@@ -83,20 +89,28 @@ try {
     .httpsCallable('functionName')
     .call(data);
   // Handle successful result
-} catch (e) {
-  if (e is FirebaseFunctionsException) {
-    print('Error code: ${e.code}');
-    print('Error message: ${e.message}');
-    print('Error details: ${e.details}');
-  } else {
-    print('Error: $e');
+} on FirebaseFunctionsException catch (e) {
+  switch (e.code) {
+    case 'not-found':
+      // Function does not exist
+      break;
+    case 'permission-denied':
+      // User lacks permission
+      break;
+    case 'unavailable':
+      // Service temporarily unavailable — retry
+      break;
+    default:
+      debugPrint('Function error [${e.code}]: ${e.message}');
   }
+} catch (e) {
+  debugPrint('Unexpected error: $e');
 }
 ```
 
 - Handle network connectivity issues and timeouts appropriately.
 - Provide meaningful error messages to users when function calls fail.
-- Consider implementing retry logic for transient errors.
+- Implement retry logic with exponential backoff for transient errors (`unavailable`, `deadline-exceeded`).
 
 ---
 
@@ -116,7 +130,6 @@ final callable = FirebaseFunctions.instance.httpsCallable(
 - Minimize the amount of data passed to and from functions to reduce latency.
 - Use batch operations when possible to reduce the number of function calls.
 - Consider client-side caching for frequently used function results.
-- Monitor function performance in the Firebase Console to identify bottlenecks.
 - Account for **cold starts** for infrequently used functions.
 - Implement proper loading states in the UI while waiting for function responses.
 
@@ -134,7 +147,6 @@ FirebaseFunctions.instance.useFunctionsEmulator('localhost', 5001);
 - Verify that functions handle authentication correctly.
 - Test with different user roles and permissions to ensure proper access control.
 - Implement unit tests for client-side function calling logic.
-- Use integration tests to verify end-to-end function behavior.
 
 ---
 

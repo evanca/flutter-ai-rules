@@ -1,6 +1,6 @@
 ---
 name: effective-dart
-description: Applies Effective Dart guidelines in Flutter/Dart code. Use when writing or reviewing Dart code for naming conventions, types, style, imports, file structure, usage patterns, documentation, testing, widgets, state management, or performance.
+description: "Apply Effective Dart guidelines to write idiomatic, high-quality Dart and Flutter code. Use when writing new Dart code, reviewing pull requests for style compliance, refactoring naming conventions, adding doc comments, structuring imports, enforcing type annotations, or running code review checks against Effective Dart standards."
 ---
 
 # Effective Dart Skill
@@ -32,7 +32,7 @@ This skill defines how to write idiomatic, high-quality Dart and Flutter code fo
 
 ## 2. Types and Functions
 
-- Use **class modifiers** to control if a class can be extended or used as an interface.
+- Use **class modifiers** (`final`, `sealed`, `interface`, `base`, `mixin`) to control whether a class can be extended or implemented.
 - **Type annotate variables** without initializers.
 - Type annotate **fields and top-level variables** if the type isn't obvious.
 - **Annotate return types** on function declarations.
@@ -44,6 +44,20 @@ This skill defines how to write idiomatic, high-quality Dart and Flutter code fo
 - Use **setters** for operations that conceptually change properties.
 - Use a **function declaration** to bind a function to a name.
 - Use **inclusive start and exclusive end** parameters to accept a range.
+
+```dart
+// Prefer: explicit class modifier
+final class AppConfig {
+  final String apiUrl;
+  final int timeout;
+  const AppConfig({required this.apiUrl, required this.timeout});
+}
+
+// Prefer: sealed for exhaustive pattern matching
+sealed class Result<T> {}
+class Success<T> extends Result<T> { final T value; Success(this.value); }
+class Failure<T> extends Result<T> { final Exception error; Failure(this.error); }
+```
 
 ---
 
@@ -82,7 +96,7 @@ dart format .
 
 ---
 
-## 6. Usage
+## 6. Usage Patterns
 
 ```dart
 // Adjacent string concatenation (not +)
@@ -104,7 +118,7 @@ class Empty {
   Empty();  // not Empty() {}
 }
 
-// rethrow
+// rethrow to preserve stack trace
 try {
   doSomething();
 } catch (e) {
@@ -113,7 +127,7 @@ try {
 }
 ```
 
-- Use `whereType()` to filter a collection by type.
+- Use `whereType<T>()` to filter a collection by type.
 - Follow a **consistent rule** for `var` and `final` on local variables.
 - Initialize fields at their **declaration** when possible.
 - Override `hashCode` if you override `==`; ensure `==` obeys mathematical equality rules.
@@ -137,47 +151,74 @@ int add(int a, int b) { ... }
 - Avoid redundancy with the surrounding context.
 - Start function/method comments with a **third-person verb** if the main purpose is a side effect.
 - Start with a **noun or non-imperative verb phrase** if returning a value is the primary purpose.
-- Start **boolean** variable/property comments with "Whether followed by a noun or gerund phrase.
+- Start **boolean** variable/property comments with "Whether" followed by a noun or gerund phrase.
 - Use `[identifier]` in doc comments to refer to in-scope identifiers.
 - Use **prose** to explain parameters, return values, and exceptions (e.g., "The [param]", "Returns", "Throws" sections).
 - Put doc comments **before** metadata annotations.
 - Document **why** code exists or how it should be used, not just what it does.
-- When referring to the current object, prefer "this box" over bare "this".
 
 ---
 
-## 8. Testing
+## 8. Testing Patterns
 
-- Write **unit tests** for business logic.
-- Write **widget tests** for UI components.
-- Aim for **good test coverage**.
+- Write **unit tests** for business logic, using `group` and descriptive `test` names:
+
+```dart
+import 'package:test/test.dart';
+
+void main() {
+  group('CartService', () {
+    late CartService cart;
+
+    setUp(() => cart = CartService());
+
+    test('addItem increases item count', () {
+      cart.addItem(Product(id: '1', name: 'Widget', price: 9.99));
+      expect(cart.items, hasLength(1));
+    });
+
+    test('removeItem decreases total price', () {
+      final product = Product(id: '1', name: 'Widget', price: 9.99);
+      cart.addItem(product);
+      cart.removeItem(product.id);
+      expect(cart.totalPrice, equals(0.0));
+    });
+  });
+}
+```
+
+- Write **widget tests** using `testWidgets` and `WidgetTester`:
+
+```dart
+import 'package:flutter_test/flutter_test.dart';
+
+void main() {
+  testWidgets('LoginButton shows loading indicator when tapped',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(const MaterialApp(home: LoginScreen()));
+    await tester.tap(find.byType(ElevatedButton));
+    await tester.pump();
+    expect(find.byType(CircularProgressIndicator), findsOneWidget);
+  });
+}
+```
 
 ---
 
-## 9. Widgets
+## 9. Code Review Workflow
 
-- Extract reusable widgets into **separate components**.
-- Use `StatelessWidget` when possible.
-- Keep **build methods simple and focused**.
+When reviewing Dart code for Effective Dart compliance, the agent should check:
 
----
-
-## 10. State Management
-
-- Choose appropriate state management based on **complexity**.
-- Avoid unnecessary `StatefulWidget`s.
-- Keep **state as local as possible**.
-
----
-
-## 11. Performance
-
-- Use `const` constructors when possible.
-- Avoid **expensive operations** in build methods.
-- Implement **pagination** for large lists.
+1. **Naming** — verify all identifiers follow the conventions in Section 1.
+2. **Type annotations** — confirm public API parameters, return types, and uninitialized variables are annotated.
+3. **Class modifiers** — verify `final`, `sealed`, or `interface` is used where appropriate.
+4. **Documentation** — confirm all public members have `///` doc comments with a single-sentence summary.
+5. **Style** — run `dart format --output=none --set-exit-if-changed .` to verify formatting.
+6. **Analysis** — run `dart analyze` and confirm zero issues.
 
 ---
 
 ## References
 
+- [Effective Dart](https://dart.dev/effective-dart)
 - [Dart Site WWW GitHub Repository](https://github.com/dart-lang/site-www)
