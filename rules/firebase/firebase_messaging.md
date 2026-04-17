@@ -80,8 +80,8 @@
 1. On iOS, if the user swipes away the application from the app switcher, it must be manually reopened for background messages to work again.
 2. On Android, if the user force-quits the app from device settings, it must be manually reopened for messages to work.
 3. On web, you must have requested a token using `getToken()` with your web push certificate.
-4. For notification messages to display while the app is in the foreground on Android, create a "High Priority" notification channel.
-5. For notification messages to display while the app is in the foreground on iOS, update the presentation options for the application.
+4. **Android target setup**: Configure a default channel for background notifications by setting the `com.google.firebase.messaging.default_notification_channel_id` metadata in `AndroidManifest.xml`. By default, FCM notifications won't display visibly when the Android app is foregrounded; you must consume the payload via `onMessage` and handle visualizations manually or with a local notifications package.
+5. **iOS foreground handling**: Call `FirebaseMessaging.instance.setForegroundNotificationPresentationOptions()` with the desired visual presentation options (e.g., alert, badge, sound) to enable visible foreground notifications.
 6. For web platforms, create and register a service worker file named `firebase-messaging-sw.js` in your web directory:
    ```js
    // Please see this file for the latest firebase-js-sdk version:
@@ -114,6 +114,7 @@
    final fcmToken = await FirebaseMessaging.instance.getToken();
    print("FCM Token: $fcmToken");
    ```
+   **Rule:** Always securely save FCM tokens keyed to user auth sessions. Revoke or delete this token mapping from the backend on sign-out to prevent the next user on a shared device from receiving the previous user's push notifications.
 2. For web platforms, provide your VAPID public key when requesting a token.
    ```dart
    final fcmToken = await FirebaseMessaging.instance.getToken(
@@ -183,3 +184,10 @@
 3. For Swift implementations, use the `FirebaseMessaging` Swift package by adding it to your target.
 4. For Objective-C implementations, add the Firebase/Messaging pod to your Podfile.
 5. Configure the notification service extension to use `Messaging.serviceExtension().populateNotificationContent()` for image handling.
+
+### Server Dispatch and Security
+
+1. Ensure backend systems invoke pushes via the **FCM HTTP v1 API**. The legacy server key endpoints are strictly deprecated.
+2. Authenticate server-to-server calls via an OAuth2 JWT exchange relying on a downloaded `.json` Service Account key.
+3. Manage the Service Account securely. It must **never** be committed to Git. Instead, provision it inside secret managers or inject it as a stringified variable via CI/CD (e.g., `FIREBASE_SERVICE_ACCOUNT`).
+4. Construct the HTTP v1 payload strictly according to the format required by `POST https://fcm.googleapis.com/v1/projects/{project_id}/messages:send`, using nested platform attributes (e.g., `android.notification.channel_id` or `apns.payload.aps`) to trigger specific OS-level notification settings.
