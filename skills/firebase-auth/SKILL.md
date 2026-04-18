@@ -1,6 +1,6 @@
 ---
 name: firebase-auth
-description: Integrates Firebase Authentication into Flutter apps. Use when setting up auth, managing auth state, implementing email/password or social sign-in, handling auth errors, managing users, or applying security best practices.
+description: "Integrates Firebase Authentication into Flutter apps. Use when implementing email/password sign-in, configuring Google or social sign-in providers, listening to auth state changes, managing user profiles and account linking, implementing multi-factor authentication, handling FirebaseAuthException errors, or securing auth flows. Trigger terms: Firebase auth, sign-in, sign-up, authentication, login, logout, social login, MFA, auth state, FirebaseAuthException."
 ---
 
 # Firebase Authentication Skill
@@ -103,7 +103,11 @@ try {
     password: password,
   );
 } on FirebaseAuthException catch (e) {
-  if (e.code == 'user-not-found') {
+  if (e.code == 'invalid-credential') {
+    // Email enumeration protection enabled (default since Sep 2023):
+    // replaces 'user-not-found' and 'wrong-password'.
+    print('Invalid email or password.');
+  } else if (e.code == 'user-not-found') {
     print('No user found for that email.');
   } else if (e.code == 'wrong-password') {
     print('Wrong password provided for that user.');
@@ -114,6 +118,7 @@ try {
 - Verify the user's email address after account creation.
 - Firebase rate-limits new email/password sign-ups from the same IP to protect against abuse.
 - On iOS/macOS, authentication state persists between app re-installs via the system keychain.
+- Since September 2023, Firebase enables **email enumeration protection** by default on new projects, replacing `user-not-found` and `wrong-password` with `invalid-credential`. Manage this in the Firebase console under **Authentication > Settings**.
 
 ---
 
@@ -143,16 +148,32 @@ Future<UserCredential> signInWithGoogle() async {
 
 - Configure platform-specific settings for each provider (e.g., SHA1 key for Google Sign-In on Android).
 - If a user signs in with a social provider after registering with the same email manually, Firebase's trusted provider concept will automatically change their authentication provider.
+- On Android, `signInWithProvider` opens a Chrome Custom Tab. If `AndroidManifest.xml` contains `android:taskAffinity=""` (Flutter's default), the tab closes when the user switches apps (e.g., to use a password manager), causing a `web-context-already-presented` error. Remove `android:taskAffinity=""` to fix this.
+- When signing in with Apple, add the `email` and `name` scopes to present the full first-time sign-in UI (including "Share/Hide email"):
+  ```dart
+  final appleProvider = AppleAuthProvider();
+  appleProvider.addScope('email');
+  appleProvider.addScope('name');
+  ```
 
 ---
 
 ## 5. Error Handling
 
+Common `FirebaseAuthException` codes and their recommended handling:
+
+| Error code | Meaning | Action |
+|---|---|---|
+| `weak-password` | Password does not meet strength requirements | Show password requirements to user |
+| `email-already-in-use` | Account exists for this email | Prompt sign-in or password reset |
+| `user-not-found` | No account for this email | Prompt account creation |
+| `wrong-password` | Incorrect password | Show error, offer password reset |
+| `too-many-requests` | Rate limited | Show cooldown message, retry later |
+| `account-exists-with-different-credential` | Email linked to another provider | Fetch sign-in methods, guide user to correct provider |
+| `operation-not-allowed` | Provider not enabled | Enable the provider in the Firebase console |
+
 - Always use `try-catch` with `FirebaseAuthException`.
-- Check `e.code` to identify specific error types.
-- Handle `account-exists-with-different-credential` by fetching sign-in methods for the email and guiding users through the correct flow.
-- Handle `too-many-requests` with retry logic or user feedback.
-- Handle `operation-not-allowed` by ensuring the provider is enabled in the Firebase console.
+- Check `e.code` to identify specific error types and provide actionable user feedback.
 
 ---
 

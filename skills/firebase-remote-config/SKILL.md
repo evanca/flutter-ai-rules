@@ -1,6 +1,6 @@
 ---
 name: firebase-remote-config
-description: Integrates Firebase Remote Config into Flutter apps. Use when setting up Remote Config, managing parameter defaults, fetching and activating values, implementing real-time updates, or handling throttling and testing.
+description: "Integrates Firebase Remote Config into Flutter apps. Use when implementing feature flags, creating A/B tests, managing remote parameter defaults, fetching and activating config values, implementing real-time config updates, or configuring throttling intervals. Trigger terms: remote config, feature flags, A/B testing, fetchAndActivate, dynamic configuration, conditional targeting, kill switch."
 ---
 
 # Firebase Remote Config Skill
@@ -11,10 +11,10 @@ This skill defines how to correctly use Firebase Remote Config in Flutter applic
 
 Use this skill when:
 
-* Setting up Remote Config to configure your app without deploying updates.
-* Managing parameter defaults and remote values.
-* Fetching, activating, and listening to config updates.
-* Applying throttling, A/B testing, or conditional targeting.
+* Implementing feature flags or remote configuration without deploying app updates.
+* Managing parameter defaults and fetching remote values.
+* Implementing real-time config updates for instant changes.
+* Setting up A/B testing or conditional targeting for user segments.
 
 ---
 
@@ -31,7 +31,7 @@ import 'package:firebase_remote_config/firebase_remote_config.dart';
 final remoteConfig = FirebaseRemoteConfig.instance;
 ```
 
-- Enable **Google Analytics** in your Firebase project for user property and audience targeting.
+- Enable **Google Analytics** in the Firebase project for user property and audience targeting.
 - Ensure the **Remote Config REST API** is not disabled — the SDK depends on it.
 - For **macOS**, enable Keychain Sharing in Xcode.
 
@@ -48,20 +48,28 @@ await remoteConfig.setConfigSettings(RemoteConfigSettings(
 
 ## 2. Parameter Management
 
-**Set in-app defaults** (ensures your app behaves as intended before connecting to the backend):
+**Set in-app defaults** (ensures the app behaves as intended before connecting to the backend):
 
 ```dart
 await remoteConfig.setDefaults(const {
-  "example_param_1": 42,
-  "example_param_2": 3.14159,
-  "example_param_3": true,
-  "example_param_4": "Hello, world!",
+  "feature_new_onboarding": false,
+  "max_retry_attempts": 3,
+  "welcome_message": "Hello, world!",
+  "promo_discount_pct": 0.0,
 });
 ```
 
+**Read values with type-specific getters:**
+
+```dart
+final showNewOnboarding = remoteConfig.getBool("feature_new_onboarding");
+final maxRetries = remoteConfig.getInt("max_retry_attempts");
+final welcomeMsg = remoteConfig.getString("welcome_message");
+final discount = remoteConfig.getDouble("promo_discount_pct");
+```
+
 - **Never** store confidential data in Remote Config keys or values — they can be accessed by end users.
-- Use type-specific getters: `getBool()`, `getDouble()`, `getInt()`, `getString()`.
-- Define parameters with the **same names** in the Firebase console as those in your app.
+- Define parameters with the **same names** in the Firebase console as those in the app.
 - Group related parameters with common prefixes (e.g., `login_timeout`, `login_attempts_max`).
 
 ---
@@ -76,7 +84,7 @@ await remoteConfig.fetchAndActivate();
 - Alternatively, call `fetch()` then `activate()` separately to control when values take effect.
 - Activate fetched values at appropriate times (e.g., app start) for a smooth user experience.
 - Check `remoteConfig.lastFetchStatus` to determine if the fetch was successful, failed, or throttled.
-- Handle fetch failures gracefully by falling back to default values.
+- Handle fetch failures gracefully — default values are used automatically when fetch fails.
 
 ---
 
@@ -85,13 +93,16 @@ await remoteConfig.fetchAndActivate();
 ```dart
 remoteConfig.onConfigUpdated.listen((event) async {
   await remoteConfig.activate();
-  // Use the new config values here
+  // event.updatedKeys contains the changed parameter names
+  if (event.updatedKeys.contains("feature_new_onboarding")) {
+    // Refresh UI based on the new value
+  }
 });
 ```
 
 - Real-time Remote Config is **not available for Web**.
-- Update your UI state when new configuration values are activated.
-- Ensure real-time updates don't disrupt the user experience.
+- Update UI state when new configuration values are activated.
+- Ensure real-time updates do not disrupt the user experience mid-flow.
 
 ---
 
@@ -116,7 +127,7 @@ await remoteConfig.setConfigSettings(RemoteConfigSettings(
 
 - Use **conditional values** in the Firebase console to test configurations without new app deployments.
 - Implement **A/B testing** with different parameter values for different user segments.
-- Test your app with both default and remote values.
+- Test the app with both default and remote values.
 - Verify graceful handling of configuration changes at runtime.
 - Test **offline behavior** to ensure proper fallback to defaults.
 

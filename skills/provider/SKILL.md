@@ -46,10 +46,10 @@ MultiProvider(
 Always specify the **generic type** for type safety:
 
 ```dart
-// Listen and rebuild on change
+// Listen and rebuild on change — only valid inside build() or a Provider's update method
 final count = context.watch<MyModel>().count;
 
-// Access without listening (use in callbacks)
+// Access without listening — use in callbacks, not inside build()
 context.read<MyModel>().increment();
 
 // Listen to only part of the state

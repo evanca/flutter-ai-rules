@@ -1,44 +1,37 @@
 ---
 name: patrol-e2e-testing
-description: Generates and maintains end-to-end tests for Flutter apps using Patrol. Use when adding E2E coverage for new features, regression tests for UI bugs, or testing native interactions (permissions, system dialogs, deep links)
+description: "Create, maintain, and run end-to-end tests for Flutter apps using Patrol 4.x. Use when writing E2E tests, adding integration test coverage, testing native interactions like permissions or system dialogs, capturing UI bug regressions, or validating cross-platform behavior on Android, iOS, and Web."
 ---
 
 # Patrol E2E Testing Skill
 
-This skill defines how to design, implement, and run end-to-end (E2E) tests using Patrol 4.x in Flutter projects.
-
-It focuses on:
-
-* Covering new feature flows with deterministic UI tests
-* Converting reproducible UI bugs into regression tests
-* Handling native OS interactions
-* Running tests locally and in CI using correct Patrol CLI commands
+Design, implement, and run end-to-end (E2E) tests using Patrol 4.x in Flutter projects.
 
 ## When to Use
 
 Use this skill when:
 
-* A new screen or user flow must be covered with E2E tests.
-* A feature interacts with native components (permissions, notifications, system dialogs).
+* A new screen or user flow needs E2E test coverage.
+* A feature interacts with native components (permissions, notifications, system dialogs, deep links).
 * A UI bug should be captured as a regression test.
 * Cross-platform behavior (Android / iOS / Web) must be validated.
+* Setting up Patrol in a new or existing Flutter project.
 
 ## Setup
 
-For installation and project initialization, follow the official documentation:
-
+Follow the official Patrol documentation for installation and project initialization:
 [https://patrol.leancode.co/documentation#setup](https://patrol.leancode.co/documentation#setup)
 
 Key Patrol conventions:
 
-* `patrol` is added as a dev dependency.
-* Tests live in `patrol_test/`.
-* Test files must end with `_test.dart`.
-* Tests are executed with `patrol test`.
+* Add `patrol` as a dev dependency.
+* Place tests in `patrol_test/`.
+* Name test files with a `_test.dart` suffix.
+* Execute tests with `patrol test`.
 
-## How to use this skill
+## Workflow
 
-Follow the steps below when implementing or updating Patrol tests.
+Follow these steps when implementing or updating Patrol tests.
 
 ### 1. Identify the user journey
 
@@ -200,21 +193,42 @@ Filter by tags:
 patrol test --tags android
 ```
 
-### Output requirements when this skill is used
+### 6. Stabilization patterns
 
-When applied, this skill must produce:
+Flaky tests undermine confidence. Apply these patterns:
+
+```dart
+// AVOID — arbitrary delay
+await Future.delayed(Duration(seconds: 3));
+
+// PREFER — explicit wait condition
+await $.waitUntilVisible($(#targetWidget));
+
+// For animations, pump until settled
+await $.pumpAndSettle();
+```
+
+* Never use `Future.delayed` as a synchronization mechanism.
+* Use `waitUntilVisible` or `waitUntilExists` to wait for UI state.
+* Set `settleTimeout` in `PatrolTesterConfig` for slow CI environments.
+
+### Output requirements
+
+When applied, this skill produces:
 
 1. Patrol test(s) covering the specified feature.
-2. Any required widget key additions.
+2. Any required widget `Key` additions to production code.
 3. Exact `patrol test` command(s) to execute locally.
-4. Notes explaining stabilization decisions.
+4. Notes explaining stabilization or timing decisions.
+
+**Checkpoint:** Run `patrol test --target <file>` locally to confirm the test passes before committing.
 
 ### Quality bar
 
 A valid Patrol test must be:
 
-* Deterministic (no arbitrary delays)
-* Readable
-* Minimal but complete
-* Secret-safe (no hardcoded credentials)
-* CI-ready
+* **Deterministic** — no arbitrary delays; uses explicit wait conditions.
+* **Readable** — clear test name describing the user journey.
+* **Minimal but complete** — one assertion chain per journey.
+* **Secret-safe** — credentials loaded from `String.fromEnvironment`, never hardcoded.
+* **CI-ready** — passes headless with `--web-headless true` or on emulator.

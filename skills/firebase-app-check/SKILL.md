@@ -1,21 +1,21 @@
 ---
 name: firebase-app-check
-description: Integrates Firebase App Check into Flutter apps. Use when setting up App Check, selecting providers per platform, using debug providers during development, enabling enforcement, or applying App Check security best practices.
+description: "Integrates Firebase App Check into Flutter apps. Use when implementing app attestation, configuring App Check providers per platform, setting up debug tokens for development and CI, enabling enforcement for backend resources, managing token refresh and TTL, or hardening app security against abuse."
 ---
 
 # Firebase App Check Skill
 
-This skill defines how to correctly use Firebase App Check in Flutter applications.
+This skill defines how to correctly implement Firebase App Check in Flutter applications, covering provider selection, debug configuration, enforcement rollout, and security hardening.
 
 ## When to Use
 
 Use this skill when:
 
 * Setting up and activating Firebase App Check in a Flutter project.
-* Selecting the right provider for each platform.
-* Configuring debug providers for development and testing.
+* Selecting the right attestation provider for each platform.
+* Configuring debug providers for development, testing, and CI.
 * Enabling enforcement and monitoring App Check metrics.
-* Applying App Check security best practices.
+* Implementing token refresh handling and custom TTL configuration.
 
 ---
 
@@ -35,14 +35,17 @@ Initialize App Check **after** `Firebase.initializeApp()` and **before** using a
 await Firebase.initializeApp();
 await FirebaseAppCheck.instance.activate(
   webProvider: ReCaptchaV3Provider('recaptcha-v3-site-key'),
-  providerAndroid: AndroidPlayIntegrityProvider(),
-  providerApple: AppleDeviceCheckProvider(),
+  androidProvider: AndroidProvider.playIntegrity,
+  appleProvider: AppleProvider.deviceCheck,
 );
 ```
 
-- Register your apps in the Firebase console under **Project Settings > App Check** before using the service.
-- For web, obtain a reCAPTCHA v3 site key from the Firebase console.
-- Consider setting a custom **TTL** for App Check tokens based on your security and performance needs — shorter TTLs are more secure but consume quota faster.
+### Setup Checklist
+
+1. Register apps in the Firebase console under **Project Settings > App Check**.
+2. For web, obtain a reCAPTCHA v3 site key from the Firebase console.
+3. Confirm activation completes before any Firestore, Storage, or RTDB calls.
+4. Consider setting a custom **TTL** — shorter TTLs are more secure but consume quota faster.
 
 ---
 
@@ -51,16 +54,16 @@ await FirebaseAppCheck.instance.activate(
 **Android:**
 | Provider | Use case |
 |---|---|
-| `AndroidPlayIntegrityProvider` | Production (default) |
-| `AndroidDebugProvider` | Development / CI only |
+| `AndroidProvider.playIntegrity` | Production (default) |
+| `AndroidProvider.debug` | Development / CI only |
 
 **Apple (iOS / macOS):**
 | Provider | Use case |
 |---|---|
-| `AppleDeviceCheckProvider` | Production default (iOS 11+, macOS 10.15+) |
-| `AppleAppAttestProvider` | Enhanced security (iOS 14+, macOS 14+) |
-| `AppleAppAttestProviderWithDeviceCheckFallback` | App Attest with Device Check fallback |
-| `AppleDebugProvider` | Development / CI only |
+| `AppleProvider.deviceCheck` | Production default (iOS 11+, macOS 10.15+) |
+| `AppleProvider.appAttest` | Enhanced security (iOS 14+, macOS 14+) |
+| `AppleProvider.appAttestWithDeviceCheckFallback` | App Attest with Device Check fallback |
+| `AppleProvider.debug` | Development / CI only |
 
 **Web:**
 | Provider | Use case |
@@ -77,40 +80,71 @@ await FirebaseAppCheck.instance.activate(
 Use debug providers during development to run in emulators or CI environments:
 
 ```dart
+await Firebase.initializeApp();
 await FirebaseAppCheck.instance.activate(
-  providerAndroid: AndroidDebugProvider('YOUR_DEBUG_TOKEN'),
-  providerApple: AppleDebugProvider('YOUR_DEBUG_TOKEN'),
+  androidProvider: AndroidProvider.debug,
+  appleProvider: AppleProvider.debug,
 );
 ```
 
-- **iOS:** Enable debug logging by adding `-FIRDebugEnabled` to Arguments Passed on Launch in Xcode.
-- **Web:** Set `self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;` in `web/index.html`.
-- Register debug tokens shown in the console in the Firebase console's App Check section.
+### Platform-Specific Debug Setup
+
+**iOS:** Enable debug logging by adding `-FIRDebugEnabled` to Arguments Passed on Launch in Xcode. The debug token appears in the console output.
+
+**Android:** The debug token prints to logcat on first run. Filter by `DebugAppCheckProvider`.
+
+**Web:** Set `self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;` in `web/index.html` before Firebase scripts load.
+
+### Register Debug Tokens
+
+1. Copy the debug token from the device/emulator console output.
+2. In the Firebase console, navigate to **App Check > Apps > Manage debug tokens**.
+3. Add the token. It is immediately active for that app.
+
+### Token Listener for Custom Backends
+
+```dart
+FirebaseAppCheck.instance.onTokenChange.listen((token) {
+  // Attach token to custom backend requests
+  // e.g., set as Authorization header
+});
+```
+
 - **Never** use debug providers or share debug tokens in production builds.
 - Keep debug tokens private — do not commit them to public repositories.
 - Revoke compromised debug tokens immediately from the Firebase console.
 
 ---
 
-## 4. Enforcement and Monitoring
+## 4. Enforcement Rollout
 
-- **Monitor** App Check metrics before enabling enforcement to avoid disrupting legitimate users.
-- Enable enforcement **gradually**, starting with non-critical Firebase services.
-- Monitor request metrics for Realtime Database, Cloud Firestore, Cloud Storage, and Authentication.
-- Once enforcement is enabled, only registered apps with valid App Check tokens can access Firebase resources.
-- Use App Check **in combination with** Firebase Security Rules for comprehensive security.
-- Implement proper error handling for App Check verification failures.
+Follow this sequence to avoid disrupting legitimate users:
+
+1. **Deploy** App Check activation code to all app versions.
+2. **Monitor** App Check metrics in the Firebase console — wait until most traffic shows valid tokens.
+3. **Enable enforcement** gradually, starting with non-critical Firebase services (e.g., Cloud Storage before Firestore).
+4. **Verify** that unverified request percentage drops to near zero before enforcing on critical services.
+
+- Once enforcement is enabled, only apps with valid App Check tokens can access protected Firebase resources.
+- Use App Check **in combination with** Firebase Security Rules for defense in depth.
+- Implement proper error handling for App Check verification failures — surface a user-friendly message rather than a raw error.
 
 ---
 
 ## 5. Security Best Practices
 
 - Never disable App Check in production builds once enabled.
-- Implement a fallback mechanism for App Check verification failures.
+- Implement a fallback mechanism for App Check verification failures (e.g., retry with exponential backoff).
 - Regularly review App Check metrics to identify potential abuse patterns.
 - App Check tokens are **automatically refreshed** at approximately half the TTL duration.
 - For high-security applications, use the shortest practical TTL.
-- Implement server-side verification for critical operations using the Firebase Admin SDK.
+- Implement server-side verification for critical operations using the Firebase Admin SDK:
+
+```
+// Node.js Admin SDK example for verifying App Check tokens
+const appCheckToken = req.header('X-Firebase-AppCheck');
+const appCheckClaims = await getAppCheck().verifyToken(appCheckToken);
+```
 
 ---
 

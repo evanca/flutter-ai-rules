@@ -1,6 +1,6 @@
 ---
 name: firebase-crashlytics
-description: Integrates Firebase Crashlytics into Flutter apps. Use when setting up crash reporting, handling fatal and non-fatal errors, customizing crash reports with keys/logs/user identifiers, or configuring opt-in reporting.
+description: "Integrates Firebase Crashlytics into Flutter apps. Use when implementing crash reporting, capturing fatal and non-fatal errors, recording uncaught exceptions from isolates and async code, customizing crash reports with keys/logs/user identifiers, configuring opt-in reporting, or uploading obfuscated symbol files. Trigger terms: crash reporting, error tracking, Crashlytics, recordError, recordFlutterFatalError, stack traces, crash logs."
 ---
 
 # Firebase Crashlytics Skill
@@ -11,10 +11,11 @@ This skill defines how to correctly use Firebase Crashlytics in Flutter applicat
 
 Use this skill when:
 
-* Setting up Crashlytics in a Flutter project.
-* Configuring fatal and non-fatal error handling.
+* Implementing crash reporting in a Flutter project.
+* Capturing fatal errors, non-fatal exceptions, and async/isolate errors.
 * Customizing crash reports with keys, logs, and user identifiers.
-* Testing crash reporting or configuring opt-in data collection.
+* Configuring opt-in data collection or disabling reporting in debug builds.
+* Uploading symbol files for obfuscated builds.
 
 ---
 
@@ -25,7 +26,7 @@ flutter pub add firebase_crashlytics
 flutter pub add firebase_analytics  # enables breadcrumb logs for better crash context
 ```
 
-Run `flutterfire configure` to update your Firebase configuration and add the required Crashlytics Gradle plugin for Android.
+Run `flutterfire configure` to update the Firebase configuration and add the required Crashlytics Gradle plugin for Android.
 
 ```dart
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -34,7 +35,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 **Obfuscated code:**
 - For apps built with `--split-debug-info` and/or `--obfuscate`, upload symbol files for readable stack traces.
 - **iOS:** Flutter 3.12.0+ and Crashlytics Flutter plugin 3.3.4+ handle symbol upload automatically.
-- **Android:** Use Firebase CLI (v11.9.0+) to upload Flutter debug symbols before reporting crashes:
+- **Android:** Use Firebase CLI (v11.9.0+) to upload Flutter debug symbols:
 
 ```bash
 firebase crashlytics:symbols:upload --app=FIREBASE_APP_ID PATH/TO/symbols
@@ -43,6 +44,8 @@ firebase crashlytics:symbols:upload --app=FIREBASE_APP_ID PATH/TO/symbols
 ---
 
 ## 2. Error Handling
+
+Configure comprehensive error capture in `main()` to catch errors from all sources:
 
 **Fatal Flutter errors:**
 
@@ -54,20 +57,17 @@ void main() async {
   // Pass all uncaught fatal errors from the framework to Crashlytics
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 
+  // Catch async errors not handled by the Flutter framework
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    return true;
+  };
+
   runApp(MyApp());
 }
 ```
 
 **Non-fatal Flutter errors:** use `recordFlutterError` instead of `recordFlutterFatalError`.
-
-**Async errors not caught by the Flutter framework:**
-
-```dart
-PlatformDispatcher.instance.onError = (error, stack) {
-  FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
-  return true;
-};
-```
 
 **Isolate errors:**
 
@@ -130,7 +130,6 @@ FirebaseCrashlytics.instance.setUserIdentifier("");
 - Crashlytics processes exceptions on a **dedicated background thread** to minimize performance impact.
 - **Fatal** reports are sent in real-time without requiring an app restart.
 - **Non-fatal** reports are written to disk and sent with the next fatal report or on app restart.
-- Crashlytics rate-limits reports from a device to reduce network traffic if necessary.
 - Use breadcrumb logs (requires Firebase Analytics) to understand user actions leading up to a crash.
 
 **Disable Crashlytics in debug builds:**
@@ -147,16 +146,20 @@ if (kReleaseMode) {
 
 ## 5. Testing and Debugging
 
-Force a test crash to verify your setup:
+Force a test crash to verify the setup:
 
 ```dart
 FirebaseCrashlytics.instance.crash();
 ```
 
-- Test both fatal and non-fatal error reporting.
+**Verification workflow:**
+1. Build and run the app in release mode.
+2. Trigger the test crash.
+3. Reopen the app so the crash report is uploaded.
+4. Check the Firebase Console Crashlytics dashboard within 5 minutes.
+5. Verify that custom keys, logs, and user identifiers appear on the crash report.
+
 - Verify stack traces are properly symbolicated when using code obfuscation.
-- Check that custom keys, logs, and user identifiers are associated with crash reports.
-- Monitor the Crashlytics dashboard regularly and set up alerts for new issues or regressions.
 
 ---
 

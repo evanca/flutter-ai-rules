@@ -1,11 +1,20 @@
 ---
 name: dart-3-updates
-description: Applies Dart 3 language features in Flutter/Dart code. Use when writing if-else or switch statements, creating new classes, or deciding between a data class and a record.
+description: "Apply Dart 3 language features including patterns, sealed classes, switch expressions, records, and if-case syntax. Use when writing switch statements, refactoring if-else chains, creating data classes, choosing between records and classes, destructuring values, or modernizing pre-Dart-3 code."
 ---
 
 # Dart 3 Updates Skill
 
-This skill defines how to correctly use Dart 3 language features: branches, patterns, pattern types, and records.
+Apply Dart 3 language features — branches, patterns, pattern types, and records — correctly and idiomatically.
+
+## When to Use
+
+Use this skill when:
+
+* Writing or refactoring `switch` statements or `if-else` chains.
+* Creating new data-holding classes and deciding between sealed classes, records, or plain classes.
+* Destructuring values from maps, lists, records, or objects.
+* Modernizing pre-Dart-3 code to use patterns, exhaustiveness checks, or switch expressions.
 
 ---
 
@@ -215,5 +224,54 @@ Use a **class** when:
 
 - Use `typedef` for record types to improve readability and maintainability.
 - Changing a record type alias does not guarantee type safety across the codebase — only classes provide full abstraction.
+
+---
+
+## 5. Migration Workflow
+
+When modernizing pre-Dart-3 code, follow these steps:
+
+### Step 1 — Replace if-else chains with switch expressions
+
+```dart
+// Before (pre-Dart 3)
+String label;
+if (status == Status.loading) {
+  label = 'Loading...';
+} else if (status == Status.success) {
+  label = 'Done';
+} else {
+  label = 'Error';
+}
+
+// After (Dart 3)
+final label = switch (status) {
+  Status.loading => 'Loading...',
+  Status.success => 'Done',
+  Status.error => 'Error',
+};
+```
+
+### Step 2 — Convert abstract class hierarchies to sealed classes
+
+```dart
+// Before
+abstract class Result {}
+class Success extends Result { final String data; Success(this.data); }
+class Failure extends Result { final String error; Failure(this.error); }
+
+// After — enables exhaustive switch
+sealed class Result {}
+final class Success extends Result { const Success(this.data); final String data; }
+final class Failure extends Result { const Failure(this.error); final String error; }
+```
+
+### Step 3 — Use destructuring for multiple return values
+
+Replace wrapper classes used solely for returning multiple values with records.
+
+### Step 4 — Validate
+
+Run `dart analyze` to confirm exhaustiveness and type safety after each change.
 
 ---
