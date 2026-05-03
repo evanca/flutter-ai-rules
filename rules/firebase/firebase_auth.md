@@ -142,6 +142,35 @@
      }
    }
    ```
+8. To revoke Apple auth tokens after sign-in, use the appropriate API per platform:
+   - On **Apple platforms** (iOS/macOS/web), use `revokeTokenWithAuthorizationCode()` with the authorization code from `userCredential.additionalUserInfo?.authorizationCode`.
+   - On **Android**, use `revokeAccessToken()` with the access token from `userCredential.credential?.accessToken`.
+   ```dart
+   // Apple platforms (iOS/macOS/web)
+   final authCode = userCredential.additionalUserInfo?.authorizationCode;
+   if (authCode != null) {
+     await FirebaseAuth.instance.revokeTokenWithAuthorizationCode(authCode);
+   }
+
+   // Android
+   final accessToken = userCredential.credential?.accessToken;
+   if (accessToken != null) {
+     await FirebaseAuth.instance.revokeAccessToken(accessToken);
+   }
+   ```
+
+### Phone Number Authentication
+
+1. Before using phone authentication, ensure platform-specific prerequisites are met:
+   - **Android**: Ensure SHA-1 hashes are configured in the Firebase console and Google Play Integrity API is enabled.
+   - **iOS**: Ensure APNs authentication key is configured with FCM and background modes for remote notifications are enabled.
+   - **iOS**: If `verifyPhoneNumber` fails with `recaptcha-sdk-not-linked`, see the iOS reCAPTCHA SDK guidance in rule 2 below.
+   - **Web**: Add your application's domain to the Firebase console under **OAuth redirect domains**.
+2. On **iOS**, phone sign-in can fail with `FirebaseAuthException` code `recaptcha-sdk-not-linked` when your Firebase/Identity Platform configuration expects **reCAPTCHA Enterprise** but the native SDK is not linked. Fix this at the native iOS level—it cannot be resolved from Dart alone:
+   - **Recommended**: Link the reCAPTCHA Enterprise iOS SDK in your Xcode project following [Google's guide](https://cloud.google.com/recaptcha-enterprise/docs/instrument-ios-apps).
+   - **Alternative**: If you cannot link the Enterprise SDK, disable reCAPTCHA SMS defense via the Identity Toolkit [`projects.updateConfig`](https://cloud.google.com/identity-platform/docs/reference/rest/v2/projects/updateConfig) REST API (set `recaptchaConfig.phoneEnforcementState` to `OFF` and `recaptchaConfig.useSmsTollFraudProtection` to `false`). This reduces fraud protection—prefer linking the SDK when possible. Follow the [official steps to disable reCAPTCHA SMS defense](https://cloud.google.com/identity-platform/docs/recaptcha-tfp#disable_recaptcha_sms_defense).
+   - If the SDK uses a Safari view controller-hosted challenge, handle the return URL using `uni_links`/`app_links` or the iOS runner's `application:openURL:` method.
+3. Phone number sign-in is only supported on real devices and the web. Testing phone auth on device emulators is not supported; use physical devices or the web platform for phone auth testing.
 
 ### Error Handling
 
@@ -151,6 +180,7 @@
 4. Be prepared to handle `too-many-requests` errors by implementing appropriate retry logic or user feedback.
 5. Handle `operation-not-allowed` errors by ensuring the authentication provider is enabled in the Firebase console.
 6. Implement proper error messages for common authentication failures to improve user experience.
+7. On iOS, handle `recaptcha-sdk-not-linked` errors during `verifyPhoneNumber` by configuring reCAPTCHA Enterprise or disabling reCAPTCHA SMS defense in your Identity Platform project. This error is raised by the native Firebase iOS Auth SDK and cannot be fixed from Dart code alone.
 
 ### User Management
 

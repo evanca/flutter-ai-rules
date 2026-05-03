@@ -1,6 +1,6 @@
 ---
 name: firebase-auth
-description: "Integrates Firebase Authentication into Flutter apps. Use when implementing email/password sign-in, configuring Google or social sign-in providers, listening to auth state changes, managing user profiles and account linking, implementing multi-factor authentication, handling FirebaseAuthException errors, or securing auth flows. Trigger terms: Firebase auth, sign-in, sign-up, authentication, login, logout, social login, MFA, auth state, FirebaseAuthException."
+description: Integrates Firebase Authentication into Flutter apps. Use when setting up auth, managing auth state, implementing email/password or social sign-in, handling auth errors, managing users, or applying security best practices.
 ---
 
 # Firebase Authentication Skill
@@ -13,9 +13,9 @@ Use this skill when:
 
 * Setting up Firebase Authentication in a Flutter project.
 * Listening to authentication state changes.
-* Implementing email/password or social sign-in.
+* Implementing email/password, phone number, or social sign-in.
 * Managing user profiles, account linking, or MFA.
-* Handling authentication errors.
+* Handling authentication errors (including iOS `recaptcha-sdk-not-linked` for phone auth).
 * Applying security best practices for auth flows.
 
 ---
@@ -155,29 +155,57 @@ Future<UserCredential> signInWithGoogle() async {
   appleProvider.addScope('email');
   appleProvider.addScope('name');
   ```
+- To revoke Apple auth tokens after sign-in, use the appropriate API per platform:
+  - **Apple platforms** (iOS/macOS/web): use `revokeTokenWithAuthorizationCode()` with the authorization code from `userCredential.additionalUserInfo?.authorizationCode`.
+  - **Android**: use `revokeAccessToken()` with the access token from `userCredential.credential?.accessToken`.
+  ```dart
+  // Apple platforms (iOS/macOS/web)
+  final authCode = userCredential.additionalUserInfo?.authorizationCode;
+  if (authCode != null) {
+    await FirebaseAuth.instance.revokeTokenWithAuthorizationCode(authCode);
+  }
+
+  // Android
+  final accessToken = userCredential.credential?.accessToken;
+  if (accessToken != null) {
+    await FirebaseAuth.instance.revokeAccessToken(accessToken);
+  }
+  ```
 
 ---
 
-## 5. Error Handling
+## 5. Phone Number Authentication
 
-Common `FirebaseAuthException` codes and their recommended handling:
+Before using phone authentication, ensure platform-specific prerequisites are met:
 
-| Error code | Meaning | Action |
-|---|---|---|
-| `weak-password` | Password does not meet strength requirements | Show password requirements to user |
-| `email-already-in-use` | Account exists for this email | Prompt sign-in or password reset |
-| `user-not-found` | No account for this email | Prompt account creation |
-| `wrong-password` | Incorrect password | Show error, offer password reset |
-| `too-many-requests` | Rate limited | Show cooldown message, retry later |
-| `account-exists-with-different-credential` | Email linked to another provider | Fetch sign-in methods, guide user to correct provider |
-| `operation-not-allowed` | Provider not enabled | Enable the provider in the Firebase console |
+- **Android**: SHA-1 hashes must be configured in the Firebase console and Google Play Integrity API enabled.
+- **iOS**: APNs authentication key must be configured with FCM and background modes for remote notifications enabled.
+- **Web**: Add your application's domain to the Firebase console under **OAuth redirect domains**.
+
+Phone number sign-in is only supported on real devices and the web. Testing on device emulators is not supported.
+
+**iOS: `recaptcha-sdk-not-linked` error**
+
+On iOS, `verifyPhoneNumber` can throw `FirebaseAuthException` with code `recaptcha-sdk-not-linked` when Identity Platform expects reCAPTCHA Enterprise but the native SDK is not linked. This cannot be resolved from Dart — fix it at the native iOS or GCP level:
+
+- **Recommended**: Link the reCAPTCHA Enterprise iOS SDK in Xcode following [Google's guide](https://cloud.google.com/recaptcha-enterprise/docs/instrument-ios-apps).
+- **Alternative**: Disable reCAPTCHA SMS defense via the Identity Toolkit [`projects.updateConfig`](https://cloud.google.com/identity-platform/docs/reference/rest/v2/projects/updateConfig) REST API (set `recaptchaConfig.phoneEnforcementState` to `OFF` and `recaptchaConfig.useSmsTollFraudProtection` to `false`). See the [official steps](https://cloud.google.com/identity-platform/docs/recaptcha-tfp#disable_recaptcha_sms_defense). This reduces fraud protection — prefer linking the SDK.
+- If the SDK uses a Safari view controller-hosted challenge, handle the return URL using `uni_links`/`app_links` or `application:openURL:` in the iOS runner.
+
+---
+
+## 6. Error Handling
 
 - Always use `try-catch` with `FirebaseAuthException`.
-- Check `e.code` to identify specific error types and provide actionable user feedback.
+- Check `e.code` to identify specific error types.
+- Handle `account-exists-with-different-credential` by fetching sign-in methods for the email and guiding users through the correct flow.
+- Handle `too-many-requests` with retry logic or user feedback.
+- Handle `operation-not-allowed` by ensuring the provider is enabled in the Firebase console.
+- On iOS, `recaptcha-sdk-not-linked` during `verifyPhoneNumber` is raised by the native Firebase iOS Auth SDK and requires native setup or GCP configuration changes — it cannot be fixed from Dart code alone.
 
 ---
 
-## 6. User Management
+## 7. User Management
 
 ```dart
 // Update profile
@@ -198,7 +226,7 @@ await user?.verifyBeforeUpdateEmail("newemail@example.com");
 
 ---
 
-## 7. Security Best Practices
+## 8. Security Best Practices
 
 - Never store sensitive authentication credentials in client-side code.
 - Monitor auth state changes for proper session management.
@@ -211,7 +239,7 @@ await user?.verifyBeforeUpdateEmail("newemail@example.com");
 
 ---
 
-## 8. Multi-Factor Authentication
+## 9. Multi-Factor Authentication
 
 > **Security warning:** Avoid SMS-based MFA. SMS is insecure and easy to compromise or spoof.
 
@@ -221,7 +249,7 @@ await user?.verifyBeforeUpdateEmail("newemail@example.com");
 
 ---
 
-## 9. Email Link Authentication
+## 10. Email Link Authentication
 
 > **Important:** Firebase Dynamic Links is deprecated for email link authentication. Firebase Hosting is now used to send sign-in links.
 
