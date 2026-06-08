@@ -91,6 +91,7 @@
 4. Verify the user's email address after account creation to enhance security.
 5. Be aware that Firebase limits the number of new email/password sign-ups from the same IP address in a short period to protect against abuse.
 6. On iOS and macOS, be aware that authentication state can persist between app re-installs as the Firebase SDK persists authentication state to the system keychain.
+7. When using `sendPasswordResetEmail()`, account for email enumeration protection behavior: if email enumeration protection is enabled, the call may complete without throwing an error even when the email address is not registered. Do not rely on this flow to determine whether an email exists.
 
 ### Social Authentication
 

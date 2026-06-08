@@ -119,6 +119,7 @@ try {
 - Firebase rate-limits new email/password sign-ups from the same IP to protect against abuse.
 - On iOS/macOS, authentication state persists between app re-installs via the system keychain.
 - Since September 2023, Firebase enables **email enumeration protection** by default on new projects, replacing `user-not-found` and `wrong-password` with `invalid-credential`. Manage this in the Firebase console under **Authentication > Settings**.
+- When email enumeration protection is enabled, `sendPasswordResetEmail()` may complete without an error even if the email is not registered. Treat this as expected behavior and do not use password-reset responses to infer whether an email exists.
 
 ---
 
