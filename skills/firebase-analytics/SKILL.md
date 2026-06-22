@@ -35,9 +35,8 @@ FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 
 - Initialize Firebase before using any Firebase Analytics features.
 - Analytics **automatically logs** some events and user properties — no additional code needed for those.
-- On iOS, if your app does not use the IDFA (Advertising Identifier), use `FirebaseAnalyticsWithoutAdIdSupport` instead of the default iOS dependency to avoid App Store review questions about advertising identifiers:
+- On iOS, if your app does not use the IDFA (Advertising Identifier), use the IDFA-free Analytics dependency (`FirebaseAnalyticsCore` under Swift Package Manager, or `FirebaseAnalytics/Core` under CocoaPods) instead of the default `FirebaseAnalytics` dependency to avoid App Store review questions about advertising identifiers:
   - **Swift Package Manager:** set `FIREBASE_ANALYTICS_WITHOUT_ADID=true` when building (`FIREBASE_ANALYTICS_WITHOUT_ADID=true flutter build ios`).
-  - **CocoaPods:** add both `pod 'FirebaseAnalytics', :modular_headers => true` and `pod 'FirebaseAnalyticsWithoutAdIdSupport', :modular_headers => true` to your `Podfile`.
 
 ### Add Navigator Observer for Automatic Screen Tracking
 
