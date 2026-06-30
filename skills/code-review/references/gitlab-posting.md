@@ -11,6 +11,37 @@ Replace the placeholders below with your own values:
 - `<iid>` — the merge request's internal ID (the number in the MR URL)
 - Auth token comes from the `GITLAB_TOKEN` env var (a review-bot access token).
 
+## Handling the token safely
+
+`GITLAB_TOKEN` is a secret that can act on the user's behalf. Treat it as
+write-only from your perspective: you may confirm it's present and report its
+length, but its value must never leave the process. This is enforced by the
+skill's `PreToolUse` hook (`scripts/protect-token.sh`), which blocks any Bash
+command that would expose the value.
+
+**Allowed** — confirm it's configured without revealing it. This uses only the
+length form `${#GITLAB_TOKEN}`, so presence is derived from length and the value
+is never expanded:
+
+```bash
+if [ "${#GITLAB_TOKEN}" -gt 0 ]; then
+  echo "GITLAB_TOKEN is set (length: ${#GITLAB_TOKEN})"
+else
+  echo "GITLAB_TOKEN is not set"
+fi
+```
+
+**Never do any of these** (the hook will deny them):
+
+- `echo "$GITLAB_TOKEN"`, `printf` it, or `cat` a file/heredoc containing it.
+- Print it to chat, write it to a file, or include it in a commit.
+- `printenv GITLAB_TOKEN`, or dump the environment (`env`, `set`, `export -p`).
+- Inline the literal token in a command (it lands in shell history/logs) — always
+  reference `$GITLAB_TOKEN`.
+- Use `curl -v` / `--verbose` / `--trace*`, which echo the `PRIVATE-TOKEN` header.
+
+When sharing command output for debugging, redact the `PRIVATE-TOKEN:` header line.
+
 ## Comment Format
 
 - Line comments: `[Flutter Code Review Bot]: <feedback>`

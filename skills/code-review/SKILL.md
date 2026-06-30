@@ -1,6 +1,12 @@
 ---
 name: code-review
 description: "Review Flutter/Dart pull requests and merge requests against a structured checklist. Use when asked to review a PR, review a MR, review a branch, audit changed files, check code quality, or evaluate a diff. Covers correctness, code smells, security, performance, style, testing, and documentation."
+hooks:
+  PreToolUse:
+    - matcher: "Bash"
+      hooks:
+        - type: command
+          command: "./scripts/protect-token.sh"
 ---
 
 # Code Review Skill
@@ -151,6 +157,10 @@ After the per-file pass, decide the outcome:
 > **Posting comments online (opt-in only).** After presenting the chat review, **ask the user whether they'd prefer you to also post these comments online** on the PR/MR — so the team can see them, review them, and reply. **Only post online if the user explicitly says yes.** Never post to the platform on your own initiative.
 >
 > When the user does opt in, post issues as **inline comments** anchored to the right file and line (use proper position fields), with the conclusion/key-concerns as a top-level review comment and an approval when warranted. This requires a **review-bot access token** for the platform (GitHub/GitLab); if one isn't configured, let the user know and ask them to set it up before posting.
+>
+> **Token safety.** The token is a secret. You may check whether it **exists** and report its **length** to confirm it's configured, but **never read, echo, log, print, or otherwise reveal the token value** — not in chat, not in a file, not in a commit. Pass it to `curl` only by referencing the env var (e.g. `$GITLAB_TOKEN`), never by inlining the literal value, and avoid `curl -v`/`--verbose` (it prints the auth header). This is enforced by a `PreToolUse` hook (`scripts/protect-token.sh`) that blocks any Bash command which would expose the value. See the "Handling the token safely" section in each reference file for the safe existence/length check.
+>
+> The hook fires in both the Claude Code CLI and the Agent SDK. (SDK apps that set `settingSources`/`setting_sources` explicitly must include `"project"` for skill hooks to load; it's included by default.)
 >
 > For platform-specific API details, curl formats, and approval steps, follow:
 > - GitLab → [references/gitlab-posting.md](references/gitlab-posting.md) (uses the `GITLAB_TOKEN` env var)
