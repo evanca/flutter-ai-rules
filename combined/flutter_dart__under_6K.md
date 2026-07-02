@@ -11,6 +11,7 @@
 8. Avoid abbreviations unless the abbreviation is more common than the unabbreviated term.
 9. Prefer putting the most descriptive noun last in names.
 10. Prefer a noun phrase for non-boolean properties or variables.
+11. Avoid starting a function or method name with `get`; prefer removing `get` and using a getter when the API conceptually exposes a property.
 
 ### Types and Functions
 1. Use class modifiers to control if your class can be extended or used as an interface.

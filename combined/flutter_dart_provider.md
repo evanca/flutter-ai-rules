@@ -17,8 +17,9 @@
 14. Prefer the positive form for boolean property and variable names.
 15. Consider omitting the verb for named boolean parameters.
 16. Use camelCase for variable and function names.
-17. Use PascalCase for class names.
-18. Use snake_case for file names.
+17. Avoid starting a function or method name with `get`; prefer removing `get` and using a getter when the API conceptually exposes a property.
+18. Use PascalCase for class names.
+19. Use snake_case for file names.
 
 ### Types and Functions
 1. Use class modifiers to control if your class can be extended or used as an interface.
@@ -257,5 +258,4 @@ class MyClass with DiagnosticableTreeMixin {
 13. Do not attempt to obtain providers inside `initState` or `constructor`; use them in `build`, callbacks, or lifecycle methods where the widget is fully mounted.
 14. You can use any object as state, not just `ChangeNotifier`; use `Provider.value()` with a `StatefulWidget` if needed.
 15. If you have a very large number of providers (e.g., 150+), consider mounting them over time (e.g., during splash screen animation) or avoid `MultiProvider` to prevent StackOverflowError.
-
 

@@ -27,6 +27,7 @@ This skill defines how to write idiomatic, high-quality Dart and Flutter code fo
 - Prefer a **noun phrase** for non-boolean properties or variables.
 - Prefer a **non-imperative verb phrase** for boolean properties or variables; prefer the positive form.
 - Consider omitting the verb for named boolean parameters.
+- Avoid starting a function or method name with `get`; prefer removing `get` and using a getter when the API conceptually exposes a property.
 
 ---
 

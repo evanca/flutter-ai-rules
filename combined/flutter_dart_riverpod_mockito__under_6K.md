@@ -6,6 +6,7 @@
 3. Type annotate fields, variables, and parameters when the type isn't obvious.
 4. Use `Future<void>` for asynchronous members without return values.
 5. Use getters for property access and setters for property changes.
+6. Avoid starting a function or method name with `get`; prefer removing `get` and using a getter when the API conceptually exposes a property.
 
 ## Riverpod Fundamentals
 1. Always wrap your app with `ProviderScope` at the root (directly in `runApp`).

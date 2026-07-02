@@ -17,8 +17,9 @@
 14. Prefer the positive form for boolean property and variable names.
 15. Consider omitting the verb for named boolean parameters.
 16. Use camelCase for variable and function names.
-17. Use PascalCase for class names.
-18. Use snake_case for file names.
+17. Avoid starting a function or method name with `get`; prefer removing `get` and using a getter when the API conceptually exposes a property.
+18. Use PascalCase for class names.
+19. Use snake_case for file names.
 
 ### Types and Functions
 1. Use class modifiers to control if your class can be extended or used as an interface.
@@ -250,5 +251,4 @@ Provider.of<CartModel>(context, listen: false).removeAll();
 14. Use `MultiProvider` when you need to provide multiple models to the widget tree.
 15. Write unit tests for your `ChangeNotifier` models to verify state changes and notifications.
 16. Avoid rebuilding widgets unnecessarily; optimize rebuilds by structuring your widget tree and provider usage carefully.
-
 

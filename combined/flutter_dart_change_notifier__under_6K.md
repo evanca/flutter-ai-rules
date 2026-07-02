@@ -6,11 +6,12 @@
 3. Type annotate fields, variables, and parameters when the type isn't obvious.
 4. Use `Future<void>` as the return type of asynchronous members that do not produce values.
 5. Use getters for operations that conceptually access properties and setters for operations that conceptually change properties.
-6. Use collection literals when possible.
-7. Use `whereType()` to filter a collection by type.
-8. Initialize fields at their declaration when possible.
-9. Use initializing formals when possible.
-10. Use `rethrow` to rethrow a caught exception.
+6. Avoid starting a function or method name with `get`; prefer removing `get` and using a getter when the API conceptually exposes a property.
+7. Use collection literals when possible.
+8. Use `whereType()` to filter a collection by type.
+9. Initialize fields at their declaration when possible.
+10. Use initializing formals when possible.
+11. Use `rethrow` to rethrow a caught exception.
 
 ## Flutter Best Practices
 1. Extract reusable widgets into separate components.

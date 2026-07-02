@@ -166,6 +166,7 @@ Rules:
 - Only call `emit` inside the Cubit/Bloc.
 - Public methods return `void` or `Future<void>` only.
 - Keep business logic out of UI.
+- When overriding `storage` in a `HydratedCubit`, pass it as a named parameter: `super(initialState, storage: storage)`.
 
 ---
 

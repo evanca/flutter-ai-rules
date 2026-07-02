@@ -112,6 +112,6 @@
 1. The Bloc ecosystem consists of multiple packages: `bloc` (core), `flutter_bloc` (Flutter widgets), `bloc_test` (testing), `bloc_lint` (linting), `bloc_tools` (CLI), `bloc_concurrency` (event transformers), `hydrated_bloc` (persistence), `replay_bloc` (undo/redo), and `angular_bloc` (AngularDart).
 2. Use `bloc_concurrency` package for advanced event transformers like `sequential`, `concurrent`, `droppable`, and `restartable`.
 3. Use `hydrated_bloc` for automatic state persistence and restoration across app sessions.
-4. Use `replay_bloc` to add undo and redo functionality to your blocs.
-5. Install packages based on your needs: start with `bloc` and `flutter_bloc` for basic functionality.
-
+4. When overriding storage in a `HydratedCubit`, pass it as a named parameter (for example, `super(0, storage: storage)`), not as a positional argument.
+5. Use `replay_bloc` to add undo and redo functionality to your blocs.
+6. Install packages based on your needs: start with `bloc` and `flutter_bloc` for basic functionality.

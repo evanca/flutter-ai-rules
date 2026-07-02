@@ -6,11 +6,12 @@
 3. Type annotate fields, variables, and parameters when the type isn't obvious.
 4. Use `Future<void>` for asynchronous members without return values.
 5. Use getters for property access and setters for property changes.
-6. Use collection literals when possible.
-7. Use `whereType()` to filter collections by type.
-8. Initialize fields at declaration when possible.
-9. Use initializing formals when possible.
-10. Use `rethrow` to rethrow caught exceptions.
+6. Avoid starting a function or method name with `get`; prefer removing `get` and using a getter when the API conceptually exposes a property.
+7. Use collection literals when possible.
+8. Use `whereType()` to filter collections by type.
+9. Initialize fields at declaration when possible.
+10. Use initializing formals when possible.
+11. Use `rethrow` to rethrow caught exceptions.
 
 ## Flutter Best Practices
 1. Separate app into UI Layer (presentation) and Data Layer (business logic).
@@ -52,6 +53,7 @@
 5. Duplicate states are ignored; no state change will occur.
 6. Use event transformers in `Bloc` for advanced event processing.
 7. Prefer `Cubit` for simplicity and less boilerplate; prefer `Bloc` for traceability and advanced event handling.
+8. When overriding storage in a `HydratedCubit`, pass it as a named parameter: `super(initialState, storage: storage)`.
 
 ## Flutter Bloc Integration
 1. Use `BlocBuilder` to rebuild widgets in response to bloc or cubit state changes.

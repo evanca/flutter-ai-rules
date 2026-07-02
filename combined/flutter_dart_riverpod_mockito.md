@@ -17,8 +17,9 @@
 14. Prefer the positive form for boolean property and variable names.
 15. Consider omitting the verb for named boolean parameters.
 16. Use camelCase for variable and function names.
-17. Use PascalCase for class names.
-18. Use snake_case for file names.
+17. Avoid starting a function or method name with `get`; prefer removing `get` and using a getter when the API conceptually exposes a property.
+18. Use PascalCase for class names.
+19. Use snake_case for file names.
 
 ### Types and Functions
 1. Use class modifiers to control if your class can be extended or used as an interface.
@@ -367,5 +368,4 @@
 25. Use `throwOnMissingStub(mock)` to throw if a mock method is called without a matching stub.
 26. Data models should not be mocked if they can be constructed with stubbed data.
 27. Only use mocks if your test asserts on interactions (calls to `verify`); otherwise, prefer real or fake objects.
-
 

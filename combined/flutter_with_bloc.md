@@ -19,8 +19,9 @@
 14. Prefer the positive form for boolean property and variable names.
 15. Consider omitting the verb for named boolean parameters.
 16. Use camelCase for variable and function names.
-17. Use PascalCase for class names.
-18. Use snake_case for file names.
+17. Avoid starting a function or method name with `get`; prefer removing `get` and using a getter when the API conceptually exposes a property.
+18. Use PascalCase for class names.
+19. Use snake_case for file names.
 
 ### Types and Functions
 1. Use class modifiers to control if your class can be extended or used as an interface.
@@ -241,7 +242,8 @@
 17. Use custom event transformers for internal events if needed.
 18. When exposing public methods on a cubit, only use them to trigger state changes and return `void` or `Future<void>`.
 19. For blocs, avoid exposing custom public methods; trigger state changes by adding events.
-20. When using `BlocProvider.of(context)`, call it within a child `BuildContext`, not the same context where the bloc was provided.
+20. When overriding storage in a `HydratedCubit`, pass it as a named parameter (for example, `super(0, storage: storage)`), not as a positional argument.
+21. When using `BlocProvider.of(context)`, call it within a child `BuildContext`, not the same context where the bloc was provided.
 
 ### Architecture
 1. Separate your features into three layers: Presentation, Business Logic, and Data.
