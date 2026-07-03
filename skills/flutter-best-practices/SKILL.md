@@ -32,6 +32,7 @@ overlap (e.g. a new feature touches both structure and coding style).
 | Create/organize a feature, folder structure, state management wiring | [references/feature-structure.md](references/feature-structure.md) |
 | Write or review Dart/Flutter code, widgets, tests, lints | [references/dart-coding-practices.md](references/dart-coding-practices.md) |
 | Multi-team/multi-package apps, monorepo, navigation, localization, API contracts, E2E tests | [references/enterprise-scale.md](references/enterprise-scale.md) |
+| App localization setup, reusable UI package string ownership, language picker visibility | [references/localization-package-boundaries.md](references/localization-package-boundaries.md) |
 
 For a quick task (small widget fix, one-line review comment), the core rules
 below may be enough on their own.
