@@ -1,6 +1,6 @@
 ---
 name: firebase-messaging
-description: A complete end-to-end guide for Firebase Cloud Messaging in Flutter. Covers client setup in Flutter, managing permissions and tokens, handling background/foreground taps, and server-side HTTP v1 dispatch using Service Accounts.
+description: "Use when setting up Firebase Cloud Messaging, managing permissions and tokens, handling background/foreground notification taps, or dispatching messages server-side (HTTP v1)."
 ---
 
 # Firebase Cloud Messaging Skill

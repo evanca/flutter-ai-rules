@@ -1,6 +1,6 @@
 ---
 name: bloc
-description: "Implement Flutter state management using the bloc and flutter_bloc libraries. Use when creating a new Cubit or Bloc, modeling state with sealed classes or status enums, wiring BlocBuilder/BlocListener/BlocProvider in widgets, writing bloc unit tests, refactoring state management, or deciding between Cubit and Bloc."
+description: "Use when creating a Cubit or Bloc, modeling state with sealed classes or status enums, wiring BlocBuilder/BlocListener/BlocProvider, writing bloc tests, or choosing between Cubit and Bloc."
 ---
 
 # Bloc Skill

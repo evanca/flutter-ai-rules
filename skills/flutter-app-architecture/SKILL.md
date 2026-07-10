@@ -1,6 +1,6 @@
 ---
 name: flutter-app-architecture
-description: "Implement layered Flutter app architecture with MVVM, repositories, services, and dependency injection. Use when scaffolding a new Flutter project, refactoring an existing app into layers, creating view models and repositories, configuring dependency injection, implementing unidirectional data flow, or adding a domain layer for complex business logic."
+description: "Use when scaffolding a project, refactoring into layers, creating view models/repositories, configuring dependency injection, or implementing unidirectional data flow (MVVM)."
 ---
 
 # Flutter App Architecture Skill

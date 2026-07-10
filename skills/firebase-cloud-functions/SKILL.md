@@ -1,6 +1,6 @@
 ---
 name: firebase-cloud-functions
-description: "Calls Firebase Cloud Functions from Flutter apps. Use when implementing callable functions, passing structured data to server-side logic, handling function errors and timeouts, configuring region-specific deployments, or testing with the Firebase Emulator Suite. Trigger terms: cloud functions, httpsCallable, server-side logic, callable functions, Firebase functions, backend calls."
+description: "Use when calling callable functions (httpsCallable), passing data to server-side logic, handling function errors/timeouts, configuring regions, or testing with the Emulator Suite."
 ---
 
 # Firebase Cloud Functions Skill

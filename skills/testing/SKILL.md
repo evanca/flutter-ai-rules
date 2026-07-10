@@ -1,6 +1,6 @@
 ---
 name: testing
-description: "Write, review, and improve Flutter and Dart tests including unit tests, widget tests, and golden tests. Use when writing new tests, reviewing test quality, fixing flaky tests, adding test coverage, structuring test files, or choosing between unit and widget tests."
+description: "Use when writing or reviewing Flutter/Dart tests (unit, widget, golden), fixing flaky tests, adding coverage, or choosing between unit and widget tests."
 ---
 
 # Testing Skill

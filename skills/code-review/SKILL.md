@@ -1,6 +1,6 @@
 ---
 name: code-review
-description: "Review Flutter/Dart pull requests and merge requests against a structured checklist. Use when asked to review a PR, review a MR, review a branch, audit changed files, check code quality, or evaluate a diff. Covers correctness, code smells, security, performance, style, testing, and documentation."
+description: "Use when asked to review a PR, MR, branch, or diff, audit changed files, or check code quality."
 hooks:
   PreToolUse:
     - matcher: "Bash"

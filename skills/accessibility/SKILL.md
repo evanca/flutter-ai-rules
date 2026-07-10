@@ -1,12 +1,6 @@
 ---
 name: accessibility
-description: >-
-  Make a UI operable by people with disabilities using assistive tech and varied input
-  methods (WCAG POUR, cognitive accessibility, sensory/motion). Use when working on
-  accessibility / a11y, WCAG, ARIA, screen readers, keyboard navigation, focus order,
-  color contrast, alt text, captions, reduced motion, target sizes, or accessible forms
-  and errors. For context, language, culture, device, or affordability, use the
-  inclusive-design skill instead.
+description: "Use when working on accessibility, a11y, WCAG, ARIA, screen readers, keyboard nav, focus order, contrast, alt text, captions, reduced motion, or target sizes; not language/culture/device (see inclusive-design)."
 ---
 
 # Accessibility

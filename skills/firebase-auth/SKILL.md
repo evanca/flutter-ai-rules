@@ -1,6 +1,6 @@
 ---
 name: firebase-auth
-description: Integrates Firebase Authentication into Flutter apps. Use when setting up auth, managing auth state, implementing email/password or social sign-in, handling auth errors, managing users, or applying security best practices.
+description: "Use when setting up auth, managing auth state, implementing email/password or social sign-in, handling auth errors, or managing users."
 ---
 
 # Firebase Authentication Skill

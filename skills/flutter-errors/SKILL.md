@@ -1,6 +1,6 @@
 ---
 name: flutter-errors
-description: Diagnoses and fixes common Flutter errors. Use when encountering layout errors (RenderFlex overflow, unbounded constraints, RenderBox not laid out), scroll errors, or setState-during-build errors.
+description: "Use when hitting layout errors (RenderFlex overflow, unbounded constraints, RenderBox not laid out), scroll errors, or setState-during-build errors."
 ---
 
 # Flutter Errors Skill

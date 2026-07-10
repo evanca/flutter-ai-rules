@@ -1,6 +1,6 @@
 ---
 name: store-listing-assets
-description: Prepare the store-listing assets and copy for a phone app's App Store / Google Play submission — app name, subtitle, short/full descriptions, keywords, promotional text, and the exact image/video specs for icon, feature graphic, screenshots, and preview video. Use this skill whenever the user needs to write or fit store copy to character limits, produce or resize listing images to the right dimensions, prepare screenshots, fill in App Store Connect / Play Console listing fields, or asks "what assets do I need for the store", "what size should my screenshots be", "write my app description", or "help with my app store listing". Trigger even if the user only mentions store screenshots, app description, keywords, feature graphic, or listing copy. Phone-only scope by default (no tablet/desktop/watch/TV).
+description: "Use when writing store copy to character limits (name, subtitle, descriptions, keywords) or preparing listing images (icon, feature graphic, screenshots, preview video)."
 ---
 
 # Store Listing Assets & Copy

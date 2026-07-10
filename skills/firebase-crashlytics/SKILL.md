@@ -1,6 +1,6 @@
 ---
 name: firebase-crashlytics
-description: "Integrates Firebase Crashlytics into Flutter apps. Use when implementing crash reporting, capturing fatal and non-fatal errors, recording uncaught exceptions from isolates and async code, customizing crash reports with keys/logs/user identifiers, configuring opt-in reporting, or uploading obfuscated symbol files. Trigger terms: crash reporting, error tracking, Crashlytics, recordError, recordFlutterFatalError, stack traces, crash logs."
+description: "Use when implementing crash reporting, capturing fatal/non-fatal errors, recording isolate/async exceptions, customizing reports, or uploading obfuscated symbols."
 ---
 
 # Firebase Crashlytics Skill

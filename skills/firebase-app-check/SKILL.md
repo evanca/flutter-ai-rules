@@ -1,6 +1,6 @@
 ---
 name: firebase-app-check
-description: "Integrates Firebase App Check into Flutter apps. Use when implementing app attestation, configuring App Check providers per platform, setting up debug tokens for development and CI, enabling enforcement for backend resources, managing token refresh and TTL, or hardening app security against abuse."
+description: "Use when implementing app attestation, configuring App Check providers, setting up debug tokens, enabling backend enforcement, or managing token refresh."
 ---
 
 # Firebase App Check Skill

@@ -1,6 +1,6 @@
 ---
 name: provider
-description: Uses the Provider package for dependency injection and state management in Flutter. Use when setting up providers, consuming state, optimizing rebuilds, using ProxyProvider, or migrating from deprecated providers.
+description: "Use when setting up providers, consuming state, optimizing rebuilds, using ProxyProvider, or migrating from deprecated providers (Provider package)."
 ---
 
 # Provider Skill

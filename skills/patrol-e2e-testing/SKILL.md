@@ -1,6 +1,6 @@
 ---
 name: patrol-e2e-testing
-description: "Create, maintain, and run end-to-end tests for Flutter apps using Patrol 4.x. Use when writing E2E tests, adding integration test coverage, testing native interactions like permissions or system dialogs, capturing UI bug regressions, or validating cross-platform behavior on Android, iOS, and Web."
+description: "Use when writing E2E/integration tests, testing native interactions like permissions or system dialogs, capturing UI regressions, or validating cross-platform behavior (Patrol 4.x)."
 ---
 
 # Patrol E2E Testing Skill

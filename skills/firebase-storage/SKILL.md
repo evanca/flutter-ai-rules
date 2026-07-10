@@ -1,6 +1,6 @@
 ---
 name: firebase-storage
-description: Integrates Firebase Cloud Storage into Flutter apps. Use when setting up Storage, uploading or downloading files, managing metadata, handling errors, or applying security rules.
+description: "Use when setting up Storage, uploading/downloading files, managing metadata, handling errors, or applying security rules."
 ---
 
 # Firebase Cloud Storage Skill

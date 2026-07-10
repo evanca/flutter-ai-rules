@@ -1,6 +1,6 @@
 ---
 name: dart-3-updates
-description: "Apply Dart 3 language features including patterns, sealed classes, switch expressions, records, and if-case syntax. Use when writing switch statements, refactoring if-else chains, creating data classes, choosing between records and classes, destructuring values, or modernizing pre-Dart-3 code."
+description: "Use when writing switch statements, refactoring if-else chains, creating data classes, choosing records vs classes, destructuring values, or modernizing pre-Dart-3 code."
 ---
 
 # Dart 3 Updates Skill

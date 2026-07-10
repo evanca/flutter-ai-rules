@@ -1,6 +1,6 @@
 ---
 name: revenuecat-testing
-description: Test and verify a RevenueCat purchase integration before launch — subscription lifecycle (purchase, trial, renewal, upgrade/downgrade, cancellation, expiration, refund), configuration (anonymous vs identified App User IDs, login/logout, offerings), the restore/transfer account-switching matrix, paywalls, and web billing. Use this skill whenever the user is testing in-app purchases or subscriptions, setting up sandbox testing, debugging why a purchase/restore/trial isn't working, checking that RevenueCat events fire correctly, verifying entitlements grant or revoke, writing a QA plan for IAP, or asks "how do I test my RevenueCat integration", "why isn't my restore working", "how do I test a subscription in sandbox", or "test my paywall". Trigger even if the user only mentions sandbox purchases, TRANSFER/EXPIRATION events, testing trials, or App User ID switching.
+description: "Use when testing RevenueCat purchases/subscriptions, setting up sandbox testing, debugging a purchase/restore/trial, verifying entitlements or events, or writing an IAP QA plan."
 ---
 
 # RevenueCat Testing

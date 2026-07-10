@@ -1,6 +1,6 @@
 ---
 name: riverpod
-description: Uses Riverpod for state management in Flutter/Dart. Use when setting up providers, combining requests, managing state disposal, passing arguments, performing side effects, testing providers, or applying Riverpod best practices.
+description: "Use when setting up providers, combining requests, managing state disposal, passing arguments, performing side effects, or testing providers (Riverpod)."
 ---
 
 # Riverpod Skill

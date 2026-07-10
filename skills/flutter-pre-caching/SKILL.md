@@ -1,6 +1,6 @@
 ---
 name: flutter-pre-caching
-description: Pre-caches assets, fonts, images, and startup data in Flutter and Flutter Web. Use when preloading Google Fonts, asset/network images, Lottie/Rive animations, local JSON/config files, warming up initial API data, or optimizing Flutter Web startup.
+description: "Use when preloading fonts, asset/network images, Lottie/Rive animations, local JSON/config, warming initial API data, or optimizing Flutter Web startup."
 ---
 
 # Pre-caching in Flutter and Flutter Web

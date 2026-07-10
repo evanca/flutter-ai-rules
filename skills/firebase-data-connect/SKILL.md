@@ -1,6 +1,6 @@
 ---
 name: firebase-data-connect
-description: "Integrate Firebase Data Connect into Flutter apps with schema design, typed queries, mutations, and real-time listeners. Use when setting up Data Connect, implementing GraphQL-based queries and mutations, configuring generated SDKs, handling offline scenarios, or applying security rules and performance optimizations."
+description: "Use when setting up Data Connect, writing GraphQL queries/mutations, configuring generated SDKs, handling offline, or applying security rules."
 ---
 
 # Firebase Data Connect Skill

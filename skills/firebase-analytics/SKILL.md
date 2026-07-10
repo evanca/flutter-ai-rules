@@ -1,6 +1,6 @@
 ---
 name: firebase-analytics
-description: "Integrates Firebase Analytics into Flutter apps. Use when implementing event tracking, logging custom or predefined analytics events, setting user properties, configuring default event parameters, creating conversion funnels, or adding screen view tracking. Covers setup, event logging, parameter constraints, and privacy best practices."
+description: "Use when logging analytics events, setting user properties, configuring default event parameters, building funnels, or adding screen-view tracking."
 ---
 
 # Firebase Analytics Skill

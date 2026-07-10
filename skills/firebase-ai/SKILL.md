@@ -1,6 +1,6 @@
 ---
 name: firebase-ai
-description: "Integrate Firebase AI Logic into Flutter apps using the Gemini Developer API. Use when setting up the firebase_ai plugin, generating text or chat responses with Gemini models, streaming AI output, implementing multimodal prompts, handling AI service errors, or applying security and privacy considerations for AI features."
+description: "Use when setting up firebase_ai, generating text/chat with Gemini, streaming AI output, building multimodal prompts, or handling AI errors."
 ---
 
 # Firebase AI Skill

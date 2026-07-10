@@ -1,6 +1,6 @@
 ---
 name: firebase-cloud-firestore
-description: "Integrates Cloud Firestore into Flutter apps. Use when implementing Firestore setup, designing document and collection schemas, performing CRUD operations, creating real-time listeners, building paginated queries, configuring indexes, implementing offline persistence, writing security rules, or optimizing for scale."
+description: "Use when setting up Firestore, designing schemas, doing CRUD, creating listeners, paginating queries, configuring indexes, enabling offline persistence, or writing security rules."
 ---
 
 # Firebase Cloud Firestore Skill

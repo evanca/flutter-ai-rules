@@ -1,6 +1,6 @@
 ---
 name: architecture-feature-first
-description: "Structure Flutter apps using layered architecture (UI / Logic / Data) with feature-first file organization. Use when creating new features, designing the project folder structure, adding repositories, services, view models (or cubits/providers/notifiers), wiring dependency injection, or deciding which layer owns a piece of logic. State management agnostic."
+description: "Use when creating a feature, designing folder structure, adding repositories/services/view models, wiring dependency injection, or deciding which layer owns logic."
 ---
 
 # Flutter Architecture — Feature-First Skill

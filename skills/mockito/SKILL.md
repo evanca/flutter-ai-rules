@@ -1,6 +1,6 @@
 ---
 name: mockito
-description: Uses the Mockito package for mocking in Flutter/Dart tests. Use when generating mocks, stubbing methods, verifying interactions, capturing arguments, or deciding between mocks, fakes, and real objects.
+description: "Use when generating mocks, stubbing methods, verifying interactions, capturing arguments, or choosing between mocks, fakes, and real objects (Mockito)."
 ---
 
 # Mockito Skill

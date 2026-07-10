@@ -1,15 +1,6 @@
 ---
 name: flutter-best-practices
-description: >-
-  Flutter/Dart architecture and coding standards based on the official Flutter
-  architecture guide (MVVM) and LeanCode's enterprise/feature-based patterns.
-  Use this skill whenever writing, reviewing, refactoring, or planning
-  Flutter/Dart code — creating a new screen or feature, structuring a new
-  Flutter project, choosing state management, organizing folders, setting up a
-  monorepo, writing widgets, cubits/blocs, repositories or services, writing
-  Flutter tests, or answering questions about Flutter architecture and code
-  style. Trigger even if the user doesn't say "architecture" — e.g. "add a
-  settings page", "review this widget", "how should I structure this app".
+description: "Use when writing, reviewing, refactoring, or planning Flutter/Dart code — screens, features, project structure, state management, folders, widgets, cubits/blocs, repositories, services, or tests."
 ---
 
 # Flutter Best Practices

@@ -1,6 +1,6 @@
 ---
 name: firebase-database
-description: "Integrates Firebase Realtime Database into Flutter apps. Use when implementing real-time data sync, structuring flattened JSON trees, performing read and write operations, creating real-time listeners, implementing offline persistence, managing presence detection, sharding across database instances, or writing security and validation rules."
+description: "Use when syncing real-time data, structuring JSON trees, reading/writing, creating listeners, enabling offline persistence, managing presence, sharding, or writing security rules."
 ---
 
 # Firebase Realtime Database Skill

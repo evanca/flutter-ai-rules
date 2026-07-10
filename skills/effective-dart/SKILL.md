@@ -1,6 +1,6 @@
 ---
 name: effective-dart
-description: "Apply Effective Dart guidelines to write idiomatic, high-quality Dart and Flutter code. Use when writing new Dart code, reviewing pull requests for style compliance, refactoring naming conventions, adding doc comments, structuring imports, enforcing type annotations, or running code review checks against Effective Dart standards."
+description: "Use when writing Dart code, reviewing for style, refactoring naming, adding doc comments, structuring imports, or enforcing type annotations."
 ---
 
 # Effective Dart Skill

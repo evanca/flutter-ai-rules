@@ -1,6 +1,6 @@
 ---
 name: firebase-in-app-messaging
-description: "Integrates Firebase In-App Messaging into Flutter apps. Use when implementing in-app message campaigns, triggering or suppressing messages programmatically, configuring opt-in data collection for user privacy compliance, testing campaigns on specific devices, handling message interaction callbacks, or managing A/B tests for in-app messaging."
+description: "Use when running in-app message campaigns, triggering/suppressing messages, configuring opt-in data collection, testing on specific devices, or handling message callbacks."
 ---
 
 # Firebase In-App Messaging Skill

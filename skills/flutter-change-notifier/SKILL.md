@@ -1,6 +1,6 @@
 ---
 name: flutter-change-notifier
-description: Implements state management with ChangeNotifier and Provider in Flutter. Use when setting up ChangeNotifier models, providing them to the widget tree, consuming state with Consumer or Provider.of, or optimizing rebuilds.
+description: "Use when setting up ChangeNotifier models, providing them to the widget tree, consuming state with Consumer or Provider.of, or optimizing rebuilds."
 ---
 
 # Flutter ChangeNotifier Skill

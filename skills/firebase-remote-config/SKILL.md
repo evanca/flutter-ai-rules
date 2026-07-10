@@ -1,6 +1,6 @@
 ---
 name: firebase-remote-config
-description: "Integrates Firebase Remote Config into Flutter apps. Use when implementing feature flags, creating A/B tests, managing remote parameter defaults, fetching and activating config values, implementing real-time config updates, or configuring throttling intervals. Trigger terms: remote config, feature flags, A/B testing, fetchAndActivate, dynamic configuration, conditional targeting, kill switch."
+description: "Use when implementing feature flags, running A/B tests, setting parameter defaults, fetching/activating config, or enabling real-time config updates."
 ---
 
 # Firebase Remote Config Skill

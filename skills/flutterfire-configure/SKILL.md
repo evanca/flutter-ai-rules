@@ -1,6 +1,6 @@
 ---
 name: flutterfire-configure
-description: "Sets up Firebase for Flutter apps using FlutterFire CLI. Use when adding Firebase to a Flutter project for the first time, running flutterfire configure after adding new platforms or services, initializing Firebase in main.dart, or configuring separate Firebase projects for multiple app flavors. Trigger terms: flutterfire configure, Firebase setup, Firebase initialization, firebase_core, firebase_options.dart, app flavors, multi-environment Firebase."
+description: "Use when adding Firebase to a Flutter project, running flutterfire configure, initializing Firebase in main.dart, or configuring multiple flavors."
 ---
 
 # FlutterFire Configure Skill

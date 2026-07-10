@@ -1,6 +1,6 @@
 ---
 name: mocktail
-description: Uses the Mocktail package for mocking in Flutter/Dart tests. Use when creating mocks, stubbing methods, verifying interactions, registering fallback values, or deciding between mocks, fakes, and real objects.
+description: "Use when creating mocks, stubbing methods, verifying interactions, registering fallback values, or choosing between mocks, fakes, and real objects (Mocktail)."
 ---
 
 # Mocktail Skill

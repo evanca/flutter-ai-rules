@@ -1,13 +1,6 @@
 ---
 name: inclusive-design
-description: >-
-  Design for the real-world context, identity, language, culture, device, and confidence
-  of users — beyond ability and beyond WCAG (Microsoft Inclusive Design, the mismatch
-  model, W3C i18n / digital inclusion). Use when working on inclusion or exclusion, the
-  Persona Spectrum, "who are we leaving out?", internationalization / localization, global
-  name or address forms, low-end devices or slow/metered networks, affordability or the
-  digital divide, or first-time / low-confidence / stressed users. For screen readers,
-  keyboard, contrast, ARIA, or WCAG conformance, use the accessibility skill instead.
+description: "Use when working on inclusion, i18n/localization, global name/address forms, low-end devices, slow/metered networks, affordability, or first-time/low-confidence users; not WCAG/screen readers (see accessibility)."
 ---
 
 # Inclusive Design
