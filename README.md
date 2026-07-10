@@ -7,7 +7,7 @@
 **Primary method:** Copy skill folders from [`skills/`](./skills) into your IDE's skills directory (e.g., `.cursor/skills/`, `.windsurf/skills/`). The agent will automatically use relevant skills based on your tasks.
 
 For traditional rules: If you want to use `.cursor/rules` or `.windsurfrules`, just copy the contents of the rule set of your choice (e.g., `combined/flutter_dart__under_6K.md`) into your IDE's global or local rules.  
-For maximum control, you can also copy the `/rules` folder into your project and reference rules as needed (e.g., "Read @rules/firebase/ and set up a project with Realtime Database, App Check, and Analytics.").
+For maximum control, you can also copy the `/rules` folder into your project and reference rules as needed (e.g., "Read @rules/effective_dart.md and follow its conventions."). For tool- and package-specific guidance (Firebase, Bloc, Riverpod, Mockito, etc.), use the matching skill in [`skills/`](./skills).
 
 ## 🚀 Introduction
 
@@ -20,7 +20,7 @@ This repository provides a comprehensive, (almost) non-opinionated collection of
 
   Copy or symlink any skill folder into `.cursor/skills/`, `.agent/skills/`, or another supported location.
 - **`rules/`**  
-  Contains individual rule files, each focused on a specific topic or tool (e.g., `bloc.md`, `effective_dart.md`, etc.).  
+  Contains individual rule files covering broad Flutter/Dart foundations (e.g., `effective_dart.md`, `flutter_app_architecture.md`, `flutter_errors.md`, `testing.md`). Tool- and package-specific guidance (Bloc, Riverpod, Provider, Mockito, Firebase, etc.) now lives in [`skills/`](./skills).  
   These files are:
     - Based **only** on official documentation from Flutter, Dart, or relevant package websites.
     - Categorized by subject to make them easy to mix, match, and reference.
@@ -55,7 +55,7 @@ If you want a quick setup with traditional rules:
 If you prefer more control:
 
 1. Browse the [`rules/`](./rules) folder.
-2. Pick files relevant to your project (e.g., `riverpod.md`, `bloc.md`, etc.).
+2. Pick files relevant to your project (e.g., `effective_dart.md`, `testing.md`, etc.).
 3. You can:
     - **Include** them directly in your IDE setup.
     - **Reference** them in prompts to add context.
@@ -63,8 +63,8 @@ If you prefer more control:
     - **Include** them partially or fully in a PRD (Product Requirements Document).
 
 <div align="center">
-  <img src="media/mocktail_md_01.png" width="300" alt="Example usage with Mocktail rules">
-  <img src="media/mocktail_md_02.png" width="300" alt="Example usage with Mocktail rules">
+  <img src="media/mocktail_md_01.png" width="300" alt="Example usage with the Mocktail skill">
+  <img src="media/mocktail_md_02.png" width="300" alt="Example usage with the Mocktail skill">
 </div>
 
 Everything is modular — use what works best for you.
