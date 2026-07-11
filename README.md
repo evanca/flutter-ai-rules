@@ -137,3 +137,25 @@ Here are the official sources that have been used to build these rules:
 ### Firebase
 - [Firebase for Flutter](https://firebase.google.com/docs/flutter/setup) - Official Firebase Flutter documentation
 - [Code with Andrea](https://codewithandrea.com/articles/flutter-firebase-multiple-flavors-flutterfire-cli/) - How to Setup Flutter & Firebase with Multiple Flavors using the FlutterFire CLI
+
+## 📏 Recommended File Sizes by Tool
+
+For each tool, the size guidance from its **own official documentation** for **rule / instruction files** and for **`SKILL.md`** skill files (accessed 2026-07-11).
+
+| Tool | Rule file — recommended size | `SKILL.md` — recommended size |
+|------|------------------------------|-------------------------------|
+| **Cursor** | `.mdc` rule: under **500 lines** *(soft)* | **No numeric limit** — "keep focused, move detail to separate files" |
+| **Windsurf** | `global_rules.md`: **6,000 chars**; `.windsurf/rules/*.md`: **12,000 chars**/file *(hard)* | **No numeric limit** — "keeps your context window lean" |
+| **Claude Code** | `CLAUDE.md`: under **200 lines** *(soft)* | Under **500 lines** *(soft)*; `description` **1,536 chars** *(hard)* |
+| **GitHub Copilot** | `copilot-instructions.md`: **≤ 2 pages** *(soft, approx.)* | **Not supported** — no repo-level `SKILL.md` |
+| **OpenAI Codex** | `AGENTS.md`: **no limit stated** | Supported — **no numeric limit stated** |
+| **Google Antigravity** | rule file: **12,000 chars** each *(hard)* | **No numeric limit stated** |
+
+**Notes:**
+- **Hard** = enforced/truncated at the limit; **soft** = a documented quality recommendation.
+- **Only Claude Code publishes a numeric `SKILL.md` recommendation** (under 500 lines). Every other tool that supports skills just says "keep it focused/lean" with no figure, and **GitHub Copilot has no repo-level `SKILL.md`** — it uses `copilot-instructions.md` plus path-specific `*.instructions.md` (no size limit stated for the latter).
+- **Claude Code** loads `CLAUDE.md` in full regardless of length, but notes files over 200 lines "consume more context and reduce adherence"; its auto-memory `MEMORY.md` loads only the "first 200 lines or 25KB, whichever comes first."
+- **Windsurf** is still named Windsurf; its docs are served through Cognition (`docs.windsurf.com` → `docs.devin.ai`) and reference `.windsurf/rules` and `.windsurf/skills`.
+- This repo keeps the [`combined/`](./combined) sets under **6,000 characters** to satisfy the strictest hard limit above (Windsurf `global_rules.md`).
+
+**Official sources:** Cursor — [rules](https://cursor.com/docs/context/rules) · [skills](https://cursor.com/docs/skills) | Windsurf — [rules & skills](https://docs.windsurf.com/windsurf/cascade/memories) | Claude Code — [memory](https://code.claude.com/docs/en/memory) · [skills](https://code.claude.com/docs/en/skills) | GitHub Copilot — [instructions](https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions) | OpenAI Codex — [AGENTS.md](https://agents.md/) · [skills](https://developers.openai.com/codex) | Google Antigravity — [rules](https://antigravity.google/docs/rules-workflows) · [skills](https://antigravity.google/docs/skills)
