@@ -60,7 +60,7 @@ Iterate through each changed file. For every file, verify the following:
 | **Security** | No input validation gaps; no secrets committed to code |
 | **Performance** | No obvious inefficiencies (e.g., unnecessary rebuilds, O(n^2) loops on large lists) |
 | **SOLID principles** | Adherence assessed without forcing unnecessary boilerplate or over-abstraction |
-| **Flutter/Dart/Riverpod patterns** | Match against the project's loaded guidelines and conventions |
+| **Flutter/Dart/<your-state-management-package> patterns** | Match against the project's loaded guidelines and conventions |
 | **Documentation** | Public APIs, complex logic, and new modules are documented |
 | **Test coverage** | New or changed logic has sufficient tests (see Step 4) |
 | **Style** | Code matches the project's style guide and linting rules |
@@ -71,6 +71,8 @@ For **generated files** (e.g., `*.g.dart`, `*.freezed.dart`): confirm they are u
 > **Scope discipline:** Your job is **not** to comment on every change — it's to find errors and concrete improvement areas and comment on those. Don't manufacture comments where the code is fine.
 
 #### Flutter-specific checks
+
+*(Note: The following is just an example using Bloc/Cubit; apply similar principles to Riverpod, Provider, or your chosen state management package.)*
 
 ```dart
 // BAD — rebuilds entire tree on every state change
