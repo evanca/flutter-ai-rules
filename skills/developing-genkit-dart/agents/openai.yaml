@@ -1,0 +1,4 @@
+interface:
+  display_name: "Developing with Genkit Dart"
+  short_description: "Build Dart AI agents, tools, and flows"
+  default_prompt: "Use $developing-genkit-dart to build an AI flow in Dart with Genkit."
