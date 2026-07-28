@@ -20,7 +20,7 @@ This repository provides a comprehensive, (almost) non-opinionated collection of
 
   Copy or symlink any skill folder into `.cursor/skills/`, `.agent/skills/`, or another supported location.
 - **`rules/`**  
-  Contains individual rule files covering broad Flutter/Dart foundations (e.g., `effective_dart.md`, `flutter_app_architecture.md`, `flutter_errors.md`, `testing.md`). Tool- and package-specific guidance (Bloc, Riverpod, Provider, Mockito, Firebase, etc.) now lives in [`skills/`](./skills).  
+  Contains individual rule files covering broad Flutter/Dart foundations (e.g., `effective_dart.md`, `flutter_app_architecture.md`, `flutter_errors.md`, `testing.md`). Tool- and package-specific guidance (Bloc, Riverpod, Provider, Mockito, Firebase, etc.) now lives in [`skills/`](./skills).
   These files are:
     - Based **only** on official documentation from Flutter, Dart, or relevant package websites.
     - Categorized by subject to make them easy to mix, match, and reference.
@@ -36,10 +36,25 @@ This repository provides a comprehensive, (almost) non-opinionated collection of
 
 ### Option 1: Skills - Agent Will Decide What to Use
 
-1. Browse the [`skills/`](./skills) folder.
-2. Copy or symlink skill folders into your IDE's skills directory (e.g., `.cursor/skills/`, `.windsurf/skills/`).
-3. The agent will automatically use relevant skills based on your task descriptions.
-4. You're ready to go - skills activate contextually without manual selection.
+Install skills interactively with the [Skills CLI](https://www.npmjs.com/package/skills):
+
+```sh
+npx skills add evanca/flutter-ai-rules
+```
+
+To inspect the available skills without installing them:
+
+```sh
+npx skills add evanca/flutter-ai-rules --list
+```
+
+To install a specific skill:
+
+```sh
+npx skills add evanca/flutter-ai-rules --skill flutter-best-practices
+```
+
+The CLI discovers the packages under [`skills/`](./skills) and installs them for supported agents. Alternatively, browse the folder and copy or symlink individual skill folders into your IDE's skills directory (e.g., `.cursor/skills/`, `.windsurf/skills/`). The agent will then activate relevant skills contextually based on your tasks.
 
 ### Option 2: Use Pre-Made Combined Rules
 
