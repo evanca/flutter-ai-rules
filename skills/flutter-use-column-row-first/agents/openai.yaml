@@ -1,0 +1,4 @@
+interface:
+  display_name: "Flutter Column/Row First"
+  short_description: "Build responsive Flutter layouts with flex"
+  default_prompt: "Use $flutter-use-column-row-first to build this Flutter screen responsively."
