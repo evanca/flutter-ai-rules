@@ -1,170 +1,120 @@
-# Flutter AI Skills and Rules for Cursor, Claude, Codex, Antigravity, and Other AI-Powered IDEs
+# Flutter AI Skills for Claude Code, Codex, Cursor, Antigravity, and Other AI Coding Agents
 
-<img src="media/flutter_ai_rules.png" width="500" alt="Flutter Rules for Windsurf, Cursor">
+<img src="media/flutter_ai_skills.jpg" width="600" alt="An agent prompt reading &quot;Add Google sign-in to the profile screen&quot; on the left; on the right, the firebase-auth and flutter-app-architecture skills are auto-selected from a list of dozens">
 
-## ⚡ TLDR
+**36 Flutter and Dart skills your coding agent loads by itself, sourced only from official documentation.**
 
-**Primary method:** Copy skill folders from [`skills/`](./skills) into your IDE's skills directory (e.g., `.cursor/skills/`, `.windsurf/skills/`). The agent will automatically use relevant skills based on your tasks.
+A skill is a folder with a `SKILL.md` file. Your agent reads the description, decides a task matches, and pulls in the guidance — you don't paste anything into a rules file or remember to `@`-mention a doc. Install once, and Firebase Auth guidance shows up when you touch auth, Riverpod guidance when you touch providers.
 
-For traditional rules: If you want to use `.cursor/rules` or `.windsurfrules`, just copy the contents of the rule set of your choice (e.g., `combined/flutter_dart__under_6K.md`) into your IDE's global or local rules.  
-For maximum control, you can also copy the `/rules` folder into your project and reference rules as needed (e.g., "Read @rules/effective_dart.md and follow its conventions."). For tool- and package-specific guidance (Firebase, Bloc, Riverpod, Mockito, etc.), use the matching skill in [`skills/`](./skills).
+A comprehensive, (almost) non-opinionated collection: everything here is derived from official Flutter, Dart, Firebase, and package documentation. No personal preferences, no invented conventions.
 
-## 🚀 Introduction
-
-This repository provides a comprehensive, (almost) non-opinionated collection of Flutter-related rules tailored for use with **Windsurf**, **Cursor**, and other AI-powered IDEs. These rules are designed to improve your development workflow, ensure consistency, and help you get the most out of your AI coding assistant.
-
-## 📁 Repository Structure
-
-- **`skills/`**  
-  **NEW!** Skills are an open standard for extending agent capabilities. A skill is a folder containing a `SKILL.md` file with instructions that the agent can follow when working on specific tasks. They are essentially what “dynamic rules” used to be — applied automatically when the agent determines they are relevant based on the description.
-
-  Copy or symlink any skill folder into `.cursor/skills/`, `.agent/skills/`, or another supported location.
-- **`rules/`**  
-  Contains individual rule files covering broad Flutter/Dart foundations (e.g., `effective_dart.md`, `flutter_app_architecture.md`, `flutter_errors.md`, `testing.md`). Tool- and package-specific guidance (Bloc, Riverpod, Provider, Mockito, Firebase, etc.) now lives in [`skills/`](./skills).
-  These files are:
-    - Based **only** on official documentation from Flutter, Dart, or relevant package websites.
-    - Categorized by subject to make them easy to mix, match, and reference.
-    - Meant to be refined, adjusted, or extracted based on your project needs.
-
-- **`combined/`**  
-  Contains pre-made, curated sets of rules that combine commonly used topics (e.g., Flutter + Riverpod + Mockito).  
-  These files:
-    - Are kept under **6,000 characters** to comply with **Windsurf's** limit.
-    - Can be used **as-is** by copying them into your global or local rules configuration.
-
-## ✅ How To Use
-
-### Option 1: Skills - Agent Will Decide What to Use
-
-Install skills interactively with the [Skills CLI](https://www.npmjs.com/package/skills):
+## ⚡ Quick start
 
 ```sh
 npx skills add evanca/flutter-ai-rules
 ```
 
-To inspect the available skills without installing them:
+That's it. The [Skills CLI](https://www.npmjs.com/package/skills) discovers the packages under [`skills/`](./skills) and installs them for supported agents.
+
+Browse before installing, or take just one:
 
 ```sh
 npx skills add evanca/flutter-ai-rules --list
-```
-
-To install a specific skill:
-
-```sh
 npx skills add evanca/flutter-ai-rules --skill flutter-best-practices
 ```
 
-The CLI discovers the packages under [`skills/`](./skills) and installs them for supported agents. Alternatively, browse the folder and copy or symlink individual skill folders into your IDE's skills directory (e.g., `.cursor/skills/`, `.windsurf/skills/`). The agent will then activate relevant skills contextually based on your tasks.
-
-### Option 2: Use Pre-Made Combined Rules
-
-If you want a quick setup with traditional rules:
-
-1. Browse the [`combined/`](./combined) folder.
-2. Copy a file that suits your project.
-3. Paste it into your IDE's global or local rules config.
-4. You're ready to go.
-
-### Option 3: Use Individual Rule Files
-
-If you prefer more control:
-
-1. Browse the [`rules/`](./rules) folder.
-2. Pick files relevant to your project (e.g., `effective_dart.md`, `testing.md`, etc.).
-3. You can:
-    - **Include** them directly in your IDE setup.
-    - **Reference** them in prompts to add context.
-    - **Extract** only the parts that are useful for your context.
-    - **Include** them partially or fully in a PRD (Product Requirements Document).
-
-<div align="center">
-  <img src="media/mocktail_md_01.png" width="300" alt="Example usage with the Mocktail skill">
-  <img src="media/mocktail_md_02.png" width="300" alt="Example usage with the Mocktail skill">
-</div>
-
-Everything is modular — use what works best for you.
-
-### Option 4: Download All Skills via CLI
-
-You can fetch the latest skills directly into your project with a single command:
+Prefer to do it by hand? Copy or symlink any skill folder into your agent's skills directory — `.claude/skills/`, `.cursor/skills/`, `.agent/skills/`, `.windsurf/skills/`. Or vendor the whole set into your project:
 
 ```sh
 git clone --depth 1 https://github.com/evanca/flutter-ai-rules.git temp_repo && mkdir -p .skills && cp -r temp_repo/skills/* .skills && rm -rf temp_repo
 ```
 
-This will copy all skills into a `.skills` folder in your project. After all skills are in the `.skills` folder, you can reference them individually based on your needs. For example:
+With a `.skills/` folder you can also reference a skill explicitly when you want it: *"Read `@.skills/bloc/SKILL.md` and create test coverage for the new methods."*
 
-"Read `@.skills/bloc/SKILL.md` and create test coverage for new methods."
+## 🧠 What's in the box
 
-**Pro tip:**  
-You can also configure your IDE to automatically load skills from this `.skills` folder, or reference them in prompts for specific guidance. 
+### Flutter and Dart foundations
 
-## 📏 No Opinions, Just Documentation
+| Skill | Loads when you're… |
+|---|---|
+| [`flutter-best-practices`](./skills/flutter-best-practices) | Writing, reviewing, or planning Flutter code |
+| [`effective-dart`](./skills/effective-dart) | Writing Dart, naming things, adding doc comments |
+| [`dart-3-updates`](./skills/dart-3-updates) | Using records, patterns, sealed classes, switch expressions |
+| [`flutter-app-architecture`](./skills/flutter-app-architecture) | Scaffolding a project or refactoring into layers |
+| [`architecture-feature-first`](./skills/architecture-feature-first) | Designing folder structure for a new feature |
+| [`flutter-errors`](./skills/flutter-errors) | Hitting RenderFlex overflows, unbounded constraints, layout errors |
+| [`flutter-use-column-row-first`](./skills/flutter-use-column-row-first) | Building responsive layouts with Row, Column, Expanded, Flexible |
+| [`flutter-pre-caching`](./skills/flutter-pre-caching) | Preloading fonts, images, animations, or config |
 
-All rules are sourced from official documentation — no personal preferences or subjective interpretations. That’s intentional. You’re free to alter them to your taste, but this repo keeps things objective by sticking to the source.
+### State management
 
-Note: This might sometimes lead to contradictory rules (e.g., if one package suggests one folder architecture and another recommends a different one).
+| Skill | Loads when you're… |
+|---|---|
+| [`bloc`](./skills/bloc) | Creating a Cubit or Bloc, modeling state, wiring providers |
+| [`riverpod`](./skills/riverpod) | Setting up providers, combining requests, managing disposal |
+| [`provider`](./skills/provider) | Consuming state, optimizing rebuilds, using ProxyProvider |
+| [`flutter-change-notifier`](./skills/flutter-change-notifier) | Setting up ChangeNotifier models and consuming them |
 
-## 📌 Use Cases
+### Testing and review
 
-- Install skills in your IDE for automatic, contextual assistance during development.
-- Set up global rules for a Flutter project in your IDE.
-- Configure project-specific constraints for popular state management packages.
-- Provide clear expectations in a PRD when working with a team.
-- Extract only what you need to avoid rule clutter.
-- Reference individual skills or rules in prompts for specific guidance.
-
-## 🛠️ Contributing
-
-Contributions are welcome! If you'd like to suggest a new rule or improve an existing one, here’s how you can help:
-
-1. Fork this repository.
-2. Add or modify rules in the appropriate folder.
-3. Submit a pull request with a clear explanation of your changes.  
-   **Make sure to include an official documentation link** for any rule set you’re adding or modifying to keep everything objective and reliable.
-
-## 📚 References
-
-Here are the official sources that have been used to build these rules:
-
-### Flutter
-- [Flutter App Architecture](https://docs.flutter.dev/app-architecture) - Official Flutter architecture guidelines
-- [Flutter Common Errors](https://docs.flutter.dev/testing/common-errors) - Common errors documentation
-- [Flutter ChangeNotifier State Management](https://docs.flutter.dev/data-and-backend/state-mgmt/simple) - Simple state management with ChangeNotifier
-
-### Dart
-- [Effective Dart](https://dart.dev/effective-dart) - Official Dart style guidelines
-- [Dart 3 Updates](https://dart.dev/language) - Documentation on Dart 3 features including:
-  - [Records](https://dart.dev/language/records)
-  - [Patterns](https://dart.dev/language/patterns)
-  - [Pattern Types](https://dart.dev/language/pattern-types)
-  - [Branches](https://dart.dev/language/branches)
-
-### State Management
-- [Bloc Library](https://bloclibrary.dev/) - Official Bloc library documentation
-- [Provider](https://pub.dev/packages/provider) - Official Provider package documentation
-- [Riverpod](https://riverpod.dev/) - Official Riverpod documentation
-
-### Testing
-- [Mockito](https://pub.dev/packages/mockito) - Official Mockito for Dart documentation
-- [Mocktail](https://pub.dev/packages/mocktail) - Official Mocktail documentation
+| Skill | Loads when you're… |
+|---|---|
+| [`testing`](./skills/testing) | Writing unit, widget, or golden tests; fixing flaky tests |
+| [`mockito`](./skills/mockito) | Generating mocks, stubbing, verifying interactions |
+| [`mocktail`](./skills/mocktail) | Mocking without codegen, registering fallback values |
+| [`patrol-e2e-testing`](./skills/patrol-e2e-testing) | Writing E2E tests that touch native permissions or dialogs |
+| [`code-review`](./skills/code-review) | Reviewing a PR, branch, or diff |
 
 ### Firebase
-- [Firebase for Flutter](https://firebase.google.com/docs/flutter/setup) - Official Firebase Flutter documentation
-- [Code with Andrea](https://codewithandrea.com/articles/flutter-firebase-multiple-flavors-flutterfire-cli/) - How to Setup Flutter & Firebase with Multiple Flavors using the FlutterFire CLI
 
-## 📏 Recommended File Sizes by Tool
+| Skill | Loads when you're… |
+|---|---|
+| [`flutterfire-configure`](./skills/flutterfire-configure) | Adding Firebase to a project, running `flutterfire configure` |
+| [`firebase-auth`](./skills/firebase-auth) | Setting up auth, managing auth state, social sign-in |
+| [`firebase-cloud-firestore`](./skills/firebase-cloud-firestore) | Designing schemas, CRUD, listeners, pagination |
+| [`firebase-database`](./skills/firebase-database) | Syncing real-time data, structuring JSON trees |
+| [`firebase-storage`](./skills/firebase-storage) | Uploading and downloading files, managing metadata |
+| [`firebase-analytics`](./skills/firebase-analytics) | Logging events, setting user properties |
+| [`firebase-crashlytics`](./skills/firebase-crashlytics) | Capturing fatal and non-fatal errors |
+| [`firebase-messaging`](./skills/firebase-messaging) | Setting up FCM, handling background messages |
+| [`firebase-in-app-messaging`](./skills/firebase-in-app-messaging) | Running in-app campaigns |
+| [`firebase-remote-config`](./skills/firebase-remote-config) | Implementing feature flags or A/B tests |
+| [`firebase-app-check`](./skills/firebase-app-check) | Configuring attestation and debug tokens |
+| [`firebase-cloud-functions`](./skills/firebase-cloud-functions) | Calling callable functions, handling errors |
+| [`firebase-ai`](./skills/firebase-ai) | Generating text or chat with Gemini via `firebase_ai` |
+| [`firebase-data-connect`](./skills/firebase-data-connect) | Writing GraphQL queries against Data Connect |
 
-For each tool, the size guidance from its **own official documentation** for **rule / instruction files** and for **`SKILL.md`** skill files (accessed 2026-07-11).
+### Shipping and product
+
+| Skill | Loads when you're… |
+|---|---|
+| [`accessibility`](./skills/accessibility) | Working on a11y, WCAG, screen readers, focus order |
+| [`inclusive-design`](./skills/inclusive-design) | Handling i18n, global name/address forms, low-end devices |
+| [`store-listing-assets`](./skills/store-listing-assets) | Writing store copy to character limits |
+| [`revenuecat-testing`](./skills/revenuecat-testing) | Testing purchases, subscriptions, sandbox flows |
+| [`developing-genkit-dart`](./skills/developing-genkit-dart) | Building AI agents in Dart with Genkit |
+
+## 🗂️ Rules and combined sets (legacy)
+
+Before skills existed, this repo shipped rule files you pasted into a config, plus pre-merged bundles squeezed under Windsurf's character cap. Both still work and both are still updated, but **skills are the recommended path** — they load contextually instead of consuming your context window on every request.
+
+Reach for these only if your tool has no skills support, or you want one static file you fully control:
+
+- **[`rules/`](./rules)** — six broad foundation files: `effective_dart.md`, `flutter_app_architecture.md`, `flutter_errors.md`, `dart_3_updates.md`, `testing.md`, `code_review.md`. Drop them in your project and reference them by name: *"Read @rules/effective_dart.md and follow its conventions."* Package-specific guidance (Bloc, Riverpod, Firebase, Mockito…) is **skills-only** now.
+- **[`combined/`](./combined)** — seven topic bundles, each in a full and an `__under_6K` variant. Paste one into your global or local rules config and you're done. The trimmed variants stay under 6,000 characters to fit Windsurf's `global_rules.md` hard limit.
+
+## 📏 Recommended file sizes by tool
+
+Size guidance from each tool's **own official documentation**, for rule/instruction files and for `SKILL.md` files (accessed 2026-07-11).
 
 | Tool | Rule file — recommended size | `SKILL.md` — recommended size |
 |------|------------------------------|-------------------------------|
-| **Cursor** | `.mdc` rule: under **500 lines** *(soft)* | **No numeric limit** — "keep focused, move detail to separate files" |
-| **Windsurf** | `global_rules.md`: **6,000 chars**; `.windsurf/rules/*.md`: **12,000 chars**/file *(hard)* | **No numeric limit** — "keeps your context window lean" |
 | **Claude Code** | `CLAUDE.md`: under **200 lines** *(soft)* | Under **500 lines** *(soft)*; `description` **1,536 chars** *(hard)* |
-| **GitHub Copilot** | `copilot-instructions.md`: **≤ 2 pages** *(soft, approx.)* | **Not supported** — no repo-level `SKILL.md` |
+| **Cursor** | `.mdc` rule: under **500 lines** *(soft)* | **No numeric limit** — "keep focused, move detail to separate files" |
 | **OpenAI Codex** | `AGENTS.md`: **no limit stated** | Skill bundle: zip **≤ 50 MB**, uncompressed file **≤ 25 MB**, **≤ 500** files/version (no per-`SKILL.md` text limit) |
 | **Google Antigravity** | rule file: **12,000 chars** each *(hard)* | **No numeric limit stated** |
+| **Windsurf** | `global_rules.md`: **6,000 chars**; `.windsurf/rules/*.md`: **12,000 chars**/file *(hard)* | **No numeric limit** — "keeps your context window lean" |
+| **GitHub Copilot** | `copilot-instructions.md`: **≤ 2 pages** *(soft, approx.)* | **Not supported** — no repo-level `SKILL.md` |
 
 **Notes:**
 - **Hard** = enforced/truncated at the limit; **soft** = a documented quality recommendation.
@@ -173,4 +123,40 @@ For each tool, the size guidance from its **own official documentation** for **r
 - **Windsurf** is still named Windsurf; its docs are served through Cognition (`docs.windsurf.com` → `docs.devin.ai`) and reference `.windsurf/rules` and `.windsurf/skills`.
 - This repo keeps the [`combined/`](./combined) sets under **6,000 characters** to satisfy the strictest hard limit above (Windsurf `global_rules.md`).
 
-**Official sources:** Cursor — [rules](https://cursor.com/docs/context/rules) · [skills](https://cursor.com/docs/skills) | Windsurf — [rules & skills](https://docs.windsurf.com/windsurf/cascade/memories) | Claude Code — [memory](https://code.claude.com/docs/en/memory) · [skills](https://code.claude.com/docs/en/skills) | GitHub Copilot — [instructions](https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions) | OpenAI Codex — [AGENTS.md](https://agents.md/) · [skills](https://developers.openai.com/api/docs/guides/tools-skills#limits-and-validation) | Google Antigravity — [rules](https://antigravity.google/docs/rules-workflows) · [skills](https://antigravity.google/docs/skills)
+**Official sources:** Claude Code — [memory](https://code.claude.com/docs/en/memory) · [skills](https://code.claude.com/docs/en/skills) | Cursor — [rules](https://cursor.com/docs/context/rules) · [skills](https://cursor.com/docs/skills) | OpenAI Codex — [AGENTS.md](https://agents.md/) · [skills](https://developers.openai.com/api/docs/guides/tools-skills#limits-and-validation) | Google Antigravity — [rules](https://antigravity.google/docs/rules-workflows) · [skills](https://antigravity.google/docs/skills) | Windsurf — [rules & skills](https://docs.windsurf.com/windsurf/cascade/memories) | GitHub Copilot — [instructions](https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions)
+
+## 📌 No opinions, just documentation
+
+Every skill is sourced from official documentation — no personal preferences or subjective interpretations. That's intentional. You're free to alter them to taste, but this repo stays objective by sticking to the source.
+
+One consequence worth knowing: skills can contradict each other, because their sources do. If one package recommends a folder layout and another recommends a different one, you'll see both.
+
+Content is re-fetched from upstream docs on a schedule, so skills track the official guidance as it changes rather than freezing at whatever was true when they were written.
+
+## 🛠️ Contributing
+
+Contributions are welcome:
+
+1. Fork this repository.
+2. Add or modify a skill in [`skills/`](./skills), or a rule in [`rules/`](./rules).
+3. Open a pull request explaining the change.
+
+**Include an official documentation link** for anything you add or change. That's the one hard requirement — it's what keeps the repo objective and reviewable.
+
+## 📚 Sources
+
+Official documentation these skills are built from:
+
+**Flutter** — [App Architecture](https://docs.flutter.dev/app-architecture) · [Common Errors](https://docs.flutter.dev/testing/common-errors) · [Simple State Management](https://docs.flutter.dev/data-and-backend/state-mgmt/simple)
+
+**Dart** — [Effective Dart](https://dart.dev/effective-dart) · [Language tour](https://dart.dev/language) · [Records](https://dart.dev/language/records) · [Patterns](https://dart.dev/language/patterns) · [Pattern types](https://dart.dev/language/pattern-types) · [Branches](https://dart.dev/language/branches)
+
+**State management** — [Bloc](https://bloclibrary.dev/) · [Riverpod](https://riverpod.dev/) · [Provider](https://pub.dev/packages/provider)
+
+**Testing** — [Mockito](https://pub.dev/packages/mockito) · [Mocktail](https://pub.dev/packages/mocktail) · [Patrol](https://patrol.leancode.co/)
+
+**Firebase** — [Firebase for Flutter](https://firebase.google.com/docs/flutter/setup) · [FlutterFire](https://firebase.flutter.dev/) · [Multiple flavors with the FlutterFire CLI](https://codewithandrea.com/articles/flutter-firebase-multiple-flavors-flutterfire-cli/)
+
+## 📄 License
+
+[MIT](./LICENSE).
