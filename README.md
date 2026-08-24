@@ -82,6 +82,7 @@ With a `.skills/` folder you can also reference a skill explicitly when you want
 | [`firebase-app-check`](./skills/firebase-app-check) | Configuring attestation and debug tokens |
 | [`firebase-cloud-functions`](./skills/firebase-cloud-functions) | Calling callable functions, handling errors |
 | [`firebase-ai`](./skills/firebase-ai) | Generating text or chat with Gemini via `firebase_ai` |
+| [`generate-images-with-firebase-ai`](./skills/generate-images-with-firebase-ai) | Generating or editing images with a Gemini image model (Nano Banana) |
 | [`firebase-data-connect`](./skills/firebase-data-connect) | Writing GraphQL queries against Data Connect |
 
 ### Shipping and product
