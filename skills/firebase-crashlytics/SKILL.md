@@ -1,6 +1,7 @@
 ---
 name: firebase-crashlytics
 description: "Use when implementing crash reporting, capturing fatal/non-fatal errors, recording isolate/async exceptions, customizing reports, or uploading obfuscated symbols."
+license: MIT
 ---
 
 # Firebase Crashlytics Skill

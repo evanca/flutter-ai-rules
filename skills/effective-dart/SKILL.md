@@ -1,6 +1,7 @@
 ---
 name: effective-dart
 description: "Use when writing Dart code, reviewing for style, refactoring naming, adding doc comments, structuring imports, or enforcing type annotations."
+license: MIT
 ---
 
 # Effective Dart Skill

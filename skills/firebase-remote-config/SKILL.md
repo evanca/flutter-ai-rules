@@ -1,6 +1,7 @@
 ---
 name: firebase-remote-config
 description: "Use when implementing feature flags, running A/B tests, setting parameter defaults, fetching/activating config, or enabling real-time config updates."
+license: MIT
 ---
 
 # Firebase Remote Config Skill

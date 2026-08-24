@@ -1,0 +1,5 @@
+{
+  "$schema": "https://antigravity.google/schemas/v1/plugin.json",
+  "name": "flutter-ai-skills",
+  "description": "Flutter, Dart, and Firebase skills sourced only from official documentation."
+}

@@ -1,6 +1,7 @@
 ---
 name: flutter-errors
 description: "Use when hitting layout errors (RenderFlex overflow, unbounded constraints, RenderBox not laid out), scroll errors, or setState-during-build errors."
+license: MIT
 ---
 
 # Flutter Errors Skill

@@ -1,6 +1,7 @@
 ---
 name: accessibility
 description: "Use when working on accessibility, a11y, WCAG, ARIA, screen readers, keyboard nav, focus order, contrast, alt text, captions, reduced motion, or target sizes; not language/culture/device (see inclusive-design)."
+license: MIT
 ---
 
 # Accessibility

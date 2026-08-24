@@ -1,6 +1,7 @@
 ---
 name: firebase-ai
 description: "Use when setting up firebase_ai, generating text/chat with Gemini, streaming AI output, building multimodal prompts, or handling AI errors."
+license: MIT
 ---
 
 # Firebase AI Skill

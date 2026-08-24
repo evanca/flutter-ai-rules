@@ -1,6 +1,7 @@
 ---
 name: store-listing-assets
 description: "Use when writing store copy to character limits (name, subtitle, descriptions, keywords) or preparing listing images (icon, feature graphic, screenshots, preview video)."
+license: MIT
 ---
 
 # Store Listing Assets & Copy

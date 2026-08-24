@@ -1,6 +1,7 @@
 ---
 name: generate-images-with-firebase-ai
 description: "Use when generating or editing images from Flutter/Dart with Firebase AI Logic and a Gemini image model (Nano Banana), making the first call work, choosing Gemini Developer API vs Vertex AI, hitting quota, billing or App Check failures, getting empty or image-only responses, sending a user photo as input, controlling aspect ratio or size, writing the image prompt, or deciding what to test."
+license: MIT
 ---
 
 # Generating images with Firebase AI Logic

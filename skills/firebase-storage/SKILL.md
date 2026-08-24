@@ -1,6 +1,7 @@
 ---
 name: firebase-storage
 description: "Use when setting up Storage, uploading/downloading files, managing metadata, handling errors, or applying security rules."
+license: MIT
 ---
 
 # Firebase Cloud Storage Skill

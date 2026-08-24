@@ -1,6 +1,7 @@
 ---
 name: firebase-app-check
 description: "Use when implementing app attestation, configuring App Check providers, setting up debug tokens, enabling backend enforcement, or managing token refresh."
+license: MIT
 ---
 
 # Firebase App Check Skill

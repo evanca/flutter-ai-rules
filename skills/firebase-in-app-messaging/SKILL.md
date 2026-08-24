@@ -1,6 +1,7 @@
 ---
 name: firebase-in-app-messaging
 description: "Use when running in-app message campaigns, triggering/suppressing messages, configuring opt-in data collection, testing on specific devices, or handling message callbacks."
+license: MIT
 ---
 
 # Firebase In-App Messaging Skill

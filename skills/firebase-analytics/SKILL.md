@@ -1,6 +1,7 @@
 ---
 name: firebase-analytics
 description: "Use when logging analytics events, setting user properties, configuring default event parameters, building funnels, or adding screen-view tracking."
+license: MIT
 ---
 
 # Firebase Analytics Skill

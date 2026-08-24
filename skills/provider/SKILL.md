@@ -1,6 +1,7 @@
 ---
 name: provider
 description: "Use when setting up providers, consuming state, optimizing rebuilds, using ProxyProvider, or migrating from deprecated providers (Provider package)."
+license: MIT
 ---
 
 # Provider Skill

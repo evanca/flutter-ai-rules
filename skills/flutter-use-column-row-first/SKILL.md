@@ -1,6 +1,7 @@
 ---
 name: flutter-use-column-row-first
 description: Use when building any Flutter screen or component to choose responsive Row, Column, Expanded, Flexible, and Spacer layouts before fixed-size or coordinate-based alternatives.
+license: MIT
 ---
 
 # Flutter Use Column Row First

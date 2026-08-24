@@ -1,6 +1,7 @@
 ---
 name: firebase-auth
 description: "Use when setting up auth, managing auth state, implementing email/password or social sign-in, handling auth errors, or managing users."
+license: MIT
 ---
 
 # Firebase Authentication Skill

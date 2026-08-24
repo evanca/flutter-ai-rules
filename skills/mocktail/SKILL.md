@@ -1,6 +1,7 @@
 ---
 name: mocktail
 description: "Use when creating mocks, stubbing methods, verifying interactions, registering fallback values, or choosing between mocks, fakes, and real objects (Mocktail)."
+license: MIT
 ---
 
 # Mocktail Skill

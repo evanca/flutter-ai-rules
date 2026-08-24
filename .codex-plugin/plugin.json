@@ -1,0 +1,30 @@
+{
+  "name": "flutter-ai-skills",
+  "version": "1.0.0",
+  "description": "Flutter, Dart, and Firebase skills sourced only from official documentation.",
+  "author": {
+    "name": "Ivanna Kaceviča",
+    "url": "https://happycode.studio"
+  },
+  "homepage": "https://github.com/evanca/flutter-ai-rules",
+  "repository": "https://github.com/evanca/flutter-ai-rules",
+  "license": "MIT",
+  "keywords": [
+    "flutter",
+    "dart",
+    "firebase",
+    "bloc",
+    "riverpod",
+    "provider",
+    "testing",
+    "mobile"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Flutter AI Skills",
+    "shortDescription": "Flutter and Dart skills built only from official documentation.",
+    "longDescription": "Skills for Flutter, Dart, Firebase, Bloc, Riverpod, Provider, and testing, derived only from official Flutter, Dart, Firebase, and package documentation — no personal preferences, no invented conventions.",
+    "developerName": "Ivanna Kaceviča",
+    "websiteURL": "https://happycode.studio"
+  }
+}

@@ -1,6 +1,7 @@
 ---
 name: firebase-messaging
 description: "Use when setting up Firebase Cloud Messaging, managing permissions and tokens, handling background/foreground notification taps, or dispatching messages server-side (HTTP v1)."
+license: MIT
 ---
 
 # Firebase Cloud Messaging Skill

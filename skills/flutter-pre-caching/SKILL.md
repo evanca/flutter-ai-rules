@@ -1,6 +1,7 @@
 ---
 name: flutter-pre-caching
 description: "Use when preloading fonts, asset/network images, Lottie/Rive animations, local JSON/config, warming initial API data, or optimizing Flutter Web startup."
+license: MIT
 ---
 
 # Pre-caching in Flutter and Flutter Web

@@ -1,6 +1,7 @@
 ---
 name: dart-3-updates
 description: "Use when writing switch statements, refactoring if-else chains, creating data classes, choosing records vs classes, destructuring values, or modernizing pre-Dart-3 code."
+license: MIT
 ---
 
 # Dart 3 Updates Skill

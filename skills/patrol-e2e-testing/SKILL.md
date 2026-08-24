@@ -1,6 +1,7 @@
 ---
 name: patrol-e2e-testing
 description: "Use when writing E2E/integration tests, testing native interactions like permissions or system dialogs, capturing UI regressions, or validating cross-platform behavior (Patrol 4.x)."
+license: MIT
 ---
 
 # Patrol E2E Testing Skill

@@ -1,6 +1,7 @@
 ---
 name: firebase-cloud-firestore
 description: "Use when setting up Firestore, designing schemas, doing CRUD, creating listeners, paginating queries, configuring indexes, enabling offline persistence, or writing security rules."
+license: MIT
 ---
 
 # Firebase Cloud Firestore Skill

@@ -23,7 +23,42 @@ npx skills add evanca/flutter-ai-rules --list
 npx skills add evanca/flutter-ai-rules --skill flutter-best-practices
 ```
 
-Prefer to do it by hand? Copy or symlink any skill folder into your agent's skills directory — `.claude/skills/`, `.cursor/skills/`, `.agent/skills/`, `.windsurf/skills/`. Or vendor the whole set into your project:
+### Install as a plugin
+
+This repo is also a plugin marketplace, so agents that support plugins can install the whole set and keep it updated in place. The manifests live at `.claude-plugin/`, `.codex-plugin/`, `.cursor-plugin/`, `.agents/plugins/`, and `plugin.json` — all pointing at the same [`skills/`](./skills) directory.
+
+**Claude Code** — [plugin marketplaces](https://code.claude.com/docs/en/plugin-marketplaces):
+
+```sh
+/plugin marketplace add evanca/flutter-ai-rules
+/plugin install flutter-ai-skills@flutter-ai-rules
+```
+
+Skills then load as `flutter-ai-skills:bloc`, `flutter-ai-skills:riverpod`, and so on.
+
+**Codex** — [plugins](https://developers.openai.com/codex/plugins/build):
+
+```sh
+codex plugin marketplace add evanca/flutter-ai-rules
+codex plugin install flutter-ai-skills@flutter-ai-rules
+```
+
+**Cursor** — [plugins](https://cursor.com/docs/plugins): in Cursor, run `/add-plugin`, or add the repo as a team marketplace under **Dashboard → Settings → Plugins → Import from Repo**:
+
+```
+https://github.com/evanca/flutter-ai-rules
+```
+
+**Antigravity** — [plugins](https://antigravity.google/docs/plugins):
+
+```sh
+git clone --depth 1 https://github.com/evanca/flutter-ai-rules.git
+agy plugin install ./flutter-ai-rules
+```
+
+**Windsurf / Devin** has no plugin manifest, but Cascade already scans `.agents/skills/` and `~/.agents/skills/`, so the manual copy below is the install path. **GitHub Copilot** doesn't read `SKILL.md` at all — see [Rules and combined sets](#️-rules-and-combined-sets-legacy) for what to use instead.
+
+Prefer to do it by hand? Copy or symlink any skill folder into your agent's skills directory — `.claude/skills/`, `.cursor/skills/`, `.codex/skills/`, `.agents/skills/` (Antigravity, Codex, Windsurf), `.windsurf/skills/`. Or vendor the whole set into your project:
 
 ```sh
 git clone --depth 1 https://github.com/evanca/flutter-ai-rules.git temp_repo && mkdir -p .skills && cp -r temp_repo/skills/* .skills && rm -rf temp_repo
@@ -104,6 +139,12 @@ Reach for these only if your tool has no skills support, or you want one static 
 - **[`rules/`](./rules)** — six broad foundation files: `effective_dart.md`, `flutter_app_architecture.md`, `flutter_errors.md`, `dart_3_updates.md`, `testing.md`, `code_review.md`. Drop them in your project and reference them by name: *"Read @rules/effective_dart.md and follow its conventions."* Package-specific guidance (Bloc, Riverpod, Firebase, Mockito…) is **skills-only** now.
 - **[`combined/`](./combined)** — seven topic bundles, each in a full and an `__under_6K` variant. Paste one into your global or local rules config and you're done. The trimmed variants stay under 6,000 characters to fit Windsurf's `global_rules.md` hard limit.
 
+**GitHub Copilot** lives here rather than in the skills section, because it has no `SKILL.md` support. Three options, in the order Copilot documents them:
+
+- Copy a [`combined/`](./combined) bundle to `.github/copilot-instructions.md` for repo-wide guidance.
+- Copy [`rules/`](./rules) files into `.github/instructions/` as `<name>.instructions.md`, each with `applyTo: "**/*.dart"` frontmatter, so they only load for Dart files.
+- Copilot also reads a root `AGENTS.md`, so a bundle pasted there works for Copilot, Codex, and Antigravity at once.
+
 ## 📏 Recommended file sizes by tool
 
 Size guidance from each tool's **own official documentation**, for rule/instruction files and for `SKILL.md` files (accessed 2026-07-11).
@@ -142,7 +183,7 @@ Contributions are welcome:
 2. Add or modify a skill in [`skills/`](./skills), or a rule in [`rules/`](./rules).
 3. Open a pull request explaining the change.
 
-**Include an official documentation link** for anything you add or change. That's the one hard requirement — it's what keeps the repo objective and reviewable.
+**Include an official documentation link** for anything you add or change. That's the one hard requirement — it's what keeps the repo objective and reviewable. If your source isn't already listed in [ATTRIBUTION.md](./ATTRIBUTION.md), add it there with its license — and if that license isn't a permissive one, restate the guidance instead of quoting it.
 
 ## 📚 Sources
 
@@ -160,4 +201,14 @@ Official documentation these skills are built from:
 
 ## 📄 License
 
-[MIT](./LICENSE).
+[MIT](./LICENSE) — for this repository's own content: the choice of topics, the trigger
+descriptions, and the wording and structure of every skill.
+
+The underlying documentation keeps its own terms. Most of it is CC BY 4.0 (Flutter, Dart, Firebase),
+with code samples under BSD-3 or Apache 2.0, package READMEs under MIT or Apache 2.0, and a few
+sources — Apple, Google Play, RevenueCat — that aren't openly licensed and are therefore restated
+as fact rather than copied. [**ATTRIBUTION.md**](./ATTRIBUTION.md) maps every source to its license
+and to the skills built on it.
+
+If you redistribute this repo or lift a single skill out of it, keep the source links — that's what
+the CC BY attribution requirement actually asks for.

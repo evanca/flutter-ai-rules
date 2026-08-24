@@ -1,6 +1,7 @@
 ---
 name: firebase-data-connect
 description: "Use when setting up Data Connect, writing GraphQL queries/mutations, configuring generated SDKs, handling offline, or applying security rules."
+license: MIT
 ---
 
 # Firebase Data Connect Skill

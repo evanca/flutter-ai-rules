@@ -1,6 +1,7 @@
 ---
 name: mockito
 description: "Use when generating mocks, stubbing methods, verifying interactions, capturing arguments, or choosing between mocks, fakes, and real objects (Mockito)."
+license: MIT
 ---
 
 # Mockito Skill

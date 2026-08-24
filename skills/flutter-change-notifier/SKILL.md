@@ -1,6 +1,7 @@
 ---
 name: flutter-change-notifier
 description: "Use when setting up ChangeNotifier models, providing them to the widget tree, consuming state with Consumer or Provider.of, or optimizing rebuilds."
+license: MIT
 ---
 
 # Flutter ChangeNotifier Skill

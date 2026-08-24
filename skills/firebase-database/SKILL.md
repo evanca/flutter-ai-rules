@@ -1,6 +1,7 @@
 ---
 name: firebase-database
 description: "Use when syncing real-time data, structuring JSON trees, reading/writing, creating listeners, enabling offline persistence, managing presence, sharding, or writing security rules."
+license: MIT
 ---
 
 # Firebase Realtime Database Skill

@@ -1,0 +1,20 @@
+{
+  "name": "flutter-ai-rules",
+  "interface": {
+    "displayName": "Flutter AI Rules"
+  },
+  "plugins": [
+    {
+      "name": "flutter-ai-skills",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

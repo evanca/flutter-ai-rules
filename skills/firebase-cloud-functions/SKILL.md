@@ -1,6 +1,7 @@
 ---
 name: firebase-cloud-functions
 description: "Use when calling callable functions (httpsCallable), passing data to server-side logic, handling function errors/timeouts, configuring regions, or testing with the Emulator Suite."
+license: MIT
 ---
 
 # Firebase Cloud Functions Skill

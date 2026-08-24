@@ -1,6 +1,7 @@
 ---
 name: inclusive-design
 description: "Use when working on inclusion, i18n/localization, global name/address forms, low-end devices, slow/metered networks, affordability, or first-time/low-confidence users; not WCAG/screen readers (see accessibility)."
+license: MIT
 ---
 
 # Inclusive Design

@@ -1,0 +1,16 @@
+{
+  "name": "flutter-ai-rules",
+  "owner": {
+    "name": "Ivanna Kaceviča"
+  },
+  "metadata": {
+    "description": "Flutter and Dart agent skills derived only from official Flutter, Dart, Firebase, and package documentation."
+  },
+  "plugins": [
+    {
+      "name": "flutter-ai-skills",
+      "source": ".",
+      "description": "Flutter, Dart, and Firebase skills sourced only from official documentation."
+    }
+  ]
+}

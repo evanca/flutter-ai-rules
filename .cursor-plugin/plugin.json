@@ -1,0 +1,31 @@
+{
+  "name": "flutter-ai-skills",
+  "displayName": "Flutter AI Skills",
+  "version": "1.0.0",
+  "description": "Flutter, Dart, and Firebase skills sourced only from official documentation.",
+  "author": {
+    "name": "Ivanna Kaceviča"
+  },
+  "publisher": "evanca",
+  "homepage": "https://github.com/evanca/flutter-ai-rules",
+  "repository": "https://github.com/evanca/flutter-ai-rules",
+  "license": "MIT",
+  "keywords": [
+    "flutter",
+    "dart",
+    "firebase",
+    "bloc",
+    "riverpod",
+    "provider",
+    "testing",
+    "mobile"
+  ],
+  "category": "developer-tools",
+  "tags": [
+    "flutter",
+    "dart",
+    "firebase",
+    "testing"
+  ],
+  "skills": "./skills/"
+}

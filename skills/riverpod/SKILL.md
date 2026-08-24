@@ -1,6 +1,7 @@
 ---
 name: riverpod
 description: "Use when setting up providers, combining requests, managing state disposal, passing arguments, performing side effects, or testing providers (Riverpod)."
+license: MIT
 ---
 
 # Riverpod Skill

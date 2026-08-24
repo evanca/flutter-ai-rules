@@ -1,6 +1,7 @@
 ---
 name: revenuecat-testing
 description: "Use when testing RevenueCat purchases/subscriptions, setting up sandbox testing, debugging a purchase/restore/trial, verifying entitlements or events, or writing an IAP QA plan."
+license: MIT
 ---
 
 # RevenueCat Testing

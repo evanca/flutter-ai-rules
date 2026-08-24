@@ -1,6 +1,7 @@
 ---
 name: developing-genkit-dart
 description: Use when building AI agents in Dart, implementing Genkit flows or tools, integrating LLMs into Dart or Flutter applications, or using Genkit Dart plugins.
+license: MIT
 ---
 
 # Genkit Dart

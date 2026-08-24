@@ -1,6 +1,7 @@
 ---
 name: flutterfire-configure
 description: "Use when adding Firebase to a Flutter project, running flutterfire configure, initializing Firebase in main.dart, or configuring multiple flavors."
+license: MIT
 ---
 
 # FlutterFire Configure Skill

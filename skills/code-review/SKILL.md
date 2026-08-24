@@ -7,6 +7,7 @@ hooks:
       hooks:
         - type: command
           command: "./scripts/protect-token.sh"
+license: MIT
 ---
 
 # Code Review Skill

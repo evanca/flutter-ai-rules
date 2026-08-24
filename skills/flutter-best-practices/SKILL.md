@@ -1,6 +1,7 @@
 ---
 name: flutter-best-practices
 description: "Use when writing, reviewing, refactoring, or planning Flutter/Dart code — screens, features, project structure, state management, folders, widgets, cubits/blocs, repositories, services, or tests."
+license: MIT
 ---
 
 # Flutter Best Practices

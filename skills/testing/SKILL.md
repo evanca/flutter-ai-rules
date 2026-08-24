@@ -1,6 +1,7 @@
 ---
 name: testing
 description: "Use when writing or reviewing Flutter/Dart tests (unit, widget, golden), fixing flaky tests, adding coverage, or choosing between unit and widget tests."
+license: MIT
 ---
 
 # Testing Skill

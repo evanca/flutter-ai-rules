@@ -1,6 +1,7 @@
 ---
 name: flutter-app-architecture
 description: "Use when scaffolding a project, refactoring into layers, creating view models/repositories, configuring dependency injection, or implementing unidirectional data flow (MVVM)."
+license: MIT
 ---
 
 # Flutter App Architecture Skill

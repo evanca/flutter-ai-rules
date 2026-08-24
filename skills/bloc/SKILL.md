@@ -1,6 +1,7 @@
 ---
 name: bloc
 description: "Use when creating a Cubit or Bloc, modeling state with sealed classes or status enums, wiring BlocBuilder/BlocListener/BlocProvider, writing bloc tests, or choosing between Cubit and Bloc."
+license: MIT
 ---
 
 # Bloc Skill

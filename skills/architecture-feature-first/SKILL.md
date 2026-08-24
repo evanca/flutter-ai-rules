@@ -1,6 +1,7 @@
 ---
 name: architecture-feature-first
 description: "Use when creating a feature, designing folder structure, adding repositories/services/view models, wiring dependency injection, or deciding which layer owns logic."
+license: MIT
 ---
 
 # Flutter Architecture — Feature-First Skill

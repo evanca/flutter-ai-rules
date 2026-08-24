@@ -1,0 +1,36 @@
+{
+  "name": "flutter-ai-rules",
+  "owner": {
+    "name": "Ivanna Kaceviča",
+    "url": "https://happycode.studio"
+  },
+  "description": "Flutter and Dart agent skills derived only from official Flutter, Dart, Firebase, and package documentation.",
+  "version": "1.0.0",
+  "plugins": [
+    {
+      "name": "flutter-ai-skills",
+      "source": "./",
+      "displayName": "Flutter AI Skills",
+      "description": "Flutter, Dart, and Firebase skills sourced only from official documentation.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Ivanna Kaceviča",
+        "url": "https://happycode.studio"
+      },
+      "homepage": "https://github.com/evanca/flutter-ai-rules",
+      "repository": "https://github.com/evanca/flutter-ai-rules",
+      "license": "MIT",
+      "category": "development",
+      "tags": [
+        "flutter",
+        "dart",
+        "firebase",
+        "bloc",
+        "riverpod",
+        "provider",
+        "testing",
+        "mobile"
+      ]
+    }
+  ]
+}
