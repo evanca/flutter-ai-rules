@@ -14,7 +14,7 @@ A comprehensive, (almost) non-opinionated collection: everything here is derived
 npx skills add evanca/flutter-ai-rules
 ```
 
-That's it. The [Skills CLI](https://www.npmjs.com/package/skills) discovers the packages under [`skills/`](./skills) and installs them for supported agents.
+That's it. The [Skills CLI](https://www.npmjs.com/package/skills) discovers the packages under [`skills/`](./skills) and installs them for supported agents. It needs **Node 22.20 or newer** — on older versions it exits with `SyntaxError: ... does not provide an export named 'styleText'` before it does anything. Every other install route below works on any Node version, or none at all.
 
 Browse before installing, or take just one:
 
