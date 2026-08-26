@@ -20,8 +20,6 @@ check if the user has it installed: `genkit --version`
 
 **Installation:**
 ```bash
-curl -sL cli.genkit.dev | bash # Native CLI
-# OR
 npm install -g genkit-cli # Via npm
 ```
 
