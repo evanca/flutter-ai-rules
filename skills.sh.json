@@ -1,0 +1,73 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "Flutter and Dart foundations",
+      "description": "Architecture, layout, and language guidance from the official Flutter and Dart documentation.",
+      "skills": [
+        "flutter-best-practices",
+        "effective-dart",
+        "dart-3-updates",
+        "flutter-app-architecture",
+        "architecture-feature-first",
+        "flutter-errors",
+        "flutter-use-column-row-first",
+        "flutter-pre-caching"
+      ]
+    },
+    {
+      "title": "State management",
+      "description": "One skill per approach, each from that package's own documentation.",
+      "skills": [
+        "bloc",
+        "riverpod",
+        "provider",
+        "flutter-change-notifier"
+      ]
+    },
+    {
+      "title": "Testing and review",
+      "description": "Unit, widget, golden, and end-to-end testing, mocking, and diff review.",
+      "skills": [
+        "testing",
+        "mockito",
+        "mocktail",
+        "patrol-e2e-testing",
+        "code-review"
+      ]
+    },
+    {
+      "title": "Firebase",
+      "description": "Setup and every major FlutterFire service, from the official Firebase documentation.",
+      "skills": [
+        "flutterfire-configure",
+        "firebase-auth",
+        "firebase-cloud-firestore",
+        "firebase-database",
+        "firebase-storage",
+        "firebase-analytics",
+        "firebase-crashlytics",
+        "firebase-messaging",
+        "firebase-in-app-messaging",
+        "firebase-remote-config",
+        "firebase-app-check",
+        "firebase-cloud-functions",
+        "firebase-ai",
+        "generate-images-with-firebase-ai",
+        "firebase-data-connect"
+      ]
+    },
+    {
+      "title": "Shipping and product",
+      "description": "Accessibility, inclusive design, store listings, purchases, and on-device AI.",
+      "skills": [
+        "accessibility",
+        "inclusive-design",
+        "store-listing-assets",
+        "revenuecat-testing",
+        "developing-genkit-dart"
+      ]
+    }
+  ]
+}
