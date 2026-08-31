@@ -20,9 +20,10 @@ check if the user has it installed: `genkit --version`
 
 **Installation:**
 ```bash
-npm install -g genkit-cli # Via npm (preferred)
+curl -sL cli.genkit.dev | bash # Native CLI
+# OR
+npm install -g genkit-cli # Via npm
 ```
-A native CLI installer is also documented at https://genkit.dev/docs/devtools — it pipes a remote script to `bash`, so run it yourself rather than having an agent execute it.
 
 **Usage:**
 Wrap your run command with `genkit start` to attach the Genkit developer UI and tracing:

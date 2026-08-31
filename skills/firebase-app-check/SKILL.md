@@ -48,6 +48,10 @@ await FirebaseAppCheck.instance.activate(
 3. Confirm activation completes before any Firestore, Storage, or RTDB calls.
 4. Consider setting a custom **TTL** — shorter TTLs are more secure but consume quota faster.
 
+### Native `FirebaseApp.configure()` on Apple Platforms
+
+Avoid calling `FirebaseApp.configure()` natively in your `AppDelegate` — `Firebase.initializeApp()` already configures the native default app. If you must call it, install your `AppCheckProviderFactory` **before** `configure()`; otherwise the Apple SDK locks in `DeviceCheck` on physical devices and the `appleProvider` passed to `activate()` (including `AppleProvider.debug`) is silently ignored. This is easiest to miss because simulators already default to the debug provider. `activate()` on Android is unaffected. See [flutterfire#18613](https://github.com/firebase/flutterfire/issues/18613).
+
 ---
 
 ## 2. Provider Selection
@@ -90,7 +94,7 @@ await FirebaseAppCheck.instance.activate(
 
 ### Platform-Specific Debug Setup
 
-**iOS:** Enable debug logging by adding `-FIRDebugEnabled` to Arguments Passed on Launch in Xcode. The debug token appears in the console output.
+**iOS:** Enable debug logging by adding `-FIRDebugEnabled` to Arguments Passed on Launch in Xcode. The debug token appears in the console output. On **physical devices**, `AppleProvider.debug` is ignored if your `AppDelegate` calls `FirebaseApp.configure()` natively — see the native `configure()` note in Setup and Configuration.
 
 **Android:** The debug token prints to logcat on first run. Filter by `DebugAppCheckProvider`.
 

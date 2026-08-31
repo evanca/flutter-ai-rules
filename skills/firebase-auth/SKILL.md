@@ -122,6 +122,18 @@ try {
 - Since September 2023, Firebase enables **email enumeration protection** by default on new projects, replacing `user-not-found` and `wrong-password` with `invalid-credential`. Manage this in the Firebase console under **Authentication > Settings**.
 - When email enumeration protection is enabled, `sendPasswordResetEmail()` may complete without an error even if the email is not registered. Treat this as expected behavior and do not use password-reset responses to infer whether an email exists.
 
+**Share authentication state between Apple apps:**
+
+On Apple platforms, share auth state between apps in the same developer account by storing it in a shared Keychain access group. Enable the Keychain Sharing capability for each app with the same access group, then configure Firebase Auth with the fully qualified access group:
+
+```dart
+await FirebaseAuth.instance.setSettings(
+  userAccessGroup: 'TEAMID.com.example.group1',
+);
+```
+
+Switching from the default Keychain to a shared access group signs out the existing user unless migrated. Pass `migrateCurrentUser: true` (requires a non-null `userAccessGroup`) to preserve the current session, including an anonymous one — safe to call at app startup before any other Auth call, since it reads the existing session straight from the Keychain before Auth restores it. Migration can overwrite a user already stored in the destination access group.
+
 ---
 
 ## 4. Social Authentication
