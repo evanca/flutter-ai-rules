@@ -66,7 +66,6 @@ copied or adapted text:
 
 | Source | Skills |
 |---|---|
-| Apple App Store Connect and Google Play Console help | `store-listing-assets` |
 | [RevenueCat docs](https://www.revenuecat.com/docs/) | `revenuecat-testing` |
 | [LeanCode](https://leancode.co) engineering articles | `flutter-best-practices` |
 | [Refactoring.Guru](https://refactoring.guru) | `code-review` |

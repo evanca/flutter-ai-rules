@@ -60,11 +60,10 @@
     },
     {
       "title": "Shipping and product",
-      "description": "Accessibility, inclusive design, store listings, purchases, and on-device AI.",
+      "description": "Accessibility, inclusive design, purchases, and on-device AI.",
       "skills": [
         "accessibility",
         "inclusive-design",
-        "store-listing-assets",
         "revenuecat-testing",
         "developing-genkit-dart"
       ]
