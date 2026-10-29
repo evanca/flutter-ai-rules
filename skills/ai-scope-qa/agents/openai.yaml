@@ -1,4 +1,0 @@
-interface:
-  display_name: "AI Scope QA"
-  short_description: "Test AI scope, ambiguity and prompt injection"
-  default_prompt: "Use $ai-scope-qa to create a context-aware QA checklist and test prompts for this app’s AI boundaries."

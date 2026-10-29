@@ -2,7 +2,7 @@
 
 <img src="media/flutter_ai_skills.jpg" width="600" alt="An agent prompt reading &quot;Add Google sign-in to the profile screen&quot; on the left; on the right, the firebase-auth and flutter-app-architecture skills are auto-selected from a list of dozens">
 
-**37 Flutter and Dart skills your coding agent loads by itself, sourced only from official documentation.**
+**36 Flutter and Dart skills your coding agent loads by itself, sourced only from official documentation.**
 
 A skill is a folder with a `SKILL.md` file. Your agent reads the description, decides a task matches, and pulls in the guidance — you don't paste anything into a rules file or remember to `@`-mention a doc. Install once, and Firebase Auth guidance shows up when you touch auth, Riverpod guidance when you touch providers.
 
@@ -98,7 +98,6 @@ With a `.skills/` folder you can also reference a skill explicitly when you want
 | [`mockito`](./skills/mockito) | Generating mocks, stubbing, verifying interactions |
 | [`mocktail`](./skills/mocktail) | Mocking without codegen, registering fallback values |
 | [`patrol-e2e-testing`](./skills/patrol-e2e-testing) | Writing E2E tests that touch native permissions or dialogs |
-| [`ai-scope-qa`](./skills/ai-scope-qa) | Testing an in-app AI's scope, false refusals, or prompt injection |
 | [`code-review`](./skills/code-review) | Reviewing a PR, branch, or diff |
 
 ### Firebase
@@ -198,8 +197,6 @@ Official documentation these skills are built from:
 **Testing** — [Mockito](https://pub.dev/packages/mockito) · [Mocktail](https://pub.dev/packages/mocktail) · [Patrol](https://patrol.leancode.co/)
 
 **Firebase** — [Firebase for Flutter](https://firebase.google.com/docs/flutter/setup) · [FlutterFire](https://firebase.flutter.dev/) · [Multiple flavors with the FlutterFire CLI](https://codewithandrea.com/articles/flutter-firebase-multiple-flavors-flutterfire-cli/)
-
-**AI evaluation** — [Dialogflow CX test cases](https://docs.cloud.google.com/dialogflow/cx/docs/concept/test-case) · [OWASP LLM Prompt Injection Prevention](https://cheatsheetseries.owasp.org/cheatsheets/LLM_Prompt_Injection_Prevention_Cheat_Sheet.html) · [Out-of-scope prediction (Larson et al., 2019)](https://aclanthology.org/D19-1131/) · [CheckList behavioral testing (Ribeiro et al., 2020)](https://aclanthology.org/2020.acl-main.442/)
 
 ## 📄 License
 

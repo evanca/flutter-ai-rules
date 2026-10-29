@@ -4,7 +4,7 @@ This repository is [MIT licensed](./LICENSE). The skills in it are *derived from
 documentation that this project does not own, so this file records what the MIT license covers,
 what it does not, and under which terms each upstream source was used.
 
-License terms were verified on **2026-08-24**, and on **2026-10-29** for the `ai-scope-qa` sources. Upstream terms change — check the source before
+License terms were verified on **2026-08-24**. Upstream terms change — check the source before
 relying on this summary. This is a good-faith record, not legal advice.
 
 ## What the MIT license covers
@@ -31,16 +31,14 @@ and is attributed at the point of use.
 | Source | Prose | Code samples | Skills |
 |---|---|---|---|
 | [Flutter](https://docs.flutter.dev) and [Dart](https://dart.dev) docs | CC BY 4.0 | 3-Clause BSD | `architecture-feature-first`, `dart-3-updates`, `effective-dart`, `flutter-app-architecture`, `flutter-best-practices`, `flutter-errors`, `flutter-pre-caching`, `flutter-use-column-row-first`, `testing` |
-| [Firebase](https://firebase.google.com/docs) and Google developer docs | CC BY 4.0 | Apache 2.0 | all `firebase-*` skills, `flutterfire-configure`, `generate-images-with-firebase-ai`, `ai-scope-qa` |
+| [Firebase](https://firebase.google.com/docs) and Google developer docs | CC BY 4.0 | Apache 2.0 | all `firebase-*` skills, `flutterfire-configure`, `generate-images-with-firebase-ai` |
 | [GitHub Docs](https://github.com/github/docs) | CC BY 4.0 | — | `code-review` |
 | [FlutterFire](https://firebase.flutter.dev) | 3-Clause BSD | 3-Clause BSD | `flutterfire-configure` |
 | Package repositories and READMEs — [bloc](https://github.com/felangel/bloc), [riverpod](https://github.com/rrousselGit/riverpod), [provider](https://github.com/rrousselGit/provider), [mocktail](https://github.com/felangel/mocktail) | MIT | MIT | `bloc`, `riverpod`, `provider`, `mocktail`, `flutter-change-notifier` |
 | [mockito](https://github.com/dart-lang/mockito), [Patrol](https://patrol.leancode.co) | Apache 2.0 | Apache 2.0 | `mockito`, `patrol-e2e-testing` |
 | [Genkit](https://pub.dev/packages/genkit) | Apache 2.0 | Apache 2.0 | `developing-genkit-dart` |
-| [ACL Anthology](https://aclanthology.org) papers, 2016 onward | CC BY 4.0 | — | `ai-scope-qa` |
 | [GOV.UK](https://www.gov.uk) service guidance | Open Government Licence v3.0 | — | `inclusive-design` |
 | [MDN Web Docs](https://developer.mozilla.org) | **CC BY-SA 2.5 or later** | CC0 | `accessibility`, `flutter-pre-caching` |
-| [OWASP Cheat Sheet Series](https://cheatsheetseries.owasp.org) | **CC BY-SA 4.0** | — | `ai-scope-qa` |
 | [W3C](https://www.w3.org) — WCAG, WAI | **W3C Document License** | — | `accessibility`, `inclusive-design` |
 
 CC BY 4.0 has no share-alike clause, so adapted material may be redistributed under other terms —
@@ -48,17 +46,13 @@ including MIT — as long as attribution is given, the license is identified, an
 indicated. Every skill built on these sources links the specific page it came from, and all of them
 are rewritten rather than reproduced.
 
-### Restricted reuse: MDN, OWASP and W3C
+### Restricted reuse: MDN and W3C
 
 **MDN Web Docs is CC BY-SA**, not CC BY. Share-alike means an adaptation of MDN prose must itself
 be licensed CC BY-SA, which is incompatible with MIT. MDN is therefore used only as short
 quotations, each in quotation marks with a link to the page, with the surrounding material written
 independently. Quotation is not adaptation. Contributors must not paraphrase MDN more closely:
 quote it plainly, or state the fact in their own words.
-
-**The OWASP Cheat Sheet Series is CC BY-SA** as well, so the same rule applies: `ai-scope-qa`
-restates its testing guidance in its own words and uses its own example prompts, never adapted
-cheat-sheet text.
 
 **The W3C Document License does not permit derivative works**, except for the purpose of
 implementing a specification. WCAG and WAI material is used as restated fact and short attributed

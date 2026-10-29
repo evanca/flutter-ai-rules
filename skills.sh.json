@@ -28,13 +28,12 @@
     },
     {
       "title": "Testing and review",
-      "description": "Unit, widget, golden, and end-to-end testing, mocking, AI scope evaluation, and diff review.",
+      "description": "Unit, widget, golden, and end-to-end testing, mocking, and diff review.",
       "skills": [
         "testing",
         "mockito",
         "mocktail",
         "patrol-e2e-testing",
-        "ai-scope-qa",
         "code-review"
       ]
     },
