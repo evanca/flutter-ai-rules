@@ -226,6 +226,7 @@ Rules:
 - Blocs must not access data providers directly — only via repositories.
 - No direct bloc-to-bloc communication. Use `BlocListener` in the UI to bridge blocs.
 - For shared data, inject the same repository into multiple blocs.
+- When a repository must expose its latest value synchronously (for example `currentUser`), write each update into a small injectable in-memory cache client and read from that cache, falling back to an empty value. Injecting the cache client keeps the repository testable.
 - Initialize `BlocObserver` in `main.dart`.
 
 ---

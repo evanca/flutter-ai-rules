@@ -34,6 +34,7 @@
 10. Use setters for operations that conceptually change properties.
 11. Use a function declaration to bind a function to a name.
 12. Use inclusive start and exclusive end parameters to accept a range.
+13. Don't annotate a return type on a setter; this includes the `[]=` operator, which behaves like a setter.
 
 ### Style
 1. Format your code using `dart format`.

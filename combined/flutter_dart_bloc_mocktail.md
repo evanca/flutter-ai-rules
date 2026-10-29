@@ -34,6 +34,7 @@
 10. Use setters for operations that conceptually change properties.
 11. Use a function declaration to bind a function to a name.
 12. Use inclusive start and exclusive end parameters to accept a range.
+13. Don't annotate a return type on a setter; this includes the `[]=` operator, which behaves like a setter.
 
 ### Style
 1. Format your code using `dart format`.
@@ -254,6 +255,7 @@
 9. For shared data, inject the same repository into multiple blocs; let each bloc listen to repository streams independently.
 10. Always strive for loose coupling between architectural layers and components.
 11. Structure your project consistently and intentionally; there is no single right way.
+12. When a repository must expose its latest value synchronously, write each update into a small injectable in-memory cache client and read from that cache (falling back to an empty value), instead of re-querying the data provider.
 
 ### Flutter Bloc Concepts
 1. Use `BlocBuilder` to rebuild widgets in response to bloc or cubit state changes; the builder function must be pure.

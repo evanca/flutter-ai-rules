@@ -46,6 +46,7 @@ This skill defines how to write idiomatic, high-quality Dart and Flutter code fo
 - Use **setters** for operations that conceptually change properties.
 - Use a **function declaration** to bind a function to a name.
 - Use **inclusive start and exclusive end** parameters to accept a range.
+- Don't annotate a **return type on a setter** — including the `[]=` operator, which behaves like a setter.
 
 ```dart
 // Prefer: explicit class modifier
