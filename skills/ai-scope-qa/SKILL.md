@@ -63,8 +63,7 @@ does not undo an unauthorized operation that already happened.
 Keep deterministic application tests separate from model-quality evaluations.
 A fake response proves only the surrounding application behavior. A simulation
 through a different SDK/model/context is separate evidence from the production
-integration. Python, Jev or Antigravity may fit an existing project, but none is
-required or adopted by this skill.
+integration.
 
 Run live evaluations only within existing authorization, test boundaries and
 provider/run budgets. Stop at the agreed ceiling or a configuration, billing or

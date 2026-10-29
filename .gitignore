@@ -1,4 +1,1 @@
 .DS_Store
-
-# Private skill slides (publish.sh also excludes them)
-skills/*/slide/
