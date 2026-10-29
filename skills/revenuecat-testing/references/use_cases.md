@@ -1,6 +1,6 @@
 # RevenueCat testing use cases
 
-Source: revenuecat.com/docs/guides/testing-guide/use-cases and /docs/test-and-launch/debugging (compiled 2026-07). Every use case below lists the method and the **verifiable signal** — the dashboard event or CustomerInfo/log state that proves it worked. Cross-reference all events in the RevenueCat customer history; some (like iOS refunds) can take up to 24 hours.
+Source: revenuecat.com/docs/guides/testing-guide/use-cases and /docs/test-and-launch/debugging (compiled 2026-07); section 6 from /docs/tools/experiments-v1/experiments-overview-v1 and the RevenueCat AI Toolkit's `revenuecat-sdk-compatibility` skill. Every use case below lists the method and the **verifiable signal** — the dashboard event or CustomerInfo/log state that proves it worked. Cross-reference all events in the RevenueCat customer history; some (like iOS refunds) can take up to 24 hours.
 
 ## Prerequisites (do first, every platform)
 
@@ -57,6 +57,15 @@ Source: revenuecat.com/docs/guides/testing-guide/use-cases and /docs/test-and-la
 | Purchase flow | `INITIAL_PURCHASE` event on completion; entitlements grant access immediately |
 | Free trials | Trial applies per configured criteria; auto-converts to paid unless canceled |
 | Expiration | `EXPIRATION` event; access to protected content lost |
+
+## 6. Before an experiment
+
+Run these before anyone starts a RevenueCat experiment. An experiment works by changing which offering is *current* for each enrolled customer, so an app that hard-codes an offering shows it to every variant: customers don't split evenly and the results measure nothing. RevenueCat calls displaying the current offering "required to ensure customers are evenly split between variants". Setting up, starting, pausing and stopping the experiment is the AI Toolkit's `revenuecat-experiments` skill.
+
+| Check | Method | Verify |
+|---|---|---|
+| App shows the SDK's current offering | Find where every paywall gets its offering. It must read `offerings.current` (the placement's current offering if placements are used), or show a RevenueCat paywall without an explicit offering — never `offerings.all['<id>']` or any other lookup by a literal offering identifier | No literal offering identifiers in paywall code. At runtime: set an offering override for the sandbox App User ID (dashboard → customer → *Current Offering* card) and refetch offerings; the paywall shows the override's packages without an app release. Remove the override afterwards: an override outranks experiments, so a tester who keeps one never sees a variant |
+| SDK meets the feature-gate minimum | Before relying on an SDK-gated feature (e.g. existing-customer enrollment, exposure tracking), look up its minimum per SDK with the toolkit's `revenuecat-sdk-compatibility` skill (MCP `list-sdk-feature-gates`) | The resolved SDK version (Flutter: `purchases_flutter` in `pubspec.lock`) is at or above the gate's `min_version`. For a live app, `list-sdk-versions` shows the share of last-30-day subscribers below it; they won't get the feature, so say so in the plan |
 
 ## Event cheat-sheet (what proves what)
 

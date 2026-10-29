@@ -1,6 +1,6 @@
 ---
 name: revenuecat-testing
-description: "Use when testing RevenueCat purchases/subscriptions, setting up sandbox testing, debugging a purchase/restore/trial, verifying entitlements or events, or writing an IAP QA plan."
+description: "Use when testing RevenueCat purchases/subscriptions, setting up sandbox testing, debugging a purchase/restore/trial, verifying entitlements or events, checking an app is ready for a RevenueCat experiment, or writing an IAP QA plan."
 license: MIT
 ---
 
@@ -21,7 +21,7 @@ Help a developer systematically verify their RevenueCat integration works before
 
 **Reference implementation (especially for Flutter):** RevenueCat ships an official **Purchase Tester** sample app at `github.com/RevenueCat/purchases-flutter/tree/main/revenuecat_examples/purchase_tester`. It's a runnable app exercising the flows this skill tests — dedicated screens for product change (`product_change_testing_screen.dart`), paywalls and paywall-footer, customer center, virtual currency, winback offers, and custom paywall-impression testing — plus an end-to-end integration test at `integration_test/app_test.dart`. Point Flutter users there to (a) run a known-good build to isolate whether a bug is in their code vs. their store/RevenueCat config, and (b) model their own `integration_test` widget tests on `app_test.dart`. For non-Flutter SDKs, RevenueCat has equivalent Purchase Tester apps in each SDK repo.
 
-## The five testing domains
+## The six testing domains
 
 Pull the specific rows from `references/use_cases.md`; here's the shape so you know what to cover:
 
@@ -30,10 +30,11 @@ Pull the specific rows from `references/use_cases.md`; here's the shape so you k
 3. **Restoring flow** — the account-switching/transfer matrix. This is the highest-value, most-bug-prone area: `syncPurchases()`, restore-to-new-ID, the three-ID conflict case (transfer succeeds for the empty ID, errors for the one that already owns the sub), and transfer-disabled behavior. The signal throughout is whether a `TRANSFER` event fires (or correctly does *not*).
 4. **Paywalls** — display & purchase, localization (device/store-account country → language + localized price), and intro-offer eligibility display for fresh users.
 5. **RevenueCat Billing (web)** — purchase, trial auto-conversion, expiration.
+6. **Before an experiment** — the app must render the SDK's *current* offering (or the placement's current offering), never a hard-coded one, or customers don't split evenly between variants; and the installed SDK must meet the feature-gate minimum for anything the experiment relies on. Setting up and running the experiment itself is the RevenueCat AI Toolkit's `revenuecat-experiments` skill.
 
 ## Deliverables
 
-- **QA test plan** — a checklist of the use cases relevant to their app (skip web billing if they're mobile-only, skip trials if they have none), each row as: *action → expected event/signal → where to see it*. This is the primary output; make it copy-pasteable into a QA doc or issue tracker.
+- **QA test plan** — a checklist of the use cases relevant to their app (skip web billing if they're mobile-only, skip trials if they have none, add the pre-experiment checks when an experiment is planned), each row as: *action → expected event/signal → where to see it*. This is the primary output; make it copy-pasteable into a QA doc or issue tracker.
 - **Debugging a specific failure** — diagnose against the reference: is it a prereq problem (invalid product IDs, logs off, wrong sandbox account)? a wrong-signal expectation (e.g. expecting `TRANSFER` when transfer is disabled)? a platform difference (iOS refund can't be sandbox-tested)? Name the expected event and where it should appear, then work backward from what they actually see.
 - **Restore/transfer walkthrough** — when the user is confused about account switching, walk the specific ID configuration and the expected `TRANSFER`-or-error outcome for each ID, since this is the area the docs spend the most care on.
 - **Sandbox setup guidance** — the prerequisites section, adapted to their platform and SDK.

@@ -126,7 +126,7 @@ With a `.skills/` folder you can also reference a skill explicitly when you want
 |---|---|
 | [`accessibility`](./skills/accessibility) | Working on a11y, WCAG, screen readers, focus order |
 | [`inclusive-design`](./skills/inclusive-design) | Handling i18n, global name/address forms, low-end devices |
-| [`revenuecat-testing`](./skills/revenuecat-testing) | Testing purchases, subscriptions, sandbox flows |
+| [`revenuecat-testing`](./skills/revenuecat-testing) | Testing purchases, subscriptions, sandbox flows, experiment readiness |
 | [`developing-genkit-dart`](./skills/developing-genkit-dart) | Building AI agents in Dart with Genkit |
 
 ## 🗂️ Rules and combined sets (legacy)
