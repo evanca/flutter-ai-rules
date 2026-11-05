@@ -35,9 +35,9 @@ Initialize App Check **after** `Firebase.initializeApp()` and **before** using a
 ```dart
 await Firebase.initializeApp();
 await FirebaseAppCheck.instance.activate(
-  webProvider: ReCaptchaV3Provider('recaptcha-v3-site-key'),
-  androidProvider: AndroidProvider.playIntegrity,
-  appleProvider: AppleProvider.deviceCheck,
+  providerWeb: ReCaptchaV3Provider('recaptcha-v3-site-key'),
+  providerAndroid: AndroidPlayIntegrityProvider(),
+  providerApple: AppleDeviceCheckProvider(),
 );
 ```
 
@@ -50,7 +50,7 @@ await FirebaseAppCheck.instance.activate(
 
 ### Native `FirebaseApp.configure()` on Apple Platforms
 
-Avoid calling `FirebaseApp.configure()` natively in your `AppDelegate` — `Firebase.initializeApp()` already configures the native default app. If you must call it, install your `AppCheckProviderFactory` **before** `configure()`; otherwise the Apple SDK locks in `DeviceCheck` on physical devices and the `appleProvider` passed to `activate()` (including `AppleProvider.debug`) is silently ignored. This is easiest to miss because simulators already default to the debug provider. `activate()` on Android is unaffected. See [flutterfire#18613](https://github.com/firebase/flutterfire/issues/18613).
+Avoid calling `FirebaseApp.configure()` natively in your `AppDelegate` — `Firebase.initializeApp()` already configures the native default app. If you must call it, install your `AppCheckProviderFactory` **before** `configure()`; otherwise the Apple SDK locks in `DeviceCheck` on physical devices and the `providerApple` passed to `activate()` (including `AppleDebugProvider`) is silently ignored. This is easiest to miss because simulators already default to the debug provider. `activate()` on Android is unaffected. See [flutterfire#18613](https://github.com/firebase/flutterfire/issues/18613).
 
 ---
 
@@ -59,16 +59,16 @@ Avoid calling `FirebaseApp.configure()` natively in your `AppDelegate` — `Fire
 **Android:**
 | Provider | Use case |
 |---|---|
-| `AndroidProvider.playIntegrity` | Production (default) |
-| `AndroidProvider.debug` | Development / CI only |
+| `AndroidPlayIntegrityProvider()` | Production (default) |
+| `AndroidDebugProvider()` | Development / CI only |
 
 **Apple (iOS / macOS):**
 | Provider | Use case |
 |---|---|
-| `AppleProvider.deviceCheck` | Production default (iOS 11+, macOS 10.15+) |
-| `AppleProvider.appAttest` | Enhanced security (iOS 14+, macOS 14+) |
-| `AppleProvider.appAttestWithDeviceCheckFallback` | App Attest with Device Check fallback |
-| `AppleProvider.debug` | Development / CI only |
+| `AppleDeviceCheckProvider()` | Production default (iOS 11+, macOS 10.15+) |
+| `AppleAppAttestProvider()` | Enhanced security (iOS 14+, macOS 14+) |
+| `AppleAppAttestWithDeviceCheckFallbackProvider()` | App Attest with Device Check fallback |
+| `AppleDebugProvider()` | Development / CI only |
 
 **Web:**
 | Provider | Use case |
@@ -87,14 +87,21 @@ Use debug providers during development to run in emulators or CI environments:
 ```dart
 await Firebase.initializeApp();
 await FirebaseAppCheck.instance.activate(
-  androidProvider: AndroidProvider.debug,
-  appleProvider: AppleProvider.debug,
+  providerAndroid: AndroidDebugProvider(),
+  providerApple: AppleDebugProvider(),
 );
+```
+
+To use a registered debug token (for example in CI), pass it by name:
+
+```dart
+providerAndroid: AndroidDebugProvider(debugToken: 'your-debug-token'),
+providerApple: AppleDebugProvider(debugToken: 'your-debug-token'),
 ```
 
 ### Platform-Specific Debug Setup
 
-**iOS:** Enable debug logging by adding `-FIRDebugEnabled` to Arguments Passed on Launch in Xcode. The debug token appears in the console output. On **physical devices**, `AppleProvider.debug` is ignored if your `AppDelegate` calls `FirebaseApp.configure()` natively — see the native `configure()` note in Setup and Configuration.
+**iOS:** Enable debug logging by adding `-FIRDebugEnabled` to Arguments Passed on Launch in Xcode. The debug token appears in the console output. On **physical devices**, `AppleDebugProvider` is ignored if your `AppDelegate` calls `FirebaseApp.configure()` natively — see the native `configure()` note in Setup and Configuration.
 
 **Android:** The debug token prints to logcat on first run. Filter by `DebugAppCheckProvider`.
 

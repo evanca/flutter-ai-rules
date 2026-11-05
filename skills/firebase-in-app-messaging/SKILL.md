@@ -1,6 +1,6 @@
 ---
 name: firebase-in-app-messaging
-description: "Use when running in-app message campaigns, triggering/suppressing messages, configuring opt-in data collection, testing on specific devices, or handling message callbacks."
+description: "Use when running in-app message campaigns, triggering/suppressing messages, configuring opt-in data collection, testing on specific devices, rendering campaigns with custom Flutter widgets, or handling message callbacks."
 license: MIT
 ---
 
@@ -17,6 +17,7 @@ Use this skill when:
 * Implementing opt-in data collection for GDPR or user privacy compliance.
 * Testing campaigns with specific devices before rollout.
 * Configuring message types, targeting rules, and A/B tests.
+* Rendering campaigns with custom Flutter widgets instead of native templates.
 
 ---
 
@@ -148,12 +149,54 @@ Future<void> disableMessaging() async {
 5. **Test** — Use device testing before publishing.
 6. **Publish** — Launch the campaign and monitor performance.
 
-- Use **custom metadata** (key-value pairs) to pass additional info accessible when users interact with messages.
+- Use **custom metadata** (key-value pairs) to pass additional info accessible when users interact with messages. With custom Flutter display enabled, read it from `InAppMessage.data`.
 - Use **A/B testing** to optimize message content, timing, and conversion rates.
 - Monitor campaign performance (impressions, clicks, conversions) through Firebase console analytics.
+
+---
+
+## 6. Custom Flutter Display
+
+By default, In-App Messaging draws native templates. To render campaigns with your own Flutter widgets, listen to `onMessageDisplay`, report the lifecycle back to the SDK, and opt in with `setCustomDisplayEnabled(true)`:
+
+```dart
+FirebaseInAppMessaging.instance.onMessageDisplay.listen((message) async {
+  await message.impress();
+
+  // Both are null for campaigns published without an action (image-only
+  // layouts, action-less banners), so resolve the action before using it.
+  final action = message.primaryAction ?? message.action;
+
+  // showCampaign() is your own widget; draw it from message.title, body,
+  // imageUrl, actions and data, and complete when the user closes it.
+  await showCampaign(
+    message,
+    onActionTap: action == null
+        ? null
+        : () async {
+            await message.click(action);
+            // The plugin does not open action URLs — your app should.
+          },
+  );
+
+  await message.dismiss();
+});
+
+await FirebaseInAppMessaging.instance.setCustomDisplayEnabled(true);
+```
+
+- Listening to `onMessageDisplay` alone does not replace native UI — native templates keep showing until `setCustomDisplayEnabled(true)` is called.
+- Report `impress()` when your UI appears, `click()` **only from the user's tap handler**, and `dismiss()` when it closes; `onMessageImpression` / `onMessageClicked` still fire.
+- `action`, `primaryAction` and `secondaryAction` are all `InAppMessageAction?`, while `click(InAppMessageAction action)` takes a non-nullable action — a campaign published without one has nothing to report and must skip `click()`. `action` is the single action for banner, modal and image-only layouts, `primaryAction` is card-only, and `imageOnly` carries an *optional* tap action, so both are null for an image-only campaign with no action.
+- `click()`, `dismiss()` and `reportError()` share one terminal latch — the first call wins and the others return as no-ops. Reporting a click on display therefore also discards the dismiss.
+- The Firebase doc example calls `click()` in the listener body and force-unwraps with `message.action!`. Verified against the plugin source: for an action-less campaign it throws `Null check operator used on a null value`, and because the throw sits inside an `async` stream listener it goes unhandled — only `impress()` reaches the SDK and no terminal event is ever reported. For a campaign that does carry an action it reports a click the user never made, then silently drops the dismiss.
+- Open action URLs yourself; the plugin does not.
 
 ---
 
 ## References
 
 - [Firebase In-App Messaging Flutter documentation](https://firebase.google.com/docs/in-app-messaging/get-started?platform=flutter)
+- [Modify message behavior](https://firebase.google.com/docs/in-app-messaging/modify-message-behavior?platform=flutter)
+- [`FirebaseInAppMessaging` API reference](https://pub.dev/documentation/firebase_in_app_messaging/latest/firebase_in_app_messaging/FirebaseInAppMessaging-class.html) — `onMessageDisplay`, `setCustomDisplayEnabled`
+- [`InAppMessage` API reference](https://pub.dev/documentation/firebase_in_app_messaging/latest/firebase_in_app_messaging/InAppMessage-class.html) — action nullability, `impress`/`click`/`dismiss`

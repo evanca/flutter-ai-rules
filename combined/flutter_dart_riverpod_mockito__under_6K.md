@@ -12,7 +12,7 @@
 1. Always wrap your app with `ProviderScope` at the root (directly in `runApp`).
 2. Define provider variables as `final` and at the top level (global scope).
 3. Use `Provider` for synchronous values that don't change.
-4. Use `StateProvider` for simple state that can be modified from the UI.
+4. Use a `Notifier` with `NotifierProvider` for simple state that can be modified from the UI; avoid the legacy `StateProvider`.
 5. Use `FutureProvider` for asynchronous operations like API calls.
 6. Use `StreamProvider` for real-time data streams.
 7. Use `NotifierProvider` for complex state logic with methods.

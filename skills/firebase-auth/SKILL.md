@@ -104,15 +104,26 @@ try {
     password: password,
   );
 } on FirebaseAuthException catch (e) {
-  if (e.code == 'invalid-credential') {
-    // Email enumeration protection enabled (default since Sep 2023):
-    // replaces 'user-not-found' and 'wrong-password'.
-    print('Invalid email or password.');
-  } else if (e.code == 'user-not-found') {
-    print('No user found for that email.');
-  } else if (e.code == 'wrong-password') {
-    print('Wrong password provided for that user.');
-  }
+  final String error = switch (e.code) {
+    'invalid-email' => 'The email address is not valid.',
+    // Email enumeration protection (default since Sep 2023) reports
+    // 'invalid-credential' instead of 'user-not-found' / 'wrong-password';
+    // older native SDKs report 'invalid-login-credentials'. Handle all four so
+    // the app works with the setting on or off.
+    'invalid-credential' ||
+    'invalid-login-credentials' ||
+    'user-not-found' ||
+    'wrong-password' =>
+      'The email address or password is incorrect.',
+    'user-disabled' => 'This account has been disabled.',
+    'too-many-requests' ||
+    'network-request-failed' =>
+      'Something went wrong. Try again later.',
+    // Always keep a default branch — codes differ by platform and SDK version
+    // (for example Windows reports 'unknown-error' for a wrong password).
+    _ => 'Sign-in failed (${e.code}).',
+  };
+  print(error);
 }
 ```
 
@@ -211,8 +222,12 @@ On iOS, `verifyPhoneNumber` can throw `FirebaseAuthException` with code `recaptc
 ## 6. Error Handling
 
 - Always use `try-catch` with `FirebaseAuthException`.
-- Check `e.code` to identify specific error types.
-- Handle `account-exists-with-different-credential` by fetching sign-in methods for the email and guiding users through the correct flow.
+- Branch on `e.code`, never on `e.message` — messages come from the native SDKs, differ between platforms, and change between SDK versions.
+- Codes differ between platforms for the same situation (e.g., Windows uses `unknown-error`, `no-signed-in-user`, `account-exists-with-different-credentials`). Check the [error code reference](https://firebase.google.com/docs/auth/flutter/errors) when targeting several platforms.
+- Catch `FirebaseAuthMultiFactorException` **by type**, before `FirebaseAuthException`, and complete sign-in with `e.resolver`; its code differs by platform (`second-factor-required` vs `multi-factor-auth-required`).
+- `signInWithRedirect`, `getRedirectResult` and `reauthenticateWithPopup` are the exception — they throw a plain `FirebaseAuthException` carrying the multi-factor code, without a `resolver`. Branch on the code in those flows, or enrolled users are stranded on a generic error with no way to complete the second factor.
+- On Android and Apple, `verifyPhoneNumber` does not throw — errors arrive in the `verificationFailed` callback.
+- Handle `account-exists-with-different-credential` by signing the user in with the provider their account already uses, then calling `linkWithCredential(e.credential)`. With email enumeration protection enabled, Firebase does not reveal which provider that is, so let the user choose.
 - Handle `too-many-requests` with retry logic or user feedback.
 - Handle `operation-not-allowed` by ensuring the provider is enabled in the Firebase console.
 - On iOS, `recaptcha-sdk-not-linked` during `verifyPhoneNumber` is raised by the native Firebase iOS Auth SDK and requires native setup or GCP configuration changes — it cannot be fixed from Dart code alone.
@@ -236,7 +251,6 @@ await user?.verifyBeforeUpdateEmail("newemail@example.com");
 - Store only essential info in the auth profile; use a database for additional user data.
 - Use `linkWithCredential()` to connect multiple auth providers to a single account.
 - Verify the user's identity before linking new credentials.
-- Use `fetchSignInMethodsForEmail()` when handling account linking.
 
 ---
 

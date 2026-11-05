@@ -18,7 +18,7 @@
 2. Define provider variables as `final` and at the top level (global scope).
 3. Use `Consumer` or `ConsumerWidget` in your UI to access providers via a `ref` object.
 4. Use `Provider` for synchronous values that don't change.
-5. Use `StateProvider` for simple state that can be modified from the UI.
+5. Use a `Notifier` with `NotifierProvider` for simple state that can be modified from the UI; avoid the legacy `StateProvider`.
 6. Use `FutureProvider` for asynchronous operations like API calls.
 7. Use `StreamProvider` for real-time data streams.
 8. Use `NotifierProvider` for complex state logic with methods.
