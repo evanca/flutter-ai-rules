@@ -40,7 +40,7 @@ Skills then load as `flutter-ai-skills:bloc`, `flutter-ai-skills:riverpod`, and 
 
 ```sh
 codex plugin marketplace add evanca/flutter-ai-rules
-codex plugin install flutter-ai-skills@flutter-ai-rules
+codex plugin add flutter-ai-skills@flutter-ai-rules
 ```
 
 **Cursor** — [plugins](https://cursor.com/docs/plugins): in Cursor, run `/add-plugin`, or add the repo as a team marketplace under **Dashboard → Settings → Plugins → Import from Repo**:
