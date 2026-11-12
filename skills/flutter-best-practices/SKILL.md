@@ -75,6 +75,25 @@ below may be enough on their own.
     errors with dedicated `error`/`stackTrace` parameters, never string
     interpolation.
 
+## SDK versions & security
+
+Pin a minimum SDK that includes published security fixes, and keep projects
+current.
+
+- **Minimum stable SDKs: Dart ≥ 3.13.7, Flutter ≥ 3.47.8.** These revoke the
+  compromised eMudhra intermediate CA certificates behind a TLS
+  man-in-the-middle advisory
+  ([GHSA-frr6-h895-5pxp](https://github.com/dart-lang/sdk/security/advisories/GHSA-frr6-h895-5pxp)).
+- The fix is compiled into the engine, so **upgrading the SDK is not enough** —
+  Android, Windows, and Linux apps must be **rebuilt and redeployed** to apply
+  it. iOS, macOS, and web builds are not affected.
+- Set the floor in `pubspec.yaml`:
+  ```yaml
+  environment:
+    sdk: ">=3.13.7 <4.0.0"
+    flutter: ">=3.47.8"
+  ```
+
 ## Workflow checklists
 
 ### Adding a new feature/screen

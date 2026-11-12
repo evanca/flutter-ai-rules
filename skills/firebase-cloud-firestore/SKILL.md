@@ -40,6 +40,12 @@ Use **Realtime Database** instead for simple data models requiring simple lookup
 flutter pub add cloud_firestore
 ```
 
+> **Security (eMudhra CA fix):** Use Dart ≥ 3.13.7 and Flutter ≥ 3.47.8
+> (advisory [GHSA-frr6-h895-5pxp](https://github.com/dart-lang/sdk/security/advisories/GHSA-frr6-h895-5pxp)).
+> For **Apple or Windows targets using Firestore**, also upgrade
+> `cloud_firestore` to **≥ 7.1.0** (FlutterFire BoM ≥ 5.1.0) and run
+> `flutter pub upgrade`, then rebuild and redeploy.
+
 ```dart
 import 'package:cloud_firestore/cloud_firestore.dart';
 
